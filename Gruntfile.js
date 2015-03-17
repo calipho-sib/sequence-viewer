@@ -14,7 +14,7 @@ module.exports = function(grunt) {
     },
     bower_concat: {
       all: {
-        dest: 'demo/build/_bower.js',
+        dest: 'demo/bower.js',
         exclude: [],
         include: ['jquery', 'handlebars'],
         dependencies: { },
