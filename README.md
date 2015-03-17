@@ -1,3 +1,7 @@
+#Sequence viewer
+The sequence viewer is a super easy javascript library to use in order to draw a protein sequence in a readable way.
+
+#How to run
 
 1) Include the library using bower or simple by including the javascript protein-sequence.js
 ```
