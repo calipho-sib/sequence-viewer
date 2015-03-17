@@ -1,5 +1,5 @@
 
-1) Include the library using bower or simple by including the javascript protein-sequence.js (note that if you choose the later approach you should also include the dependencies, jquery and handlebars)
+1) Include the library using bower or simple by including the javascript protein-sequence.js
 ```
 bower install sequence-viewer
 ```
@@ -13,9 +13,12 @@ var seq= new Sequence('MALWMRLLPLLALLALWGPGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENY
 seq.render('#protein-sequence-viewer')
 ```
 4) Et voila!
+
 ![Sequence viewer](/assets/sequence-viewer.png)
 
 
+Note: that if you choose the later approach you should also include the dependencies, jquery and handlebars
+ 
 Examples: 
 * http://calipho-sib.github.io/sequence-viewer/demo?sequence=JKBJBDJA
 * http://calipho-sib.github.io/sequence-viewer/demo?sequence=JKBJBDJA
