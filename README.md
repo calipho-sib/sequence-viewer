@@ -10,7 +10,7 @@ bower install sequence-viewer
 3) Create an instance of Sequence in javascript and apply the render method
 ```
 var seq= new Sequence('MALWMRLLPLLALLALWGPGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
-seq.render('#protein-sequence-viewer')
+seq.render('sequence-viewer')
 ```
 4) Et voila!
 
