@@ -1,0 +1,33 @@
+<html>
+<head>
+  <title>neXtProt protein sequence viewe</title>
+    <script src="bower_components/handlebars/handlebars.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="sequence-viewer.js"></script>
+</head>
+<body class="container">
+
+    <div id="protein-sequence-viewer" class="row" style="width:300px;display:inline-block;height:250px;vertical-align:top;padding:15px 0px 10px 15px;margin-left:0px;border-top: 1px solid #eee;"></div>
+
+    <div id="protein-sequence-viewer2" class="row" style="width:300px;display:inline-block;height:250px;vertical-align:top;padding:15px 0px 10px 15px;margin-left:0px;border-top: 1px solid #eee;"></div>
+
+
+  <script class="example">
+
+//      var sequence = new proteinSequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN', [{'proteotipic': 'red'}, {'natural':'green'}]);
+    var seq1= new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+    seq1.render('#protein-sequence-viewer');
+
+//showSequence('MALWMRLLPLLARGIVEQCCTSICSLYQLENYCN', '#protein-sequence-viewer2');
+
+//      sequence.highlight([[13,20],[40,50]], 'proteotipic');
+//      sequence.coverage([[2,4],[8,50]], 'font-color:red');
+
+//      sequence.render("protein-sequence-viewer");
+
+
+
+  </script>
+
+</body>
+</html>

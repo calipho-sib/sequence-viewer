@@ -1,0 +1,17 @@
+{
+  "name": "sequence-viewer",
+  "version": "0.0.1",
+  "main": "dist/sequence-viewer.min.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "vendor",
+    "demo"
+  ],
+  "dependencies": {
+    "handlebars": "~3.0.0",
+    "jquery": "~2.1.3"
+  }
+}
