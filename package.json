@@ -19,7 +19,8 @@
   "readmeFilename": "README.md",
   "dependencies": {},
   "devDependencies": {
-    "grunt": "~0.4.5",
+    "grunt": "^0.4.5",
+    "grunt-bower-concat": "^0.4.0",
     "grunt-bump": "^0.3.0",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-jshint": "~0.10.0",
