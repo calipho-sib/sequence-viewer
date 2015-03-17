@@ -10,16 +10,30 @@ module.exports = function(grunt) {
       build: {
         src: 'src/<%= pkg.name %>.js',
         dest: 'dist/<%= pkg.name %>.min.js'
+      },
+    },
+    bower_concat: {
+      all: {
+        dest: 'demo/build/_bower.js',
+        exclude: [],
+        include: ['jquery', 'handlebars'],
+        dependencies: { },
+        bowerOptions: {
+          relative: false
+        }
       }
+
     }
   });
 
+
+
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
+
   grunt.loadNpmTasks('grunt-bower-concat');
 
-
   // Default task(s).
-  grunt.registerTask('default', ['uglify']);
+  grunt.registerTask('default', ['uglify', 'bower_concat']);
 
 };
