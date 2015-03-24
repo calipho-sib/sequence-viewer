@@ -14,13 +14,17 @@ function Sequence(sequence) {
         }
         else lineJump = options.charsPerLine;
 
-        var sources = "<div><h4>Protein Sequence ({{sequenceLength}})</h4></div>" +
+        var sources = "<div style=\"border-bottom: 1px solid #E7EAEC;padding-bottom:5px;margin-bottom: 15px;\">" +
+            "<div style=\"display:inline-block;\">" +
+            "<span class=\"badge\" style=\"background:#C50063;color:white;padding:8px 5px;border-radius:70%;margin-right:10px;vertical-align:middle;\">{{sequenceLength}}</span>" +
+            "   </div><h4 style=\"display:inline-block;vertical-align:middle;\">Protein Sequence</h4></div>" +
             "<div style=\"margin-top: 5px;\">" +
             "<div id=\"charNumbers\" style=\"font-family: monospace;font-size: 12px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
             "<div id=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 12px;display:inline-block;padding:5px;\">{{{sequence}}}</div>" +
-            "<div><div style=\"display:inline-block;background:#C50063;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">single</p>" +
+            "<div style=\"margin-top: 10px;margin-left:15px;\"><div style=\"display:inline-block;background:#C50063;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">single</p>" +
             "<div style=\"display:inline-block;background:#007800;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">multiple</p>" +
-            "<div style=\"display:inline-block;background:#69CC33;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">proteotypic</p></div>" +
+            "<div style=\"display:inline-block;background:#69CC33;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">proteotypic</p>" +
+            "<div style=\"display:inline-block;background:#fff;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%; border: 1px solid grey;text-align:center; line-height:0.8;\">_</div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">synthetic</p></div>" +
             "</div>";
 
         var template = Handlebars.compile(sources);
@@ -28,7 +32,7 @@ function Sequence(sequence) {
             "sequence": sequence,
             "sequenceLength": sequence.length
         });
-        $(divId).append(html);
+        $(divId).html(html);
 
         if(!(options.wrapAminoAcids === false))
             sequenceLayout("#fastaSeq");
@@ -158,16 +162,6 @@ function Sequence(sequence) {
         }
         $("#fastaSeq").html(source);
 
-
-
-
-        //var color = "";
-        //var property = element.parent().next().text();
-        //if (property.match("synthetic")) color="#F83919";
-        //else if (property.match("proteotypic")) color="#69CC33";
-        //else color="#C50063";
-        //console.log(color);
-        //return color;
     }
 
     var lineNumbers = function(textAreaID,lineNumberID){
