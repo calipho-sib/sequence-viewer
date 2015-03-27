@@ -17,8 +17,8 @@ function Sequence(sequence) {
             "<span class=\"badge\" style=\"background:#C50063;color:white;padding:8px 5px;border-radius:70%;margin-right:10px;vertical-align:middle;\">{{sequenceLength}}</span>" +
             "</div><h4 style=\"display:inline-block;vertical-align:middle;\">Protein Sequence</h4></div>" +
             "<div style=\"margin-top: 5px;\">" +
-            "<div style=\"max-height:150px;overflow:auto;white-space: nowrap;overflow-x:hidden;\"><div id=\"charNumbers\" style=\"font-family: monospace;font-size: 12px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
-            "<div id=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 12px;display:inline-block;padding:5px;margin-right:20px;\">{{{sequence}}}</div></div>" +
+            "<div id=\"scroller\" style=\"max-height:150px;overflow:auto;white-space: nowrap;overflow-x:hidden; padding-right:20px;margin-right:10px;s\"><div id=\"charNumbers\" style=\"font-family: monospace;font-size: 11px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
+            "<div id=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 11px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
             "<div style=\"margin-top: 10px;margin-left:15px;\"><div style=\"display:inline-block;background:#C50063;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">single</p>" +
             "<div style=\"display:inline-block;background:#007800;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">multiple</p>" +
             "<div style=\"display:inline-block;background:#69CC33;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">proteotypic</p>" +
@@ -153,7 +153,7 @@ function Sequence(sequence) {
                 HLcut=false;
             }
             if (i+1 === start && i!==end) {
-                source+= seqInit.substring(initStart, j) +"<span style=\"background:#FFE5A3;\">";
+                source+= seqInit.substring(initStart, j) +"<span id=\"peptideHighlighted\" style=\"background:#FFE5A3;\">";
                 HLon=true;
                 initStart = j;
             }
