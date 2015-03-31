@@ -69,17 +69,16 @@ function Sequence(sequence) {
             var clr = "black";
             var underscore = false;
             if (properties.length > 0) {
-                properties=properties.join("")
+                properties=properties.join("");
                 if (properties.match("synthetic")) underscore = true;
                 if (properties.match("natural")) {
-                    clr = "#007800";
-                }
-                if (properties.match(/natural/gi).length === 1) {
                     clr = "#C50063";
                 }
                 if (properties.match("proteotypic")) {
-                    clr = "#00C500";
+                    if (properties.match(/proteotypic/gi).length === 1) clr = "#007800";
+                    else clr = "#00C500";
                 }
+
             }
             HashAA.push({"id": i, "property": properties, "color": clr, "underscore": underscore});
         }
