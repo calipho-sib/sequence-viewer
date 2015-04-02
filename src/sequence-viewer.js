@@ -19,7 +19,7 @@ function Sequence(sequence) {
             "<div style=\"margin-top: 5px;\">" +
             "<div id=\"scroller\" style=\"max-height:150px;overflow:auto;white-space: nowrap;overflow-x:hidden; padding-right:20px;margin-right:10px;s\"><div id=\"charNumbers\" style=\"font-family: monospace;font-size: 11px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
             "<div id=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 11px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
-            "<div style=\"margin-top: 10px;margin-left:15px;\"><div style=\"display:inline-block;background:#C50063;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">non-proteotypic</p>" +
+            "<div style=\"margin-top: 10px;margin-left:15px;\"><div style=\"display:inline-block;background:#FF0000;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">non-proteotypic</p>" +
             "<div style=\"display:inline-block;background:#007800;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">single proteotypic</p>" +
             "<div style=\"display:inline-block;background:#69CC33;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">several proteotypic</p>" +
             "<div style=\"display:inline-block;background:#fff;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%; border: 1px solid grey;text-align:center; line-height:0.8;\">_</div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">synthetic</p></div>" +
@@ -72,7 +72,7 @@ function Sequence(sequence) {
                 properties=properties.join("");
                 if (properties.match("synthetic")) underscore = true;
                 if (properties.match("natural")) {
-                    clr = "#C50063";
+                    clr = "#FF0000";
                 }
                 if (properties.match("proteotypic")) {
                     if (properties.match(/proteotypic/gi).length === 1) clr = "#007800";
