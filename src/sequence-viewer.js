@@ -15,7 +15,8 @@ function Sequence(sequence) {
         var sources = "<div style=\"border-bottom: 1px solid #E7EAEC;padding-bottom:5px;margin-bottom: 15px;\">" +
             "<div style=\"display:inline-block;\">" +
             "<span class=\"badge\" style=\"background:#C50063;color:white;padding:8px 5px;border-radius:70%;margin-right:10px;vertical-align:middle;\">{{sequenceLength}}</span>" +
-            "</div><h4 style=\"display:inline-block;vertical-align:middle;\">Protein Sequence</h4></div>" +
+            "</div><h4 style=\"display:inline-block;vertical-align:middle;\">Protein Sequence</h4>" +
+            "<div class=\"pull-right\" style=\"margin-right:20px;font-style:italic;text-align: center;\"><span id=\"proteoCover\" style=\"font-size:18px;color:#69CC33;\"></span><br><span style=\"font-size:10px;font-weight:bold;\">proteotypicity</span></div></div>" +
             "<div style=\"margin-top: 5px;\">" +
             "<div id=\"scroller\" style=\"max-height:150px;overflow:auto;white-space: nowrap;overflow-x:hidden; padding-right:20px;margin-right:10px;s\"><div id=\"charNumbers\" style=\"font-family: monospace;font-size: 10px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
             "<div id=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 10px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
@@ -59,6 +60,7 @@ function Sequence(sequence) {
         if (!start) var start=0;
         if (!end) var end=0;
         var HashAA = [];
+        var proteoCoverage=0;
         for (var i=0;i<sequence.length;i++) {
             var properties = [];
             for (var j=0;j<list.length;j++) {
@@ -75,6 +77,7 @@ function Sequence(sequence) {
                     clr = "#FF0000";
                 }
                 if (properties.match("proteotypic")) {
+                    proteoCoverage += 1;
                     if (properties.match(/proteotypic/gi).length === 1) clr = "#007800";
                     else clr = "#00C500";
                 }
@@ -158,6 +161,8 @@ function Sequence(sequence) {
             }
         }
         $("#fastaSeq").html(source);
+        proteoCoverage = ((proteoCoverage/sequence.length)*100).toFixed(2);
+        $("#proteoCover").text(proteoCoverage + "%");
 
     }
 
