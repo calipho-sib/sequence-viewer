@@ -20,7 +20,7 @@ function Sequence(sequence) {
             "<div style=\"margin-top: 5px;\">" +
             "<div id=\"scroller\" style=\"max-height:150px;overflow:auto;white-space: nowrap;overflow-x:hidden; padding-right:20px;margin-right:10px;s\"><div id=\"charNumbers\" style=\"font-family: monospace;font-size: 10px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
             "<div id=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 10px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
-            "<div style=\"margin-top: 10px;margin-left:15px;\"><div style=\"display:inline-block;background:#FF0000;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">non-proteotypic</p>" +
+            "<div style=\"margin-top: 10px;margin-left:15px;\"><div style=\"display:inline-block;background:#4A57D4;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">non-proteotypic</p>" +
             "<div style=\"display:inline-block;background:#007800;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">single proteotypic</p>" +
             "<div style=\"display:inline-block;background:#69CC33;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">several proteotypic</p>" +
             "<div style=\"display:inline-block;background:#fff;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%; border: 1px solid grey;text-align:center; line-height:0.8;\">_</div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">synthetic</p></div>" +
@@ -55,37 +55,46 @@ function Sequence(sequence) {
         hlSeq.substring(positions[1],hlSeq.length);
         $("#fastaSeq").html(hlSeq);
     }
-
-    function coverage(list,start, end){
-        if (!start) var start=0;
-        if (!end) var end=0;
+    function applyAAFormating (list) {
+        var datestart = new Date().getTime();
         var HashAA = [];
         var proteoCoverage=0;
+        var jMin=0;
         for (var i=0;i<sequence.length;i++) {
-            var properties = [];
-            for (var j=0;j<list.length;j++) {
+            var naturalPep = 0;
+            var syntheticPep = 0;
+            var proteotypicPep = 0;
+            for (var j=jMin;j<list.length;j++) {
                 if (i >= list[j].position.first && i <= list[j].position.second) {
-                    properties.push(list[j].properties.join(""));
+                    if (list[j].properties.natural) naturalPep += 1;
+                    if (list[j].properties.synthetic) syntheticPep += 1;
+                    if (list[j].properties.proteotypic) proteotypicPep += 1;
                 }
+                if (i > list[j].position.second) jMin=j;
+                if (list[j].position.first > i) break;
             }
             var clr = "black";
             var underscore = false;
-            if (properties.length > 0) {
-                properties=properties.join("");
-                if (properties.match("synthetic")) underscore = true;
-                if (properties.match("natural")) {
-                    clr = "#FF0000";
-                }
-                if (properties.match("proteotypic")) {
-                    proteoCoverage += 1;
-                    if (properties.match(/proteotypic/gi).length === 1) clr = "#007800";
-                    else clr = "#00C500";
-                }
-
+            if (syntheticPep > 0) underscore = true;
+            if (naturalPep > 0) clr = "#4A57D4";
+            if (proteotypicPep > 0) {
+                proteoCoverage += 1;
+                if (proteotypicPep === 1) clr = "#007800";
+                else clr = "#00C500";
             }
-            HashAA.push({"id": i, "property": properties, "color": clr, "underscore": underscore});
+            HashAA.push({"id": i, "color": clr, "underscore": underscore});
         }
+        var intermediate = new Date().getTime();
 
+        console.log('Time to execute AAproperties part (1600 before): ', (intermediate - datestart));
+        proteoCoverage = ((proteoCoverage/sequence.length)*100).toFixed(2);
+        $("#proteoCover").text(proteoCoverage + "%");
+        return HashAA;
+    }
+    function coverage(HashAA,start, end){
+        var timestart = new Date().getTime();
+        if (!start) var start=0;
+        if (!end) var end=0;
         var HLon = false;
         var HLcut = false;
         var initStart=0;
@@ -161,9 +170,9 @@ function Sequence(sequence) {
             }
         }
         $("#fastaSeq").html(source);
-        proteoCoverage = ((proteoCoverage/sequence.length)*100).toFixed(2);
-        $("#proteoCover").text(proteoCoverage + "%");
+        var timeend = new Date().getTime();
 
+        console.log('Time to execute all: ', (timeend - timestart));
     }
 
     var lineNumbers = function(textAreaID,lineNumberID){
@@ -193,6 +202,7 @@ function Sequence(sequence) {
     return {
         render:renderHtml,
         selection:highlighting,
-        coverage:coverage
+        coverage:coverage,
+        applyAAFormating:applyAAFormating
     }
 }
