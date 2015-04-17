@@ -1,21 +1,33 @@
 <html>
 <head>
-  <title>neXtProt protein sequence viewe</title>
-    <script src="bower.js"></script>
+  <title>neXtProt protein sequence viewer</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <script src="dependencies.js"></script>
     <script src="../src/sequence-viewer.js"></script>
 </head>
 <body class="container">
 
-    <div id="protein-sequence-viewer" class="row" style="width:300px;display:inline-block;height:250px;vertical-align:top;padding:15px 0px 10px 15px;margin-left:0px;border-top: 1px solid #eee;"></div>
+<div id="protein-sequence-viewer" class="row" style="width:500px;height:250px;vertical-align:top;padding:15px 0px 10px 15px;margin:auto;border-top: 1px solid #eee;"></div>
+<div id="protein-sequence-viewer2" class="row" style="width:500px;height:250px;vertical-align:top;padding:15px 0px 10px 15px;margin:auto;border-top: 1px solid #eee;"></div>
+<div id="protein-sequence-viewer3" class="row" style="width:500px;height:250px;vertical-align:top;padding:15px 0px 10px 15px;margin:auto;border-top: 1px solid #eee;"></div>
 
-    <div id="protein-sequence-viewer2" class="row" style="width:300px;display:inline-block;height:250px;vertical-align:top;padding:15px 0px 10px 15px;margin-left:0px;border-top: 1px solid #eee;"></div>
 
-
-  <script class="example">
+<script class="example">
 
 //      var sequence = new proteinSequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN', [{'proteotipic': 'red'}, {'natural':'green'}]);
-    var seq1= new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
-    seq1.render('#protein-sequence-viewer');
+    $(function () {
+        var seq1= new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+        seq1.render('#protein-sequence-viewer');
+
+        var seq2= new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+        seq2.render('#protein-sequence-viewer2');
+        seq1.selection(20,43,'red');
+
+        var seq3= new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+        seq3.render('#protein-sequence-viewer3');
+
+    });
+
 
 //showSequence('MALWMRLLPLLARGIVEQCCTSICSLYQLENYCN', '#protein-sequence-viewer2');
 

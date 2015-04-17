@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>neXtProt protein sequence viewe</title>
+    <script src="dependencies.js"></script>
+    <script src="../src/sequence-viewer.js"></script>
+</head>
+<body class="container">
+
+<script class="example">
+
+    //      var sequence = new proteinSequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN', [{'proteotipic': 'red'}, {'natural':'green'}]);
+    var seq1= new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+    seq1.render('#protein-sequence-viewer');
+
+    //showSequence('MALWMRLLPLLARGIVEQCCTSICSLYQLENYCN', '#protein-sequence-viewer2');
+
+    //      sequence.highlight([[13,20],[40,50]], 'proteotipic');
+    //      sequence.coverage([[2,4],[8,50]], 'font-color:red');
+
+    //      sequence.render("protein-sequence-viewer");
+
+
+
+</script>
+
+</body>
+</html>

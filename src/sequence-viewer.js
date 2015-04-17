@@ -4,9 +4,17 @@ function Sequence(sequence) {
     var sequence = sequence;
     var seqInit = "";
     var lineJump = 0;
+    var divID;
 
     function renderHtml(divId, options){
-
+        divID=divId;
+        if (typeof options === 'undefined') {
+            var options = {
+            'showLineNumbers': true,
+                'wrapAminoAcids': true,
+                'charsPerLine': 30
+            }
+        }
         if(typeof options.charsPerLine === 'undefined') {
             lineJump=30;
         }
@@ -32,14 +40,15 @@ function Sequence(sequence) {
             "sequenceLength": sequence.length
         });
         $(divId).html(html);
+        //console.log($(divId + #fastaSeq').text());
 
         if(!(options.wrapAminoAcids === false))
-            sequenceLayout("#fastaSeq");
+            sequenceLayout(divId +" #fastaSeq");
 
         if(!(options.showLineNumbers === false))
-            lineNumbers("#fastaSeq","#charNumbers");
+            lineNumbers(divId +" #fastaSeq",divId +" #charNumbers");
 
-        seqInit = $("#fastaSeq").html();
+        seqInit = $(divId +" #fastaSeq").html();
     }
 
     function highlighting (start,end, color, options){
@@ -53,17 +62,21 @@ function Sequence(sequence) {
         hlSeq.substring(positions[0],positions[1]) +
         "</span>" +
         hlSeq.substring(positions[1],hlSeq.length);
-        $("#fastaSeq").html(hlSeq);
+        $(divID +" #fastaSeq").html(hlSeq);
     }
     function applyAAFormating (list) {
         var datestart = new Date().getTime();
         var HashAA = [];
         var proteoCoverage=0;
         var jMin=0;
-        for (var i=0;i<sequence.length;i++) {
+        var begin = 1;
+        var subseqColor = "";
+        var subseq_;
+        for (var i=1;i<sequence.length+1;i++) {
             var naturalPep = 0;
             var syntheticPep = 0;
             var proteotypicPep = 0;
+
             for (var j=jMin;j<list.length;j++) {
                 if (i >= list[j].position.first && i <= list[j].position.second) {
                     if (list[j].properties.natural) naturalPep += 1;
@@ -82,7 +95,20 @@ function Sequence(sequence) {
                 if (proteotypicPep === 1) clr = "#007800";
                 else clr = "#00C500";
             }
-            HashAA.push({"id": i, "color": clr, "underscore": underscore});
+            if (i === 1) {
+                subseqColor = clr;
+                subseq_=underscore;
+            }
+            if (!(clr === subseqColor && underscore === subseq_)) {
+                HashAA.push({"start": begin-1, "end": i-1, "color": subseqColor, "underscore": subseq_});
+                begin=i;
+                subseqColor = clr;
+                subseq_=underscore;
+            }
+            if (i === sequence.length) {
+                HashAA.push({"start": begin-1, "end": i, "color": subseqColor, "underscore": subseq_});
+            }
+
         }
         var intermediate = new Date().getTime();
 
@@ -92,84 +118,46 @@ function Sequence(sequence) {
         return HashAA;
     }
     function coverage(HashAA,start, end){
+        var jTranslation = function (i) {
+            var j=i+~~(i/10)+4*(~~(i/lineJump));
+            return j;
+        };
         var timestart = new Date().getTime();
         if (!start) var start=0;
         if (!end) var end=0;
-        var HLon = false;
-        var HLcut = false;
-        var initStart=0;
-        var init="";
-        var initUnder=false;
-        var source = "<span>";
-        var q=0;
+        var source = "";
+        var pre ="";
         for (var i=0;i<HashAA.length;i++){
-            j=i+~~(i/10)+4*(~~(i/lineJump));
-            if (i === end && i!==0) {
-                source+= seqInit.substring(initStart, j) +"</span>";
-                HLon=false;
-                initStart=j;
+            if (HashAA[i].underscore) {
+                pre = "<span style=\"text-decoration:underline;color:" + HashAA[i].color + ";\">";
+                source+= pre;
             }
-            if (HLon === true && i !== (HashAA.length -1)){
-                if (HashAA[i+1].color !== init || HashAA[i+1].underscore !== initUnder) {
-                    source+=seqInit.substring(initStart, j) +"</span>";
-                    HLcut=true;
-                    initStart=j;
-                }
+            else {
+                pre = "<span style=\"color:" + HashAA[i].color + ";\">";
+                source+= pre;
             }
-            if (i === (HashAA.length -1)) {
-                if (initUnder === true && HLon === true) {
-                    source += seqInit.substring(initStart, seqInit.length) + "</span></span></span>";
+            if (end) {
+                if (start >= HashAA[i].start && start < HashAA[i].end && end >= HashAA[i].start && end < HashAA[i].end) {
+
+                    source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(start)) + "<span id=\"peptideHighlighted\" style=\"background:#FFE5A3;\">" + seqInit.substring(jTranslation(start), jTranslation(end + 1));
+
+                    source += "</span>" + seqInit.substring(jTranslation(end + 1), jTranslation(HashAA[i].end)) + "</span>";
                 }
-                else if (initUnder === true) {
-                    source += seqInit.substring(initStart, seqInit.length) + "</span></span>";
+                else if (start >= HashAA[i].start && start < HashAA[i].end) {
+                    source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(start)) + "</span><span id=\"peptideHighlighted\" style=\"background:#FFE5A3;\">"+ pre + seqInit.substring(jTranslation(start), jTranslation(HashAA[i].end)) + "</span>";
+                }
+                else if (end >= HashAA[i].start && end < HashAA[i].end) {
+                    source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(end + 1)) + "</span></span>"+ pre + seqInit.substring(jTranslation(end+1), jTranslation(HashAA[i].end)) + "</span>";
                 }
                 else {
-                    source += seqInit.substring(initStart, seqInit.length) + "</span>";
+                    source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(HashAA[i].end)) + "</span>";
                 }
             }
-            else if (HashAA[i+1].color !== init && HashAA[i+1].underscore == initUnder) {
-                init=HashAA[i+1].color;
-                if (initUnder === true) {
-                    source += seqInit.substring(initStart, j) + "</span></span><span style=\"color:" + HashAA[i + 1].color + ";\"><span style=\"text-decoration:underline;\">";
-                }
-                else {
-                    source += seqInit.substring(initStart, j) + "</span><span style=\"color:" + HashAA[i + 1].color + ";\">";
-                }
-                initStart=j;
-            }
-            else if (HashAA[i+1].color !== init && HashAA[i+1].underscore !== initUnder) {
-                init=HashAA[i+1].color;
-                initUnder=HashAA[i+1].underscore;
-                if (initUnder === true) {
-                    source += seqInit.substring(initStart, j) + "</span><span style=\"color:" + HashAA[i + 1].color + ";\"><span style=\"text-decoration:underline;\">";
-                }
-                else{
-                    source += seqInit.substring(initStart, j) + "</span></span><span style=\"color:" + HashAA[i + 1].color + ";\">";
-                }
-                initStart=j;
-            }
-            else if (HashAA[i+1].color == init && HashAA[i+1].underscore !== initUnder) {
-                init=HashAA[i+1].color;
-                initUnder=HashAA[i+1].underscore;
-                if (initUnder === true) {
-                    source += seqInit.substring(initStart,j) + "<span style=\"text-decoration:underline;\">";
-                }
-                else{
-                    source += seqInit.substring(initStart,j) + "</span>";
-                }
-                initStart=j;
-            }
-            if (HLcut===true) {
-                source+= "<span style=\"background:#FFE5A3;\">";
-                HLcut=false;
-            }
-            if (i+1 === start && i!==end) {
-                source+= seqInit.substring(initStart, j) +"<span id=\"peptideHighlighted\" style=\"background:#FFE5A3;\">";
-                HLon=true;
-                initStart = j;
+            else {
+                source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(HashAA[i].end)) + "</span>";
             }
         }
-        $("#fastaSeq").html(source);
+        $(divID +" #fastaSeq").html(source);
         var timeend = new Date().getTime();
 
         console.log('Time to execute all: ', (timeend - timestart));

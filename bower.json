@@ -12,6 +12,8 @@
   ],
   "dependencies": {
     "handlebars": "~3.0.0",
-    "jquery": "~2.1.3"
+    "jquery": "~2.1.3",
+    "bootstrap": "3.x.x",
+    "nextprot": "0.0.x"
   }
 }
