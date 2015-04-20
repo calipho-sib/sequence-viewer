@@ -10,7 +10,7 @@ function Sequence(sequence) {
         divID=divId;
         if (typeof options === 'undefined') {
             var options = {
-            'showLineNumbers': true,
+                'showLineNumbers': true,
                 'wrapAminoAcids': true,
                 'charsPerLine': 30
             }
@@ -28,10 +28,7 @@ function Sequence(sequence) {
             "<div style=\"margin-top: 5px;\">" +
             "<div id=\"scroller\" style=\"max-height:150px;overflow:auto;white-space: nowrap;overflow-x:hidden; padding-right:20px;margin-right:10px;s\"><div id=\"charNumbers\" style=\"font-family: monospace;font-size: 10px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
             "<div id=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 10px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
-            "<div style=\"margin-top: 10px;margin-left:15px;\"><div style=\"display:inline-block;background:#4A57D4;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">non-proteotypic</p>" +
-            "<div style=\"display:inline-block;background:#007800;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">single proteotypic</p>" +
-            "<div style=\"display:inline-block;background:#69CC33;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">several proteotypic</p>" +
-            "<div style=\"display:inline-block;background:#fff;width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%; border: 1px solid grey;text-align:center; line-height:0.8;\">_</div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">synthetic</p></div>" +
+            "<div id=\"coverageLegend\" style=\"margin-top: 10px;margin-left:15px;\"></div>" +
             "</div>";
 
         var template = Handlebars.compile(sources);
@@ -42,9 +39,10 @@ function Sequence(sequence) {
         $(divId).html(html);
         //console.log($(divId + #fastaSeq').text());
 
-        if(!(options.wrapAminoAcids === false))
+        if(!(options.wrapAminoAcids === false)) {
             sequenceLayout(divId +" #fastaSeq");
-
+        }
+        else $(divId +" #scroller").css("overflow-x","auto");
         if(!(options.showLineNumbers === false))
             lineNumbers(divId +" #fastaSeq",divId +" #charNumbers");
 
@@ -64,60 +62,19 @@ function Sequence(sequence) {
         hlSeq.substring(positions[1],hlSeq.length);
         $(divID +" #fastaSeq").html(hlSeq);
     }
-    function applyAAFormating (list) {
-        var datestart = new Date().getTime();
-        var HashAA = [];
-        var proteoCoverage=0;
-        var jMin=0;
-        var begin = 1;
-        var subseqColor = "";
-        var subseq_;
-        for (var i=1;i<sequence.length+1;i++) {
-            var naturalPep = 0;
-            var syntheticPep = 0;
-            var proteotypicPep = 0;
-
-            for (var j=jMin;j<list.length;j++) {
-                if (i >= list[j].position.first && i <= list[j].position.second) {
-                    if (list[j].properties.natural) naturalPep += 1;
-                    if (list[j].properties.synthetic) syntheticPep += 1;
-                    if (list[j].properties.proteotypic) proteotypicPep += 1;
-                }
-                if (i > list[j].position.second) jMin=j;
-                if (list[j].position.first > i) break;
+    function addLegend (hashLegend) {
+        for (var i=0;i<hashLegend.length;i++) {
+            if (hashLegend[i].underscore === true) {
+                $(divID +" #coverageLegend").append("<div style=\"display:inline-block;background:" + hashLegend[i].color+";width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%; border: 1px solid grey;text-align:center; line-height:0.8;\">_</div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">" + hashLegend[i].name + "</p></div>");
+                console.log("duh !");
             }
-            var clr = "black";
-            var underscore = false;
-            if (syntheticPep > 0) underscore = true;
-            if (naturalPep > 0) clr = "#4A57D4";
-            if (proteotypicPep > 0) {
-                proteoCoverage += 1;
-                if (proteotypicPep === 1) clr = "#007800";
-                else clr = "#00C500";
+            else {
+                $(divID +" #coverageLegend").append("<div style=\"display:inline-block;background:" + hashLegend[i].color+";width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">" + hashLegend[i].name + "</p>");
+                console.log("dah !");
             }
-            if (i === 1) {
-                subseqColor = clr;
-                subseq_=underscore;
-            }
-            if (!(clr === subseqColor && underscore === subseq_)) {
-                HashAA.push({"start": begin-1, "end": i-1, "color": subseqColor, "underscore": subseq_});
-                begin=i;
-                subseqColor = clr;
-                subseq_=underscore;
-            }
-            if (i === sequence.length) {
-                HashAA.push({"start": begin-1, "end": i, "color": subseqColor, "underscore": subseq_});
-            }
-
         }
-        var intermediate = new Date().getTime();
-
-        console.log('Time to execute AAproperties part (1600 before): ', (intermediate - datestart));
-        proteoCoverage = ((proteoCoverage/sequence.length)*100).toFixed(2);
-        $("#proteoCover").text(proteoCoverage + "%");
-        return HashAA;
     }
-    function coverage(HashAA,start, end){
+    function coverage(HashAA,start, end,highlightColor){
         var jTranslation = function (i) {
             var j=i+~~(i/10)+4*(~~(i/lineJump));
             return j;
@@ -125,6 +82,7 @@ function Sequence(sequence) {
         var timestart = new Date().getTime();
         if (!start) var start=0;
         if (!end) var end=0;
+        if (!highlightColor) var highlightColor="#FFE5A3";
         var source = "";
         var pre ="";
         for (var i=0;i<HashAA.length;i++){
@@ -139,12 +97,12 @@ function Sequence(sequence) {
             if (end) {
                 if (start >= HashAA[i].start && start < HashAA[i].end && end >= HashAA[i].start && end < HashAA[i].end) {
 
-                    source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(start)) + "<span id=\"peptideHighlighted\" style=\"background:#FFE5A3;\">" + seqInit.substring(jTranslation(start), jTranslation(end + 1));
+                    source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(start)) + "<span id=\"peptideHighlighted\" style=\"background:" + highlightColor + ";\">" + seqInit.substring(jTranslation(start), jTranslation(end + 1));
 
                     source += "</span>" + seqInit.substring(jTranslation(end + 1), jTranslation(HashAA[i].end)) + "</span>";
                 }
                 else if (start >= HashAA[i].start && start < HashAA[i].end) {
-                    source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(start)) + "</span><span id=\"peptideHighlighted\" style=\"background:#FFE5A3;\">"+ pre + seqInit.substring(jTranslation(start), jTranslation(HashAA[i].end)) + "</span>";
+                    source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(start)) + "</span><span id=\"peptideHighlighted\" style=\"background:" + highlightColor + ";\">"+ pre + seqInit.substring(jTranslation(start), jTranslation(HashAA[i].end)) + "</span>";
                 }
                 else if (end >= HashAA[i].start && end < HashAA[i].end) {
                     source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(end + 1)) + "</span></span>"+ pre + seqInit.substring(jTranslation(end+1), jTranslation(HashAA[i].end)) + "</span>";
@@ -191,6 +149,6 @@ function Sequence(sequence) {
         render:renderHtml,
         selection:highlighting,
         coverage:coverage,
-        applyAAFormating:applyAAFormating
+        addLegend: addLegend
     }
 }
