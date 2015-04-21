@@ -9,9 +9,28 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['bower_components/jquery/dist/jquery.js',
-          'bower_components/handlebars/handlebars.js',
-          'bower_components/nextprot/src/nextprot.js'],
+            'demo/codemirror.js',
+          'demo/javascript.js',
+          'bower_components/handlebars/handlebars.js'],
         dest: 'demo/dependencies.js'
+      }
+    },
+    bump: {
+      options: {
+        files: ['package.json'],
+        updateConfigs: [],
+        commit: true,
+        commitMessage: 'Release v%VERSION%',
+        commitFiles: ['package.json'],
+        createTag: true,
+        tagName: 'v%VERSION%',
+        tagMessage: 'Version %VERSION%',
+        push: true,
+        pushTo: 'https://github.com/calipho-sib/sequence-viewer.git',
+        gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d',
+        globalReplace: false,
+        prereleaseName: false,
+        regExp: false
       }
     },
     uglify: {

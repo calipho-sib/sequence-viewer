@@ -1,15 +1,21 @@
 <html>
 <head>
     <title>neXtProt protein sequence viewer</title>
-    <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" href="codemirror.css">
     <script src="dependencies.js"></script>
     <script src="../src/sequence-viewer.js"></script>
 </head>
+
 <body class="container">
 <div class="jumbotron">
-    <p class="pull-right" style="display: inline-block;"><a href="http://www.nextprot.org" alt="Nextprot" style="color:#C50063;">NeXtProt &copy;</a></p>
+    <p class="pull-right" style="display: inline-block;"><a href="http://www.nextprot.org" alt="neXtProt"
+                                                            style="color:#C50063;">neXtProt &copy;</a></p>
+
     <h1>Sequence Viewer</h1>
-    <p>This javascript tool will allow you to display your sequence of DNA, protein, or others, formatted FASTA-like, and apply some visual improvment for selection and coverage</p>
+
+    <p>This javascript tool will allow you to display your sequence of DNA, protein, or others, formatted FASTA-like,
+        and apply some visual improvment for selection and coverage</p>
 </div>
 <div class="row" style="margin-top: 30px;border-bottom:1px solid #E7EAEC;">
     <div class="panel panel-default col-md-5 pull-left" style="margin-left: 50px;">
@@ -20,34 +26,33 @@
             <p>This is the classic display of a sequence.<br>
                 Before displaying the sequence you can adjust some rendering options :</p>
             <ul>
-                <li>
-                    <strong>showLineNumbers</strong> <em>(boolean)</em> : Display or not the line numbers
-                </li>
-                <li>
-                    <strong>wrapAminoAcids</strong> <em>(boolean)</em> : Add or not the layout with break-line and blank
+                <li><strong>showLineNumbers</strong> <em>(boolean)</em> : Display or not the line numbers</li>
+                <li><strong>wrapAminoAcids</strong> <em>(boolean)</em> : Add or not the layout with break-line and blank
                     separation
                 </li>
-                <li>
-                    <strong>charsPerLine</strong> <em>(integer)</em> : Choose the number of letter per Line (must be a
+                <li><strong>charsPerLine</strong> <em>(integer)</em> : Choose the number of letter per Line (must be a
                     multiple of 10)
                 </li>
             </ul>
         </div>
-
-
-    <div><pre style="font-size: 9px;">
+        <form>
+            <textarea id="code1" name="code1" style="width:500px;max-height:200px;overflow:auto;font-size:11px;">
 // Classic display of the sequence
-    var seq1 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEAL........');
-    // You can add some rendering options
-    seq1.render('#protein-sequence-viewer', {
-      'showLineNumbers': true,
-      'wrapAminoAcids': true,
-      'charsPerLine': 50
-    });
-    </pre></div>
+    var seq1 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCNMALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCNMALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCNMALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCNMALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+// You can add some rendering options
+seq1.render('#protein-sequence-viewer', {
+  'showLineNumbers': true,
+  'wrapAminoAcids': true,
+  'charsPerLine': 50
+});
+    </textarea>
+        </form>
+        <button type="button" class="btn btn-default center-block" style="margin-bottom:20px;"
+                onclick=executeCode("#protein-sequence-viewer2",simpleRender)>Execute
+        </button>
     </div>
     <div id="protein-sequence-viewer" class="col-md-4 pull-right"
-         style="width:500px;height:250px;vertical-align:middle;padding:15px 0px 10px 15px;margin-right: 50px;margin-top: 0px;"></div>
+         style="width:500px;height:250px;vertical-align:middle;padding:15px 0px 10px 15px;margin-right: 50px;margin-top: 0px;position: relative"></div>
 
 </div>
 
@@ -58,17 +63,22 @@
         </div>
         <div class="panel-body">
             <p>You can also select and bring to light a part of the sequence.<br>
-                this sequence will be highlight by the color of your choice.</p>
+                This sequence will be highlight by the color of your choice.</p>
         </div>
-        <div><pre style="font-size: 9px;">
+        <form>
+            <textarea id="code2" name="code2" style="width:500px;max-height:200px;overflow:auto;font-size:11px;">
 // Display the sequence with a part highlighted
-    var seq2 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEAL.........');
-    seq2.render('#protein-sequence-viewer2');
-    seq2.selection(20, 43, 'red');
-    </pre></div>
+var seq2 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+seq2.render('#protein-sequence-viewer2');
+seq2.selection(20, 43, 'red');
+            </textarea>
+        </form>
+        <button type="button" class="btn btn-default center-block" style="margin-bottom:20px;"
+                onclick=executeCode("#protein-sequence-viewer2",highlightCode)>Execute
+        </button>
     </div>
     <div id="protein-sequence-viewer2" class="col-md-4 pull-right"
-         style="width:500px;height:250px;vertical-align:top;padding:15px 0px 10px 15px;margin-right: 50px; margin-top:0px;"></div>
+         style="width:500px;height:250px;vertical-align:top;padding:15px 0px 10px 15px;margin-right: 50px; margin-top:0px;opacity:0"></div>
 </div>
 <div class="row" style="margin-top: 30px;border-bottom:1px solid #E7EAEC;">
     <div class="panel panel-default col-md-5 pull-left" style="margin-left: 50px;">
@@ -78,117 +88,162 @@
         <div class="panel-body">
             <p>A coverage with color codes can be apply to the sequence.<br>
                 For this, you must provide a list, mapping all the sequence with some specific colors and labels. <br>
-                With the coverage, it's also possible to give within the parameters an interval to highlight in the sequence. <br>
-            An other array will be needed to display the legend of color codes.</p>
+                With the coverage, it's also possible to give within the parameters an interval to highlight in the
+                sequence. <br>
+                An other array will be needed to display the legend of color codes.</p>
         </div>
-        <div><pre style="font-size: 9px;">
+        <form>
+            <textarea id="code3" name="code3" style="width:500px;max-height:200px;overflow:auto;font-size:11px;">
 // Display the sequence with coverage and legend
-    var seq3 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEAL.........');
-    seq3.render('#protein-sequence-viewer3');
+var seq3 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+seq3.render('#protein-sequence-viewer3');
 
-    //Coverage list
-    var ExempleSequenceCoverage = [
-        {start: 0, end: 25, color: "black", underscore: false},
-        {start: 25, end: 47, color: "#ff0000", underscore: false},
-        {start: 47, end: 54, color: "#ff0000", underscore: true},
-        {start: 54, end: 55, color: "#ff0000", underscore: false},
-        {start: 55, end: 56, color: "black", underscore: false},
-        {start: 56, end: 89, color: "#69CC33", underscore: false},
-        {start: 89, end: 90, color: "black", underscore: false},
-        {start: 90, end: 110, color: "#ff0000", underscore: false}
+//Coverage list
+var exempleSequenceCoverage = [
+    {start: 0, end: 25, color: "black", underscore: false},
+    {start: 25, end: 47, color: "#ff0000", underscore: false},
+    {start: 47, end: 54, color: "#ff0000", underscore: true},
+    {start: 54, end: 55, color: "#ff0000", underscore: false},
+    {start: 55, end: 56, color: "black", underscore: false},
+    {start: 56, end: 89, color: "#69CC33", underscore: false},
+    {start: 89, end: 90, color: "black", underscore: false},
+    {start: 90, end: 110, color: "#ff0000", underscore: false}
+];
+seq3.coverage(exempleSequenceCoverage);
+// for coverage + highlight :
+// seq3.coverage(exempleSequenceCoverage, start, end, highlightColor);
+
+//Define Legend and color codes
+var exempleLegend = [
+    {name: "Mature Protein", color: "#ff0000", underscore: false},
+    {name: "Proteotypic peptide", color: "#69CC33", underscore: false},
+    {name: "Synthetic peptide",color: "#fff",underscore: true}
     ];
-    //IMPORTANT : You need to be sure the the Coverage array is sorted before drawing
-    ExempleSequenceCoverage.sort(function (a, b) {
-        return a.start - b.start;
-    });
-    seq3.coverage(ExempleSequenceCoverage);
-    // for coverage + highlight :
-    // seq3.coverage(ExempleSequenceCoverage, start, end, highlightColor);
-
-    //Define Legend and color codes
-    var ExempleLegend = [
-        {name: "Mature Protein", color: "#ff0000", underscore: false},
-        {name: "Proteotypic peptide", color: "#69CC33", underscore: false},
-        {name: "Synthetic peptide",color: "#fff",underscore: true}
-        ];
-    seq3.addLegend(ExempleLegend);
-    </pre></div>
+seq3.addLegend(exempleLegend);
+    </textarea>
+        </form>
+        <button type="button" class="btn btn-default center-block" style="margin-bottom:20px;"
+                onclick=executeCode("#protein-sequence-viewer3",coverageCode)>Execute
+        </button>
     </div>
-<div id="protein-sequence-viewer3" class="col-md-4 pull-right"
-     style="width:500px;height:250px;vertical-align:top;padding:15px 0px 10px 15px;margin-right: 50px;margin-top:0px;"></div>
+    <div id="protein-sequence-viewer3" class="col-md-4 pull-right"
+         style="width:500px;height:250px;vertical-align:top;padding:15px 0px 10px 15px;margin-right: 50px;margin-top:0px;"></div>
 </div>
 
+<script>
+    var simpleRender;
+    var highlightCode;
+    var coverageCode;
 
+    var executeCode = function (outputDiv, mirrorCode) {
+        var code = mirrorCode.getValue();
+        eval(code);
+        $(outputDiv).animate({opacity: "100"}, 2000);
+    };
+
+    window.onload = function () {
+        simpleRender = CodeMirror.fromTextArea(code1, {
+            mode: "javascript",
+            lineNumbers: true,
+            lineWrapping: true
+        });
+        highlightCode = CodeMirror.fromTextArea(code2, {
+            mode: "javascript",
+            lineNumbers: true,
+            lineWrapping: true
+        });
+        coverageCode = CodeMirror.fromTextArea(code3, {
+            mode: "javascript",
+            lineNumbers: true,
+            lineWrapping: true
+        });
+        $(function () {
+            executeCode("#protein-sequence-viewer1", simpleRender);
+            executeCode("#protein-sequence-viewer2", highlightCode);
+            executeCode("#protein-sequence-viewer3", coverageCode);
+        });
+    };
+</script>
 <script class="example">
 
-    $(function () {
+
+//    $(function () {
 
         // For the example
 
         // Classic display of the sequence
-        var seq1 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+//        var seq1 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
         // You can add some rendering options
-        seq1.render('#protein-sequence-viewer', {
-                    'showLineNumbers': true,
-                    'wrapAminoAcids': true,
-                    'charsPerLine': 50
-                }
-        );
+//        seq1.render('#protein-sequence-viewer', {
+//                    'showLineNumbers': true,
+//                    'wrapAminoAcids': true,
+//                    'charsPerLine': 50
+//                }
+//        );
+
+//        var myCodeMirror = CodeMirror($("#highlightCode")[0], {
+//            value: "var seq2 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEAL" +
+//            "YLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');\n" +
+//            "seq2.render('#protein-sequence-viewer2');\n" +
+//            "seq2.selection(20, 43, 'red');",
+//            mode: "javascript"
+//        });
 
 
         // Display the sequence with a part highlighted
-        var seq2 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
-        seq2.render('#protein-sequence-viewer2');
-        seq2.selection(20, 43, 'red');
+//        var seq2 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+//        seq2.render('#protein-sequence-viewer2');
+//        seq2.selection(20, 43, 'red');
 
 
         // Display the sequence with coverage and legend
-        var seq3 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
-        seq3.render('#protein-sequence-viewer3');
-        //Coverage list
-        var ExempleSequenceCoverage = [
-            {start: 0, end: 25, color: "black", underscore: false},
-            {start: 25, end: 47, color: "#ff0000", underscore: false},
-            {start: 47, end: 54, color: "#ff0000", underscore: true},
-            {start: 54, end: 55, color: "#ff0000", underscore: false},
-            {start: 55, end: 56, color: "black", underscore: false},
-            {start: 56, end: 89, color: "#69CC33", underscore: false},
-            {start: 89, end: 90, color: "black", underscore: false},
-            {start: 90, end: 110, color: "#ff0000", underscore: false}
-        ];
-        //IMPORTANT : You need to be sure the the Coverage array is sorted before drawing
-        ExempleSequenceCoverage.sort(function (a, b) {
-            return a.start - b.start;
-        });
-        seq3.coverage(ExempleSequenceCoverage);
-        //Legend
-        var ExempleLegend = [{
-            name: "Mature Protein",
-            color: "#ff0000",
-            underscore: false
-        }, {name: "Proteotypic peptide", color: "#69CC33", underscore: false}, {
-            name: "Synthetic peptide",
-            color: "#fff",
-            underscore: true
-        }];
-        seq3.addLegend(ExempleLegend);
-
-
-    });
+//        var seq3 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+//        seq3.render('#protein-sequence-viewer3');
+//        //Coverage list
+//        var dataCoverage = [
+//            {start: 0, end: 25, color: "black", underscore: false},
+//            {start: 25, end: 47, color: "#ff0000", underscore: false},
+//            {start: 47, end: 54, color: "#ff0000", underscore: true},
+//            {start: 54, end: 55, color: "#ff0000", underscore: false},
+//            {start: 55, end: 56, color: "black", underscore: false},
+//            {start: 56, end: 89, color: "#69CC33", underscore: false},
+//            {start: 89, end: 90, color: "black", underscore: false},
+//            {start: 90, end: 110, color: "#ff0000", underscore: false}
+//        ];
+//        //IMPORTANT : You need to be sure the the Coverage array is sorted before drawing
+////        ExempleSequenceCoverage.sort(function (a, b) {
+////            return a.start - b.start;
+////        });
+//        seq3.coverage(dataCoverage);
+//        //Legend
+//        var ExempleLegend = [{
+//            name: "Mature Protein",
+//            color: "#ff0000",
+//            underscore: false
+//        }, {name: "Proteotypic peptide", color: "#69CC33", underscore: false}, {
+//            name: "Synthetic peptide",
+//            color: "#fff",
+//            underscore: true
+//        }];
+//        seq3.addLegend(ExempleLegend);
+//
+//
+//    });
 
 
 </script>
+
 
 </body>
 </html>
