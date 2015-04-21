@@ -22,7 +22,7 @@ seq.render('sequence-viewer')
 ![Sequence viewer](/assets/sequence-viewer.png)
 
 
-Note: that if you choose the later approach you should also include the dependencies, jquery and handlebars
+Note: that if you choose the later approach you should also include the dependencies, jquery,handlebars and bootstrap.min.css
 
 Check out this page for a better understanding of how to use the sequence viewer and its possibilities :
 * http://calipho-sib.github.io/sequence-viewer/demo/
