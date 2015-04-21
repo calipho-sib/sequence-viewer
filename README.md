@@ -4,7 +4,7 @@ The sequence viewer is a super easy javascript library to use in order to draw a
 
 #How to run
 
-1) Include the library using bower or simple by including the javascript protein-sequence.js
+1) Include the library using bower or simply by including the javascript sequence-viewer.js
 ```
 bower install sequence-viewer
 ```
@@ -23,15 +23,16 @@ seq.render('sequence-viewer')
 
 
 Note: that if you choose the later approach you should also include the dependencies, jquery and handlebars
- 
-More examples: 
-* http://calipho-sib.github.io/sequence-viewer/demo?sequence=JKBJBDJA
-* http://calipho-sib.github.io/sequence-viewer/demo?sequence=JKBJBDJA&showLines=false
-* http://calipho-sib.github.io/sequence-viewer/demo?sequence=JKBJBDJA&labels={'natural':'green','synthetic':'blue'}
+
+Check out this page for a better understanding of how to use the sequence viewer and its possibilities :
+* http://calipho-sib.github.io/sequence-viewer/demo/
+
 
 # Options
 * Line numbers
 * Column size
+* Highlight
+* Coverage
 * Labels text and color
 
 
