@@ -1,6 +1,6 @@
 {
   "name": "sequence-viewer",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/sequence-viewer.min.js",
   "description": "A protein sequence viewer written in javascript",
   "repository": {
