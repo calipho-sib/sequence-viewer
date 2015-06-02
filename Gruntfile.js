@@ -9,10 +9,10 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['bower_components/jquery/dist/jquery.js',
-            'demo/codemirror.js',
-          'demo/javascript.js',
-          'bower_components/handlebars/handlebars.js'],
-        dest: 'demo/dependencies.js'
+          'bower_components/handlebars/handlebars.js',
+          'src/sequence-viewer.js'
+        ],
+        dest: 'dist/sequence-viewer.bundle.js'
       }
     },
     bump: {

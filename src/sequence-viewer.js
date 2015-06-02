@@ -26,8 +26,8 @@ function Sequence(sequence) {
             "</div><h4 style=\"display:inline-block;vertical-align:middle;\">Protein Sequence</h4>" +
             "</div>" +
             "<div style=\"margin-top: 5px;\">" +
-            "<div id=\"scroller\" style=\"max-height:150px;overflow:auto;white-space: nowrap;padding-right:20px;margin-right:10px;s\"><div id=\"charNumbers\" style=\"font-family: monospace;font-size: 10px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
-            "<div id=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 10px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
+            "<div id=\"scroller\" style=\"max-height:150px;overflow:auto;white-space: nowrap;padding-right:20px;margin-right:10px;s\"><div id=\"charNumbers\" style=\"font-family: monospace;font-size: 12px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
+            "<div id=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 12px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
             "<div id=\"coverageLegend\" style=\"margin-top: 10px;margin-left:15px;\"></div>" +
             "</div>";
 
@@ -56,7 +56,7 @@ function Sequence(sequence) {
         positions[1]=positions[1]+~~(positions[1]/10)+4*(~~(positions[1]/lineJump));
         var highlightColor=color;
         hlSeq = hlSeq.substring(0,positions[0])+
-        "<span style=\"background:" + color + ";color:white;\">" +
+        "<span id='stringSelected' style=\"background:" + color + ";color:white;\">" +
         hlSeq.substring(positions[0],positions[1]) +
         "</span>" +
         hlSeq.substring(positions[1],hlSeq.length);
