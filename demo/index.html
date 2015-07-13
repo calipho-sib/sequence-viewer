@@ -33,6 +33,10 @@
                 <li><strong>charsPerLine</strong> <em>(integer)</em> : Choose the number of letter per Line (must be a
                     multiple of 10)
                 </li>
+                <li><strong>toolbar</strong> <em>(boolean)</em> : Add a toolbar allowing users to choose the number of letter per line
+                </li>
+                <li><strong>search</strong> <em>(boolean)</em> : Add an input in the header to search for pattern in the sequence. Regular expression is supported.
+                </li>
             </ul>
         </div>
         <form>
@@ -43,7 +47,9 @@
 seq1.render('#protein-sequence-viewer', {
   'showLineNumbers': true,
   'wrapAminoAcids': true,
-  'charsPerLine': 50
+  'charsPerLine': 50,
+  'toolbar': true,
+  'search': true
 });
     </textarea>
         </form>
