@@ -2,7 +2,7 @@
 The sequence viewer is a super easy javascript library to use in order to draw a protein sequence in a readable way.
 ![Sequence viewer](/assets/sequence-viewer.png)
 
-Live demo: http://calipho-sib.github.io/sequence-viewer/demo/
+Live demo: https://cdn.rawgit.com/calipho-sib/sequence-viewer/master/demo/index.html
 
 #How to run
 
@@ -27,7 +27,7 @@ seq.render('sequence-viewer')
 Note: that if you choose the later approach you should also include the dependencies, jquery,handlebars and bootstrap.min.css
 
 Check out this page for a better understanding of how to use the sequence viewer and its possibilities :
-* http://calipho-sib.github.io/sequence-viewer/demo/
+* https://cdn.rawgit.com/calipho-sib/sequence-viewer/master/demo/index.html
 
 
 # Options
