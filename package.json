@@ -1,6 +1,6 @@
 {
   "name": "sequence-viewer",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "dist/sequence-viewer.min.js",
   "description": "A protein sequence viewer written in javascript",
   "repository": {
@@ -14,7 +14,10 @@
     "rest",
     "api"
   ],
-  "author": "Mathieu Schaeffer",
+  "authors": [
+    "Mathieu Schaeffer <mat.schaeff@gmail.com>",
+    "Calipho Team"
+  ],
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {},
