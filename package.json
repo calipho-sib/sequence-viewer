@@ -5,7 +5,7 @@
   "description": "A protein sequence viewer written in javascript",
   "repository": {
     "type": "git",
-    "url": "https://github.com/calipho-sib/nextprot-js.git"
+    "url": "https://github.com/calipho-sib/sequence-viewer.git"
   },
   "keywords": [
     "proteins",
@@ -14,7 +14,7 @@
     "rest",
     "api"
   ],
-  "author": "Calipho Team",
+  "author": "Mathieu Schaeffer",
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {},

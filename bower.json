@@ -10,6 +10,20 @@
     "vendor",
     "demo"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/calipho-sib/sequence-viewer.git"
+  },
+  "keywords": [
+    "sequence",
+    "nextprot",
+    "uniprot",
+    "protein"
+  ],
+  "authors": [
+    "Mathieu Schaeffer <mat.schaeff@gmail.com>"
+  ],
+  "license": "MIT",
   "dependencies": {
     "jquery": "~2.1.3",
     "handlebars": "x.x.x"
