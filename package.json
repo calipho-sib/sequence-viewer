@@ -66,8 +66,8 @@
     "codemirror": "x.x.x"
   },
   "sniper": {
-    "js": ["node_modules/codemirror/lib/codemirror.js","node_modules/codemirror/mode/javascript/javascript.js","/build/viewer.js"],
-    "css": ["node_modules/codemirror/lib/codemirror.css","/build/bundle.css"],
+    "js": ["/build/viewer.js"],
+    "css": ["/build/bundle.css"],
     "snippets": ["snippets"],
     "first": "test"
   },
