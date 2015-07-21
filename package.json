@@ -1,27 +1,47 @@
 {
   "name": "sequence-viewer",
-  "version": "0.0.5",
-  "main": "dist/sequence-viewer.min.js",
   "description": "A protein sequence viewer written in javascript",
+  "version": "0.1.0",
+  "homepage": "https://github.com/calipho-sib/sequence-viewer",
+  "authors": [
+    "Mathieu Schaeffer <mat.schaeff@gmail.com>",
+    "Calipho Team <ndu@isb-sib.ch>"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/calipho-sib/sequence-viewer.git"
   },
-  "keywords": [
-    "proteins",
-    "uniprot",
-    "nextprot",
-    "rest",
-    "api"
+  "licenses": [
+    {
+      "type": "GNU GPL v2"
+    }
   ],
-  "authors": [
-    "Mathieu Schaeffer <mat.schaeff@gmail.com>",
-    "Calipho Team"
-  ],
-  "license": "MIT",
-  "readmeFilename": "README.md",
-  "dependencies": {},
+  "main": "lib/index.js",
+  "style": "css/*.css",
+  "scripts": {
+    "test": "echo 'Error: no test specified' && exit 1",
+    "build": "mkdirp build && browserify -r ./:sequence-viewer -o build/viewer.js",
+    "build-browser": "npm run build",
+    "install": "npm run build && npm run css",
+    "watch": "watchify -r ./:sequence-viewer -v -o build/viewer.js",
+    "w": "prunner \"npm run sniper\" \"npm run watch\" \"npm run watch-css\"",
+    "sniper": "sniper .",
+    "css": "parcelify ./ -c build/bundle.css",
+    "watch-css": "parcelify -w ./ -c build/bundle.css --loglevel verbose"
+  },
+  "dependencies": {
+    "bower": "^1.3.12",
+    "grunt-cli": "^0.1.13",
+    "Handlebars": "x.x.x",
+    "jquery": "x.x.x"
+  },
   "devDependencies": {
+    "mkdirp": "^0.5.0",
+    "browserify": "6.x",
+    "sniper": "0.x",
+    "watchify": "^1.0.6",
+    "prunner": "1.x",
+    "parcelify": "0.x",
     "grunt": "^0.4.5",
     "grunt-bower-concat": "^0.4.0",
     "grunt-bump": "^0.3.0",
@@ -43,11 +63,22 @@
     "grunt-hustler": "0.11.2",
     "grunt-regarde": "~0.1.1",
     "grunt-serve": "^0.1.6",
-    "load-grunt-tasks": "^0.6.0"
+    "load-grunt-tasks": "^0.6.0",
+    "codemirror": "x.x.x"
   },
-  "dependencies": {
-    "bower": "^1.3.12",
-    "grunt-cli": "^0.1.13"
-
-  }
+  "sniper": {
+    "js": ["node_modules/codemirror/lib/codemirror.js","node_modules/codemirror/mode/javascript/javascript.js","node_modules/jquery/dist/jquery.min.js","node_modules/handlebars/dist/handlebars.min.js","/build/viewer.js"],
+    "css": ["node_modules/codemirror/lib/codemirror.css","/build/bundle.css"],
+    "snippets": ["snippets"],
+    "first": "simple"
+  },
+  "keywords": [
+    "sequence",
+    "protein",
+    "nextprot",
+    "uniprot",
+    "viewer",
+    "biojs"
+  ],
+  "readmeFilename": "README.md"
 }

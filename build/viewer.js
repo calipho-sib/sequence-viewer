@@ -1,12 +1,30 @@
-/////////////
+require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"sequence-viewer":[function(require,module,exports){
+/*
+ * sequence-viewer
+ * https://github.com/calipho-sib/sequence-viewer
+ *
+ * Copyright (c) 2015 Calipho - SIB
+ * Licensed under the MIT license.
+ */
 
-function Sequence(sequence,isoformName) {
+/**
+ @class sequenceviewer
+ */
+
+
+//var  sequenceviewer;
+//module.exports = sequenceviewer = function(opts){
+//    this.el = opts.el;
+//    this.el.textContent = sequenceviewer.hello(opts.text);
+//};
+//var jq = require("jquery");
+//var hdb = require("handlebars");
+var Sequence;
+module.exports = Sequence = function(sequence,isoformName) {
     var isoName;
     if (isoformName !== undefined) isoName = isoformName;
     else isoName = "";
     console.log(isoName);
-    var popo = this;
-    console.log(popo);
     var sequence = sequence;
     var seqInit = "";
     var lineJump = 0;
@@ -184,7 +202,7 @@ function Sequence(sequence,isoformName) {
         }
         $(lineNumberID).html(newTextContent.join(""));
 
-    };
+    }
 
     function sequenceLayout(textAreaID) {
 
@@ -265,4 +283,26 @@ function Sequence(sequence,isoformName) {
         coverage: coverage,
         addLegend: addLegend
     }
-}
+};
+/**
+ * Private Methods
+ */
+
+/*
+ * Public Methods
+ */
+
+/**
+ * Method responsible to say Hello
+ *
+ * @example
+ *
+ *     sequenceviewer.hello('biojs');
+ *
+ * @method hello
+ * @param {String} name Name of a person
+ * @return {String} Returns hello name
+ */
+
+
+},{}]},{},[]);
