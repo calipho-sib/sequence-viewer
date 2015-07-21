@@ -1,7 +1,7 @@
 {
   "name": "sequence-viewer",
   "description": "A protein sequence viewer written in javascript",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/calipho-sib/sequence-viewer",
   "authors": [
     "Mathieu Schaeffer <mat.schaeff@gmail.com>",
@@ -19,7 +19,6 @@
   "main": "lib/index.js",
   "style": "css/*.css",
   "scripts": {
-    "test": "echo 'Error: no test specified' && exit 1",
     "build": "mkdirp build && browserify -r ./:sequence-viewer -o build/viewer.js",
     "build-browser": "npm run build",
     "install": "npm run build && npm run css",
