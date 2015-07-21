@@ -62,14 +62,13 @@
     "grunt-hustler": "0.11.2",
     "grunt-regarde": "~0.1.1",
     "grunt-serve": "^0.1.6",
-    "load-grunt-tasks": "^0.6.0",
-    "codemirror": "x.x.x"
+    "load-grunt-tasks": "^0.6.0"
   },
   "sniper": {
     "js": ["/build/viewer.js"],
     "css": ["/build/bundle.css"],
     "snippets": ["snippets"],
-    "first": "test"
+    "first": "simple"
   },
   "keywords": [
     "sequence",
