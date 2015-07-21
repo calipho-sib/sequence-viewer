@@ -1,7 +1,7 @@
 {
   "name": "sequence-viewer",
   "description": "A protein sequence viewer written in javascript",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "homepage": "https://github.com/calipho-sib/sequence-viewer",
   "authors": [
     "Mathieu Schaeffer <mat.schaeff@gmail.com>",
@@ -31,7 +31,7 @@
   "dependencies": {
     "bower": "^1.3.12",
     "grunt-cli": "^0.1.13",
-    "Handlebars": "x.x.x",
+    "handlebars": "x.x.x",
     "jquery": "x.x.x"
   },
   "devDependencies": {
