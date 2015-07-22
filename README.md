@@ -1,42 +1,63 @@
-#Sequence viewer
-The sequence viewer is a super easy javascript library to use in order to draw a protein sequence in a readable way.
-![Sequence viewer](/assets/sequence-viewer.png)
+# Sequence viewer
+
+> The sequence viewer is a super easy javascript library to use in order to draw a protein sequence in a readable way.
+
+![Sequence viewer1](/assets/sequence-viewer-complete.png)
 
 Live demo: https://cdn.rawgit.com/calipho-sib/sequence-viewer/master/examples/index.html
 
-#How to run
+## Getting Started
 
-1) Include the library using bower or simply by including the javascript sequence-viewer.js
+1) Include the library using bower or npm or simply by including the javascript sequence-viewer.js
 ```
+//BOWER//
 bower install sequence-viewer
+
+//NODE//
+npm install sequence-viewer
 ```
+
 2) Specify a div in your html
 ```
 <div id="sequence-viewer"></div>
 ```
 3) Create an instance of Sequence in javascript and apply the render method
 ```
+//For Node add before : var Sequence = require("sequence-viewer"); //
+
 var seq= new Sequence('MALWMRLLPLLALLALWGPGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
-seq.render('sequence-viewer')
+seq.render('#sequence-viewer');
 ```
 4) Et voila!
 
-![Sequence viewer](/assets/sequence-viewer.png)
+![Sequence viewer2](/assets/sequence-viewer-simple.png)
 
 
-Note: that if you choose the later approach you should also include the dependencies, jquery,handlebars and bootstrap.min.css
+Note: if you choose the later approach with only the main javascript you should also include the dependencies, jquery,handlebars and bootstrap.min.css
+
+## Documentation
 
 Check out this page for a better understanding of how to use the sequence viewer and its possibilities :
 * https://cdn.rawgit.com/calipho-sib/sequence-viewer/master/examples/index.html
 
 
-# Options
-* Line numbers
-* Column size
+## Options
+* Show chars per line
+* Wrap lines
 * Highlight
 * Coverage
 * Labels text and color
 * toolbar (chars per line)
 * search
+
+## Support
+
+If you have any problem or suggestion please open an issue [here](https://github.com/calipho-sib/sequence-viewer/issues).
+
+## License 
+This software is licensed under the GNU GPL v2 license, quoted below.
+
+Copyright (c) 2015, SIB Swiss Institute of Bioinformatics
+
 
 
