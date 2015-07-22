@@ -62,15 +62,15 @@ If you have any problem or suggestion please open an issue [here](https://github
 
 `bower install`  (will install the browser dependencies)
 
-make your changes and modifications
+...make your changes and modifications...
 
 `npm run dist` (will create the min & bundle versions in dist/)
 
 `npm run build` (will create the bundle js & css in build/ for node)
 
-`npm publish` (will publish in npm)
-
 `grunt bump` (will push and add a new release)
+
+`npm publish` (will publish in npm)
 
 
 
