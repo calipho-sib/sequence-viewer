@@ -16134,11 +16134,6 @@ process.chdir = function (dir) {
  @class sequenceviewer
  */
 
-
-//var  sequenceviewer;
-//module.exports = sequenceviewer = function(opts){
-//    this.el = opts.el;
-//    this.el.textContent = sequenceviewer.hello(opts.text);
 //};
 var jQuery = $ = require("jquery");
 var Handlebars = require("handlebars");
@@ -16153,6 +16148,12 @@ module.exports = Sequence = function(sequence,isoformName) {
     var lineJump = 0;
     var divID;
     var sequenceOptions;
+
+
+    /**
+     * Private Methods
+     */
+
 
     function renderHtml(divId, options) {
         divID = divId;
@@ -16399,6 +16400,9 @@ module.exports = Sequence = function(sequence,isoformName) {
         });
     }
 
+    /**
+     * Public Methods
+     */
 
     return {
         render: renderHtml,
@@ -16407,25 +16411,5 @@ module.exports = Sequence = function(sequence,isoformName) {
         addLegend: addLegend
     }
 };
-/**
- * Private Methods
- */
-
-/*
- * Public Methods
- */
-
-/**
- * Method responsible to say Hello
- *
- * @example
- *
- *     sequenceviewer.hello('biojs');
- *
- * @method hello
- * @param {String} name Name of a person
- * @return {String} Returns hello name
- */
-
 
 },{"handlebars":"/Users/mschaeff/Documents/workspace-javascript/sequence-viewer/node_modules/handlebars/lib/index.js","jquery":"/Users/mschaeff/Documents/workspace-javascript/sequence-viewer/node_modules/jquery/dist/jquery.js"}]},{},[]);
