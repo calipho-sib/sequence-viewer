@@ -1,7 +1,7 @@
 {
   "name": "sequence-viewer",
   "description": "A protein sequence viewer written in javascript",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/calipho-sib/sequence-viewer",
   "authors": [
     "Mathieu Schaeffer <mat.schaeff@gmail.com>",
@@ -19,14 +19,14 @@
   "main": "lib/index.js",
   "style": "css/*.css",
   "scripts": {
-    "build": "./node_modules/.bin/mkdirp build && ./node_modules/.bin/browserify -r ./:sequence-viewer -o build/viewer.js",
+    "build": "mkdir -p build && browserify -r ./:sequence-viewer -o build/viewer.js",
     "build-browser": "npm run build",
-    "install": "npm run build && npm run css",
-    "watch": "./node_modules/.bin/watchify -r ./:sequence-viewer -v -o build/viewer.js",
-    "w": "./node_modules/.bin/prunner \"npm run sniper\" \"npm run watch\" \"npm run watch-css\"",
-    "sniper": "./node_modules/.bin/sniper .",
-    "css": "./node_modules/.bin/parcelify ./ -c build/bundle.css",
-    "watch-css": "./node_modules/.bin/parcelify -w ./ -c build/bundle.css --loglevel verbose"
+    "build-all": "npm run build && npm run css",
+    "watch": "watchify -r ./:sequence-viewer -v -o build/viewer.js",
+    "w": "prunner \"npm run sniper\" \"npm run watch\" \"npm run watch-css\"",
+    "sniper": "sniper .",
+    "css": "parcelify ./ -c build/bundle.css",
+    "watch-css": "parcelify -w ./ -c build/bundle.css --loglevel verbose"
   },
   "dependencies": {
     "bower": "^1.3.12",
