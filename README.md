@@ -54,6 +54,19 @@ Check out this page for a better understanding of how to use the sequence viewer
 
 If you have any problem or suggestion please open an issue [here](https://github.com/calipho-sib/sequence-viewer/issues).
 
+## Development
+
+`git clone https://github.com/calipho-sib/sequence-viewer.git` 
+
+`npm install`  (will install the development dependencies)
+`bower install`  (will install the browser dependencies)
+
+
+make your changes and modifications
+`npm install` 
+
+
+
 ## License 
 This software is licensed under the GNU GPL v2 license, quoted below.
 
