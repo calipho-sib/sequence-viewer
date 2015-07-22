@@ -59,11 +59,18 @@ If you have any problem or suggestion please open an issue [here](https://github
 `git clone https://github.com/calipho-sib/sequence-viewer.git` 
 
 `npm install`  (will install the development dependencies)
+
 `bower install`  (will install the browser dependencies)
 
-
 make your changes and modifications
-`npm install` 
+
+`npm run dist` (will create the min & bundle versions in dist/)
+
+`npm run build` (will create the bundle js & css in build/ for node)
+
+`npm publish` (will publish in npm)
+
+`grunt bump` (will push and add a new release)
 
 
 
