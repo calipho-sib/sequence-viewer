@@ -10,7 +10,7 @@ module.exports = function(grunt) {
       dist: {
         src: ['bower_components/jquery/dist/jquery.js',
           'bower_components/handlebars/handlebars.js',
-          'src/sequence-viewer.js'
+          'dist/sequence-viewer.min.js'
         ],
         dest: 'dist/sequence-viewer.bundle.js'
       }
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: 'src/<%= pkg.name %>.js',
+        src: 'dist/<%= pkg.name %>.js',
         dest: 'dist/<%= pkg.name %>.min.js'
       }
     },

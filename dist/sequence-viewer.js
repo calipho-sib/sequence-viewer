@@ -5,8 +5,6 @@ function Sequence(sequence,isoformName) {
     if (isoformName !== undefined) isoName = isoformName;
     else isoName = "";
     console.log(isoName);
-    var popo = this;
-    console.log(popo);
     var sequence = sequence;
     var seqInit = "";
     var lineJump = 0;
@@ -19,14 +17,14 @@ function Sequence(sequence,isoformName) {
             var options = {
                 'showLineNumbers': true,
                 'wrapAminoAcids': true,
-                'charsPerLine': 30,
+                'charsPerLine': 50,
                 'search': false,
                 'toolbar': false
             }
         }
         else sequenceOptions = options;
         if (typeof options.charsPerLine === 'undefined') {
-            lineJump = 30;
+            lineJump = 50;
         }
         else lineJump = options.charsPerLine;
 
@@ -62,7 +60,7 @@ function Sequence(sequence,isoformName) {
         if (options.toolbar) {
             addToolbar();
             if (isoName !== "") {
-                $("#sequenceToolbar").append(
+                $(divID + " #sequenceToolbar").append(
                     "<a class=\"btn btn-default\" href=\"http://www.nextprot.org/db/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" style=\"margin-left:15px;\">view Fasta</a>" +
                     "<a class=\"btn btn-default disabled\" href=\"\" style=\"margin-left:15px;\">Blast sequence</a>" +
                     "<a class=\"btn btn-default disabled\" href=\"\" style=\"margin-left:15px;\">Blast selection</a>"
@@ -184,7 +182,7 @@ function Sequence(sequence,isoformName) {
         }
         $(lineNumberID).html(newTextContent.join(""));
 
-    };
+    }
 
     function sequenceLayout(textAreaID) {
 
@@ -197,13 +195,13 @@ function Sequence(sequence,isoformName) {
     }
 
     function addSequenceSearch() {
-        $("#sequenceHeader").append('<input id=\"inputSearchSeq\" type=\"text\" class=\"form-control pull-right\" style=\"width:40%;margin-top:3px;\" placeholder=\"Search in sequence.. (Regex supported)\">');
+        $(divID + " #sequenceHeader").append('<input id=\"inputSearchSeq\" type=\"text\" class=\"form-control pull-right\" style=\"width:40%;margin-top:3px;\" placeholder=\"Search in sequence.. (Regex supported)\">');
         sequenceSearch();
 
     }
 
     function sequenceSearch() {
-        $("#inputSearchSeq").keyup(function() {
+        $(divID + " #inputSearchSeq").keyup(function() {
             var text = $(this).val();
             if (text !== "") {
                 var text2 = new RegExp(text, "gi");
@@ -251,10 +249,10 @@ function Sequence(sequence,isoformName) {
         var html = template({
             "CPL": listOfCharsPerLine
         });
-        $("#sequenceBody").prepend(html);
-        $("#CPLChoice").change(function () {
+        $(divID + " #sequenceBody").prepend(html);
+        $(divID + " #CPLChoice").change(function () {
             changeCharsPerLine(this);
-            $("#CPLChoice" + " option:selected").text($(this).val());
+            $(divID + " #CPLChoice" + " option:selected").text($(this).val());
         });
     }
 

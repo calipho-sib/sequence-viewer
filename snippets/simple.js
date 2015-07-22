@@ -7,7 +7,7 @@ var seq1 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR
 seq1.render('#seqView1', {
     'showLineNumbers': true,
     'wrapAminoAcids': true,
-    'charsPerLine': 50,
+    'charsPerLine': 60,
     'toolbar': true,
     'search': true
 });
