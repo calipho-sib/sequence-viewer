@@ -50,6 +50,10 @@ Check out this page for a better understanding of how to use the sequence viewer
 * toolbar (chars per line)
 * search
 
+## Examples 
+
+https://search.nextprot.org/entry/NX_P01308/view/proteomics
+
 ## Support
 
 If you have any problem or suggestion please open an issue [here](https://github.com/calipho-sib/sequence-viewer/issues).
