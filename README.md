@@ -52,7 +52,7 @@ Check out this page for a better understanding of how to use the sequence viewer
 
 ## Examples 
 
-https://search.nextprot.org/entry/NX_P01308/view/proteomics
+(https://search.nextprot.org/entry/NX_P01308/view/proteomics)
 
 ## Support
 
