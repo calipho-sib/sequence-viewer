@@ -5,6 +5,7 @@
 ![Sequence viewer1](/assets/sequence-viewer-complete.png)
 
 Live demo: https://cdn.rawgit.com/calipho-sib/sequence-viewer/master/examples/index.html
+
 Simple example: https://cdn.rawgit.com/calipho-sib/sequence-viewer/master/examples/simple.html
 
 ## Getting Started
