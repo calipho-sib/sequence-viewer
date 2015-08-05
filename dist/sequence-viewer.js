@@ -4,7 +4,6 @@ function Sequence(sequence,isoformName) {
     var isoName;
     if (isoformName !== undefined) isoName = isoformName;
     else isoName = "";
-    console.log(isoName);
     var sequence = sequence;
     var seqInit = "";
     var lineJump = 0;
@@ -92,7 +91,6 @@ function Sequence(sequence,isoformName) {
         }
         var hlSeq = seqInit;
         var seqTemp = hlSeq.toString();
-        console.log("length : " + ArrayHL.length);
         var positionStart=0;
         var positionEnd=0;
         for (i in ArrayHL) {
@@ -111,11 +109,9 @@ function Sequence(sequence,isoformName) {
         for (var i = 0; i < hashLegend.length; i++) {
             if (hashLegend[i].underscore === true) {
                 $(divID + " #coverageLegend").append("<div style=\"display:inline-block;background:" + hashLegend[i].color + ";width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%; border: 1px solid grey;text-align:center; line-height:0.8;\">_</div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">" + hashLegend[i].name + "</p></div>");
-                console.log("duh !");
             }
             else {
                 $(divID + " #coverageLegend").append("<div style=\"display:inline-block;background:" + hashLegend[i].color + ";width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">" + hashLegend[i].name + "</p>");
-                console.log("dah !");
             }
         }
     }
@@ -166,9 +162,6 @@ function Sequence(sequence,isoformName) {
             }
         }
         $(divID + " #fastaSeq").html(source);
-        var timeend = new Date().getTime();
-
-        console.log('Time to execute all: ', (timeend - timestart));
     }
 
     function lineNumbers(textAreaID, lineNumberID) {
@@ -204,20 +197,23 @@ function Sequence(sequence,isoformName) {
         $(divID + " #inputSearchSeq").keyup(function() {
             var text = $(this).val();
             if (text !== "") {
-                var text2 = new RegExp(text, "gi");
+                var regex = new RegExp(text, "gi");
                 var match;
                 var matches = [];
-                console.log("while begin");
-                while (( match = text2.exec(sequence) ) != null) {
+                //While begin
+                var previousIndex = -1;
+                while (( match = regex.exec(sequence) ) != null  && match.index > previousIndex && match.index < sequence.length) {
+                    previousIndex = match.index;
                     matches.push({start: match.index, end: match.index + match[0].length});
                 }
-                console.log("while finished");
+                //While finished
+
+                //Sort matches
                 matches.sort(function (a, b) {
                     return b.start - a.start;
                 });
-                console.log("matches sorted");
+                //Highlight matches
                 multiHighlighting(matches, "#C50063");
-                console.log("matches highlighted");
             }
             else {
                 $(divID + " #fastaSeq").html(seqInit);
@@ -226,7 +222,6 @@ function Sequence(sequence,isoformName) {
     }
 
     function changeCharsPerLine(selection) {
-        console.log("BANANAAAAAAAA!!");
         var options = sequenceOptions;
         options.charsPerLine = selection.value;
         renderHtml(divID, options);
@@ -234,7 +229,7 @@ function Sequence(sequence,isoformName) {
 
     function addToolbar() {
         var listOfCharsPerLine = ["50", "60", "70", "80", "90", "100"];
-        var source = "<form class=\"form-inline\" role=\"form\">" +
+        var source = "<div class=\"form-inline\" role=\"form\">" +
             "<div id=\"sequenceToolbar\" class=\"row\"style=\"margin-bottom:15px;\">" +
             "<div class=\"input-group\" style=\"margin-left:20px;\"> <span class=\"input-group-addon\">Char per line</i></span>" +
 
@@ -244,7 +239,7 @@ function Sequence(sequence,isoformName) {
             "</select>" +
             "</div>" +
             "</div>" +
-            "</form>";
+            "</div>";
         var template = Handlebars.compile(source);
         var html = template({
             "CPL": listOfCharsPerLine
