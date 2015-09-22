@@ -1,6 +1,6 @@
 /////////////
 
-function Sequence(sequence,isoformName) {
+function Sequence(sequence, isoformName) {
     var isoName;
     if (isoformName !== undefined) isoName = isoformName;
     else isoName = "";
@@ -18,14 +18,13 @@ function Sequence(sequence,isoformName) {
                 'wrapAminoAcids': true,
                 'charsPerLine': 50,
                 'search': false,
-                'toolbar': false
+                'toolbar': false,
+                'maxLines': 10
             }
-        }
-        else sequenceOptions = options;
+        } else sequenceOptions = options;
         if (typeof options.charsPerLine === 'undefined') {
             lineJump = 50;
-        }
-        else lineJump = options.charsPerLine;
+        } else lineJump = options.charsPerLine;
 
         var sources = "<div id=\"sequenceHeader\" class=\"row\" style=\"border-bottom: 1px solid #E7EAEC;padding-bottom:5px;margin:0px 0px 15px\">" +
             "<div style=\"display:inline-block;\">" +
@@ -33,7 +32,7 @@ function Sequence(sequence,isoformName) {
             "</div><h4 style=\"display:inline-block;vertical-align:middle;\">Protein Sequence</h4>" +
             "</div>" +
             "<div id=\"sequenceBody\" style=\"margin-top: 5px;\">" +
-            "<div id=\"scroller\" style=\"max-height:400px;overflow:auto;white-space: nowrap;padding-right:20px;margin-right:10px;s\">" +
+            "<div id=\"scroller\" style=\"max-height:" + (options.maxLines * 18) + "px;overflow:auto;white-space: nowrap;padding-right:20px;margin-right:10px;s\">" +
             "<div id=\"charNumbers\" style=\"font-family: monospace;font-size: 13px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
             "<div id=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 13px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
             "<div id=\"coverageLegend\" style=\"margin-top: 10px;margin-left:15px;\"></div>" +
@@ -48,8 +47,7 @@ function Sequence(sequence,isoformName) {
 
         if (!(options.wrapAminoAcids === false)) {
             sequenceLayout(divId + " #fastaSeq");
-        }
-        else $(divId + " #scroller").css("overflow-x", "auto");
+        } else $(divId + " #scroller").css("overflow-x", "auto");
         if (!(options.showLineNumbers === false))
             lineNumbers(divId + " #fastaSeq", divId + " #charNumbers");
 
@@ -77,10 +75,10 @@ function Sequence(sequence,isoformName) {
         positions[1] = positions[1] + ~~(positions[1] / 10) + 4 * (~~(positions[1] / lineJump));
         var highlightColor = color;
         hlSeq = hlSeq.substring(0, positions[0]) +
-        "<span id='stringSelected' style=\"background:" + color + ";color:white;\">" +
-        hlSeq.substring(positions[0], positions[1]) +
-        "</span>" +
-        hlSeq.substring(positions[1], hlSeq.length);
+            "<span id='stringSelected' style=\"background:" + color + ";color:white;\">" +
+            hlSeq.substring(positions[0], positions[1]) +
+            "</span>" +
+            hlSeq.substring(positions[1], hlSeq.length);
         $(divID + " #fastaSeq").html(hlSeq);
     }
 
@@ -91,16 +89,16 @@ function Sequence(sequence,isoformName) {
         }
         var hlSeq = seqInit;
         var seqTemp = hlSeq.toString();
-        var positionStart=0;
-        var positionEnd=0;
+        var positionStart = 0;
+        var positionEnd = 0;
         for (i in ArrayHL) {
-            positionStart=jTranslation(ArrayHL[i].start);
-            positionEnd=jTranslation(ArrayHL[i].end);
+            positionStart = jTranslation(ArrayHL[i].start);
+            positionEnd = jTranslation(ArrayHL[i].end);
             seqTemp = seqTemp.substring(0, positionStart) +
-            "<span class='stringsSelected' style=\"background:" + color + ";color:white;\">" +
-            seqTemp.substring(positionStart, positionEnd) +
-            "</span>" +
-            seqTemp.substring(positionEnd, seqTemp.length);
+                "<span class='stringsSelected' style=\"background:" + color + ";color:white;\">" +
+                seqTemp.substring(positionStart, positionEnd) +
+                "</span>" +
+                seqTemp.substring(positionEnd, seqTemp.length);
         }
         $(divID + " #fastaSeq").html(seqTemp);
     }
@@ -109,8 +107,7 @@ function Sequence(sequence,isoformName) {
         for (var i = 0; i < hashLegend.length; i++) {
             if (hashLegend[i].underscore === true) {
                 $(divID + " #coverageLegend").append("<div style=\"display:inline-block;background:" + hashLegend[i].color + ";width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%; border: 1px solid grey;text-align:center; line-height:0.8;\">_</div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">" + hashLegend[i].name + "</p></div>");
-            }
-            else {
+            } else {
                 $(divID + " #coverageLegend").append("<div style=\"display:inline-block;background:" + hashLegend[i].color + ";width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">" + hashLegend[i].name + "</p>");
             }
         }
@@ -135,8 +132,7 @@ function Sequence(sequence,isoformName) {
             if (HashAA[i].underscore) {
                 pre = "<span style=\"text-decoration:underline;color:" + HashAA[i].color + ";\">";
                 source += pre;
-            }
-            else {
+            } else {
                 pre = "<span style=\"color:" + HashAA[i].color + ";\">";
                 source += pre;
             }
@@ -146,18 +142,14 @@ function Sequence(sequence,isoformName) {
                     source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(start)) + "<span id=\"peptideHighlighted\" style=\"background:" + highlightColor + ";\">" + seqInit.substring(jTranslation(start), jTranslation(end + 1));
 
                     source += "</span>" + seqInit.substring(jTranslation(end + 1), jTranslation(HashAA[i].end)) + "</span>";
-                }
-                else if (start >= HashAA[i].start && start < HashAA[i].end) {
+                } else if (start >= HashAA[i].start && start < HashAA[i].end) {
                     source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(start)) + "</span><span id=\"peptideHighlighted\" style=\"background:" + highlightColor + ";\">" + pre + seqInit.substring(jTranslation(start), jTranslation(HashAA[i].end)) + "</span>";
-                }
-                else if (end >= HashAA[i].start && end < HashAA[i].end) {
+                } else if (end >= HashAA[i].start && end < HashAA[i].end) {
                     source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(end + 1)) + "</span></span>" + pre + seqInit.substring(jTranslation(end + 1), jTranslation(HashAA[i].end)) + "</span>";
-                }
-                else {
+                } else {
                     source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(HashAA[i].end)) + "</span>";
                 }
-            }
-            else {
+            } else {
                 source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(HashAA[i].end)) + "</span>";
             }
         }
@@ -194,7 +186,7 @@ function Sequence(sequence,isoformName) {
     }
 
     function sequenceSearch() {
-        $(divID + " #inputSearchSeq").keyup(function() {
+        $(divID + " #inputSearchSeq").keyup(function () {
             var text = $(this).val();
             if (text !== "") {
                 var regex = new RegExp(text, "gi");
@@ -202,9 +194,12 @@ function Sequence(sequence,isoformName) {
                 var matches = [];
                 //While begin
                 var previousIndex = -1;
-                while (( match = regex.exec(sequence) ) != null  && match.index > previousIndex && match.index < sequence.length) {
+                while ((match = regex.exec(sequence)) != null && match.index > previousIndex && match.index < sequence.length) {
                     previousIndex = match.index;
-                    matches.push({start: match.index, end: match.index + match[0].length});
+                    matches.push({
+                        start: match.index,
+                        end: match.index + match[0].length
+                    });
                 }
                 //While finished
 
@@ -214,8 +209,7 @@ function Sequence(sequence,isoformName) {
                 });
                 //Highlight matches
                 multiHighlighting(matches, "#C50063");
-            }
-            else {
+            } else {
                 $(divID + " #fastaSeq").html(seqInit);
             }
         });

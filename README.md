@@ -51,6 +51,7 @@ Check out this page for a better understanding of how to use the sequence viewer
 * Labels text and color
 * toolbar (chars per line)
 * search
+* maxLines
 
 ## Examples 
 
