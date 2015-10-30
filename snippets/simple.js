@@ -10,7 +10,7 @@ seq1.render('#seqView1', {
     'charsPerLine': 50,
     'toolbar': true,
     'search': true,
-    'title': "BANANAAAAA !!!!"
+    'title': "Protein Sequence"
 });
 seq1.onMouseSelection(function(elem){
         console.log(elem.detail);

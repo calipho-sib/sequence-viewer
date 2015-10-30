@@ -32,7 +32,7 @@ var Sequence = (function () {
             else sequenceOptions = options;
 
             (typeof options.charsPerLine === 'undefined') ? lineJump = 30 : lineJump = options.charsPerLine;
-            (typeof options.title === 'undefined') ? title = "Protein Sequence" : options.title;
+            (typeof options.title === 'undefined') ? title = "Protein Sequence" : title = options.title;
 
 
             var sources = "<div id=\"sequenceHeader\" class=\"row\" style=\"border-bottom: 1px solid #E7EAEC;padding-bottom:5px;margin:0px 0px 15px\">" +
