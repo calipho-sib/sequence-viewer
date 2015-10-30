@@ -1,21 +1,23 @@
-/////////////
 var Sequence = (function () {
 
     function Sequence(sequence, isoformName) {
         var self = this;
+        this.events = {
+            MOUSE_SELECTION_EVENT: "sequence-viewer-mouse-selection",
+            SEQUENCE_SELECTED_EVENT: "sequence-viewer-substring-selected"
+        };
         var isoName;
         if (isoformName !== undefined) isoName = isoformName;
         else isoName = "";
         console.log(isoName);
-        var popo = this;
-        console.log(popo);
         var sequence = sequence;
         var seqInit = "";
         var lineJump = 0;
+        var title;
         var divID;
         var sequenceOptions;
 
-        this.renderHtml = function (divId, options) {
+        this.render = function (divId, options) {
             divID = divId;
             if (typeof options === 'undefined') {
                 var options = {
@@ -23,19 +25,20 @@ var Sequence = (function () {
                     'wrapAminoAcids': true,
                     'charsPerLine': 30,
                     'search': false,
-                    'toolbar': false
+                    'toolbar': false,
+                    'title': "Protein Sequence"
                 }
             }
             else sequenceOptions = options;
-            if (typeof options.charsPerLine === 'undefined') {
-                lineJump = 30;
-            }
-            else lineJump = options.charsPerLine;
+
+            (typeof options.charsPerLine === 'undefined') ? lineJump = 30 : lineJump = options.charsPerLine;
+            (typeof options.title === 'undefined') ? title = "Protein Sequence" : options.title;
+
 
             var sources = "<div id=\"sequenceHeader\" class=\"row\" style=\"border-bottom: 1px solid #E7EAEC;padding-bottom:5px;margin:0px 0px 15px\">" +
                 "<div style=\"display:inline-block;\">" +
                 "<span class=\"badge\" style=\"border-radius:70%;border: 2px solid black;color:#C50063;padding:8px 5px;background-color:white;margin-right:10px;vertical-align:middle;\">{{sequenceLength}}</span>" +
-                "</div><h4 style=\"display:inline-block;vertical-align:middle;\">Protein Sequence</h4>" +
+                "</div><h4 style=\"display:inline-block;vertical-align:middle;\">" + title + "</h4>" +
                 "</div>" +
                 "<div id=\"sequenceBody\" style=\"margin-top: 5px;\">" +
                 "<div id=\"scroller\" style=\"max-height:400px;overflow:auto;white-space: nowrap;padding-right:20px;margin-right:10px;s\">" +
@@ -68,16 +71,18 @@ var Sequence = (function () {
                         "<a class=\"btn btn-default\" href=\"http://www.nextprot.org/db/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" style=\"margin-left:15px;\">view Fasta</a>" +
                         "<a class=\"btn btn-default disabled\" href=\"\" style=\"margin-left:15px;\">Blast sequence</a>" +
                         "<a class=\"btn btn-default disabled\" href=\"\" style=\"margin-left:15px;\">Blast selection</a>"
-                        );
+                    );
                 }
             }
 
             seqInit = $(divId + " #fastaSeq").html();
+            mouseSelectionListener();
         }
 
         this.simpleHighlighting = function (start, end, color, options) {
             var positions = [start, end];
             var hlSeq = seqInit;
+            subpartSelection({start:start,end:end});
             positions[0] = positions[0] + ~~(positions[0] / 10) + 4 * (~~(positions[0] / lineJump));
             positions[1] = positions[1] + ~~(positions[1] / 10) + 4 * (~~(positions[1] / lineJump));
             var highlightColor = color;
@@ -211,17 +216,19 @@ var Sequence = (function () {
                     var text2 = new RegExp(text, "gi");
                     var match;
                     var matches = [];
-                    console.log("while begin");
+                    //console.log("while begin");
                     while ((match = text2.exec(sequence)) != null) {
-                        matches.push({ start: match.index, end: match.index + match[0].length });
+                        matches.push({start: match.index, end: match.index + match[0].length});
                     }
-                    console.log("while finished");
+                    //console.log("while finished");
                     matches.sort(function (a, b) {
                         return b.start - a.start;
                     });
-                    console.log("matches sorted");
+                    //console.log("matches sorted");
+                    //console.log(matches);
+                    subpartSelection(matches);
                     multiHighlighting(matches, "#C50063");
-                    console.log("matches highlighted");
+                    //console.log("matches highlighted");
                 }
                 else {
                     $(divID + " #fastaSeq").html(seqInit);
@@ -229,11 +236,86 @@ var Sequence = (function () {
             });
         }
 
+        function subpartSelection(list) {
+            var selectedParts = getSequenceOfSelection(list, sequence);
+            if (selectedParts) triggerSequenceSelectedEvent(selectedParts);
+        }
+
+        function getSequenceOfSelection(selection, sequence) {
+            var selectionList;
+            var selectionList = [];
+            if ($.isArray(selection))
+            {
+                selection.forEach(function (s) {
+                    selectionList.push({
+                        start: s.start + 1,
+                        end: s.end,
+                        sequence: sequence.substring(s.start, s.end)
+                    });
+                });
+            }
+            else selectionList.push({
+                start: selection.start + 1,
+                end: selection.end,
+                sequence: sequence.substring(selection.start, selection.end)
+                });
+            return selectionList;
+        }
+
+        function triggerSequenceSelectedEvent(selection) {
+            if (CustomEvent) {
+                var event = new CustomEvent(self.events.SEQUENCE_SELECTED_EVENT, {
+                    detail: selection
+                });
+                document.dispatchEvent(event);
+
+            } else {
+                console.warn("CustomEvent is not defined....");
+            }
+            if (self.trigger) self.trigger(self.events.SEQUENCE_SELECTED_EVENT, selection);
+        }
+
+        function mouseSelectionListener() {
+            $("#fastaSeq").mouseup(function () {
+                var selectedSubpart = getSelectedText();
+                if (selectedSubpart) triggerMouseSelectionEvent(selectedSubpart);
+            });
+        }
+
+        this.onMouseSelection = function (listener) {
+            document.addEventListener(self.events.MOUSE_SELECTION_EVENT, listener);
+            //$(document).on(self.events.FEATURE_SELECTED_EVENT, listener);
+        };
+        this.onSubpartSelected = function (listener) {
+            document.addEventListener(self.events.SEQUENCE_SELECTED_EVENT, listener);
+            //$(document).on(self.events.FEATURE_SELECTED_EVENT, listener);
+        };
+
+        function getSelectedText() {
+            var text = window.getSelection().toString();
+            text = text.replace(/\s+/g, '');
+            return text;
+        }
+
+        function triggerMouseSelectionEvent(subseq) {
+            if (CustomEvent) {
+                var event = new CustomEvent(self.events.MOUSE_SELECTION_EVENT, {
+                    detail: {
+                        'selection': subseq
+                    }
+                });
+                document.dispatchEvent(event);
+
+            } else {
+                console.warn("CustomEvent is not defined....");
+            }
+            if (self.trigger) self.trigger(self.events.MOUSE_SELECTION_EVENT, {'selection': subseq});
+        }
+
         function changeCharsPerLine(selection) {
-            console.log("BANANAAAAAAAA!!");
             var options = sequenceOptions;
             options.charsPerLine = selection.value;
-            self.renderHtml(divID, options);
+            self.render(divID, options);
         }
 
         function addToolbar() {
@@ -259,7 +341,7 @@ var Sequence = (function () {
                 $("#CPLChoice" + " option:selected").text($(this).val());
             });
         }
-    }
+    };
+    module.exports = Sequence;
     return Sequence;
 })();
-module.exports = Sequence;
