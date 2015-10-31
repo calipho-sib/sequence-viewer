@@ -9,6 +9,18 @@ seq1.render('#seqView1', {
     'wrapAminoAcids': true,
     'charsPerLine': 60,
     'toolbar': true,
-    'search': true
+    'search': true,
+    'title': "Protein Sequence"
 });
-
+seq1.onMouseSelection(function(elem){
+        console.log(elem.detail);
+    }
+);
+seq1.onSubpartSelected(function(elem){
+        console.log(elem.detail);
+    }
+);
+//@biojs-instance=ft2
+seq1.onAll(function(name,data){
+    console.log(arguments);
+});

@@ -32,8 +32,9 @@
   "dependencies": {
     "bower": "^1.3.12",
     "grunt-cli": "^0.1.13",
-    "handlebars": "x.x.x",
-    "jquery": "x.x.x"
+    "handlebars": "3.0.2",
+    "jquery": "x.x.x",
+    "biojs-events": "x.x.x"
   },
   "devDependencies": {
     "mkdirp": "^0.5.0",
