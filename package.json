@@ -27,7 +27,7 @@
     "sniper": "sniper .",
     "css": "parcelify ./ -c build/bundle.css",
     "watch-css": "parcelify -w ./ -c build/bundle.css --loglevel verbose",
-    "dist": "grunt && grunt concating"
+    "dist": "grunt && grunt serve"
   },
   "dependencies": {
     "bower": "^1.3.12",

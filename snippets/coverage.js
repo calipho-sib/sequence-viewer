@@ -2,6 +2,18 @@
 var Sequence = require("sequence-viewer");
 var seq3 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
 seq3.render('#seqView1');
+seq3.onMouseSelection(function(elem){
+        console.log(elem.detail);
+    }
+);
+seq3.onSubpartSelected(function(elem){
+        console.log(elem.detail);
+    }
+);
+//@biojs-instance=seq3
+seq3.onAll(function(name,data){
+    console.log(arguments);
+});
 
 //Coverage list
 var exempleSequenceCoverage = [

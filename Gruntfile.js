@@ -69,7 +69,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task(s).
-    grunt.registerTask('default', ['concat', 'uglify']);
+    grunt.registerTask('default', ['uglify','concat']);
     grunt.registerTask('serve', ['connect:server', 'watch']);
 
 };

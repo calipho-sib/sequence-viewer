@@ -24,11 +24,15 @@ npm install sequence-viewer
 <div id="sequence-viewer"></div>
 ```
 3) Create an instance of Sequence in javascript and apply the render method
-```
+```javascript
 //For Node add before : var Sequence = require("sequence-viewer"); //
 
-var seq= new Sequence('MALWMRLLPLLALLALWGPGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+
+var seq = new Sequence('MALWMRLLPLLALLALWGPGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+// Render the sequence with or without rendering options
+// (Check the interactive documentation)
 seq.render('#sequence-viewer');
+
 ```
 4) Et voila!
 
@@ -39,7 +43,7 @@ Note: if you choose the later approach with only the main javascript you should 
 
 ## Documentation
 
-Check out this page for a better understanding of how to use the sequence viewer and its possibilities :
+Check out this interactive page for a better understanding of how to use the sequence viewer and its possibilities :
 * https://cdn.rawgit.com/calipho-sib/sequence-viewer/master/examples/index.html
 
 
@@ -48,10 +52,11 @@ Check out this page for a better understanding of how to use the sequence viewer
 * Wrap lines
 * Highlight
 * Coverage
-* Labels text and color
-* toolbar (chars per line)
-* search
-* maxLines
+* Labels
+* Toolbar (chars per line)
+* Search
+* Title
+* Events
 
 ## Examples 
 

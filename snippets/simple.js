@@ -20,7 +20,7 @@ seq1.onSubpartSelected(function(elem){
         console.log(elem.detail);
     }
 );
-//@biojs-instance=ft2
+//@biojs-instance=seq1
 seq1.onAll(function(name,data){
     console.log(arguments);
 });

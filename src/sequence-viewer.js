@@ -16,9 +16,11 @@ var Sequence = (function () {
         var title;
         var divID;
         var sequenceOptions;
+        var el;
 
         this.render = function (divId, options) {
             divID = divId;
+            el = document.getElementById(divId.substring(1));
             if (typeof options === 'undefined') {
                 var options = {
                     'showLineNumbers': true,
@@ -77,12 +79,12 @@ var Sequence = (function () {
 
             seqInit = $(divId + " #fastaSeq").html();
             mouseSelectionListener();
-        }
+        };
 
-        this.simpleHighlighting = function (start, end, color, options) {
+        this.selection = function (start, end, color, options) {
             var positions = [start, end];
             var hlSeq = seqInit;
-            subpartSelection({start:start,end:end});
+            subpartSelection([{start:start,end:end}]);
             positions[0] = positions[0] + ~~(positions[0] / 10) + 4 * (~~(positions[0] / lineJump));
             positions[1] = positions[1] + ~~(positions[1] / 10) + 4 * (~~(positions[1] / lineJump));
             var highlightColor = color;
@@ -92,7 +94,7 @@ var Sequence = (function () {
             "</span>" +
             hlSeq.substring(positions[1], hlSeq.length);
             $(divID + " #fastaSeq").html(hlSeq);
-        }
+        };
 
         function multiHighlighting(ArrayHL, color, options) {
             var startTime2 = new Date().getTime();
@@ -101,7 +103,6 @@ var Sequence = (function () {
             }
             var hlSeq = seqInit;
             var seqTemp = hlSeq.toString();
-            console.log("length : " + ArrayHL.length);
             var positionStart = 0;
             var positionEnd = 0;
             for (i in ArrayHL) {
@@ -120,14 +121,12 @@ var Sequence = (function () {
             for (var i = 0; i < hashLegend.length; i++) {
                 if (hashLegend[i].underscore === true) {
                     $(divID + " #coverageLegend").append("<div style=\"display:inline-block;background:" + hashLegend[i].color + ";width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%; border: 1px solid grey;text-align:center; line-height:0.8;\">_</div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">" + hashLegend[i].name + "</p></div>");
-                    console.log("duh !");
                 }
                 else {
                     $(divID + " #coverageLegend").append("<div style=\"display:inline-block;background:" + hashLegend[i].color + ";width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">" + hashLegend[i].name + "</p>");
-                    console.log("dah !");
                 }
             }
-        }
+        };
 
         function jTranslation(i) {
             var j = i + ~~(i / 10) + 4 * (~~(i / lineJump));
@@ -175,10 +174,7 @@ var Sequence = (function () {
                 }
             }
             $(divID + " #fastaSeq").html(source);
-            var timeend = new Date().getTime();
-
-            console.log('Time to execute all: ', (timeend - timestart));
-        }
+        };
 
         function lineNumbers(textAreaID, lineNumberID) {
             var textContent = $(textAreaID).html().split("<br>");
@@ -204,31 +200,26 @@ var Sequence = (function () {
         }
 
         function addSequenceSearch() {
-            $("#sequenceHeader").append('<input id=\"inputSearchSeq\" type=\"text\" class=\"form-control pull-right\" style=\"width:40%;margin-top:3px;\" placeholder=\"Search in sequence.. (Regex supported)\">');
+            $(divID + " #sequenceHeader").append('<input id=\"inputSearchSeq\" type=\"text\" class=\"form-control pull-right\" style=\"width:40%;margin-top:3px;\" placeholder=\"Search in sequence.. (Regex supported)\">');
             sequenceSearch();
 
         }
 
         function sequenceSearch() {
-            $("#inputSearchSeq").keyup(function () {
+            $(divID + " #inputSearchSeq").keyup(function () {
                 var text = $(this).val();
                 if (text !== "") {
                     var text2 = new RegExp(text, "gi");
                     var match;
                     var matches = [];
-                    //console.log("while begin");
                     while ((match = text2.exec(sequence)) != null) {
                         matches.push({start: match.index, end: match.index + match[0].length});
                     }
-                    //console.log("while finished");
                     matches.sort(function (a, b) {
                         return b.start - a.start;
                     });
-                    //console.log("matches sorted");
-                    //console.log(matches);
                     subpartSelection(matches);
                     multiHighlighting(matches, "#C50063");
-                    //console.log("matches highlighted");
                 }
                 else {
                     $(divID + " #fastaSeq").html(seqInit);
@@ -242,9 +233,8 @@ var Sequence = (function () {
         }
 
         function getSequenceOfSelection(selection, sequence) {
-            var selectionList;
             var selectionList = [];
-            if ($.isArray(selection))
+            if (selection.length)
             {
                 selection.forEach(function (s) {
                     selectionList.push({
@@ -254,11 +244,6 @@ var Sequence = (function () {
                     });
                 });
             }
-            else selectionList.push({
-                start: selection.start + 1,
-                end: selection.end,
-                sequence: sequence.substring(selection.start, selection.end)
-            });
             return selectionList;
         }
 
@@ -267,7 +252,7 @@ var Sequence = (function () {
                 var event = new CustomEvent(self.events.SEQUENCE_SELECTED_EVENT, {
                     detail: selection
                 });
-                document.dispatchEvent(event);
+                el.dispatchEvent(event);
 
             } else {
                 console.warn("CustomEvent is not defined....");
@@ -276,18 +261,18 @@ var Sequence = (function () {
         }
 
         function mouseSelectionListener() {
-            $("#fastaSeq").mouseup(function () {
+            $(divID + " #fastaSeq").mouseup(function () {
                 var selectedSubpart = getSelectedText();
                 if (selectedSubpart) triggerMouseSelectionEvent(selectedSubpart);
             });
         }
 
         this.onMouseSelection = function (listener) {
-            document.addEventListener(self.events.MOUSE_SELECTION_EVENT, listener);
+            el.addEventListener(self.events.MOUSE_SELECTION_EVENT, listener);
             //$(document).on(self.events.FEATURE_SELECTED_EVENT, listener);
         };
         this.onSubpartSelected = function (listener) {
-            document.addEventListener(self.events.SEQUENCE_SELECTED_EVENT, listener);
+            el.addEventListener(self.events.SEQUENCE_SELECTED_EVENT, listener);
             //$(document).on(self.events.FEATURE_SELECTED_EVENT, listener);
         };
 
@@ -304,7 +289,7 @@ var Sequence = (function () {
                         'selection': subseq
                     }
                 });
-                document.dispatchEvent(event);
+                el.dispatchEvent(event);
 
             } else {
                 console.warn("CustomEvent is not defined....");
@@ -335,13 +320,15 @@ var Sequence = (function () {
             var html = template({
                 "CPL": listOfCharsPerLine
             });
-            $("#sequenceBody").prepend(html);
-            $("#CPLChoice").change(function () {
+            $(divID + " #sequenceBody").prepend(html);
+            $(divID + " #CPLChoice").change(function () {
                 changeCharsPerLine(this);
-                $("#CPLChoice" + " option:selected").text($(this).val());
+                $(divID + " #CPLChoice" + " option:selected").text($(this).val());
             });
         }
-    };
-    module.exports = Sequence;
+    }
     return Sequence;
 })();
+if ( typeof module === "object" && typeof module.exports === "object" ) {
+    module.exports = Sequence;
+}
