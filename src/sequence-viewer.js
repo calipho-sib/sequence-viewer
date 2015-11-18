@@ -17,6 +17,7 @@ var Sequence = (function () {
         var divID;
         var sequenceOptions;
         var el;
+        var seqHeight;
 
         this.render = function (divId, options) {
             divID = divId;
@@ -28,13 +29,15 @@ var Sequence = (function () {
                     'charsPerLine': 30,
                     'search': false,
                     'toolbar': false,
-                    'title': "Protein Sequence"
+                    'title': "Protein Sequence",
+                    'sequenceMaxHeight': "400px"
                 }
             }
             else sequenceOptions = options;
 
             (typeof options.charsPerLine === 'undefined') ? lineJump = 30 : lineJump = options.charsPerLine;
             (typeof options.title === 'undefined') ? title = "Protein Sequence" : title = options.title;
+            (typeof options.sequenceMaxHeight === 'undefined') ? seqHeight = "400px" : seqHeight = options.sequenceMaxHeight;
 
 
             var sources = "<div id=\"sequenceHeader\" class=\"row\" style=\"border-bottom: 1px solid #E7EAEC;padding-bottom:5px;margin:0px 0px 15px\">" +
@@ -43,7 +46,7 @@ var Sequence = (function () {
                 "</div><h4 style=\"display:inline-block;vertical-align:middle;\">" + title + "</h4>" +
                 "</div>" +
                 "<div id=\"sequenceBody\" style=\"margin-top: 5px;\">" +
-                "<div id=\"scroller\" style=\"max-height:400px;overflow:auto;white-space: nowrap;padding-right:20px;margin-right:10px;s\">" +
+                "<div id=\"scroller\" style=\"max-height:" + seqHeight + ";overflow:auto;white-space: nowrap;padding-right:20px;margin-right:10px;s\">" +
                 "<div id=\"charNumbers\" style=\"font-family: monospace;font-size: 13px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
                 "<div id=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 13px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
                 "<div id=\"coverageLegend\" style=\"margin-top: 10px;margin-left:15px;\"></div>" +

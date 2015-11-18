@@ -56,6 +56,7 @@ Check out this interactive page for a better understanding of how to use the seq
 * Toolbar (chars per line)
 * Search
 * Title
+* sequenceMaxHeight
 * Events
 
 ## Examples 
