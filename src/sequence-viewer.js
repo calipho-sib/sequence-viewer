@@ -18,6 +18,7 @@ var Sequence = (function () {
         var sequenceOptions;
         var el;
         var seqHeight;
+        var showBadge;
 
         this.render = function (divId, options) {
             divID = divId;
@@ -30,7 +31,8 @@ var Sequence = (function () {
                     'search': false,
                     'toolbar': false,
                     'title': "Protein Sequence",
-                    'sequenceMaxHeight': "400px"
+                    'sequenceMaxHeight': "400px",
+                    'badge': true
                 }
             }
             else sequenceOptions = options;
@@ -38,12 +40,17 @@ var Sequence = (function () {
             (typeof options.charsPerLine === 'undefined') ? lineJump = 30 : lineJump = options.charsPerLine;
             (typeof options.title === 'undefined') ? title = "Protein Sequence" : title = options.title;
             (typeof options.sequenceMaxHeight === 'undefined') ? seqHeight = "400px" : seqHeight = options.sequenceMaxHeight;
+            (typeof options.badge === 'undefined') ? showBadge = true : showBadge = options.badge;
 
+
+            var badge = "<div style=\"display:inline-block;\">" +
+                "<span class=\"badge\" style=\"border-radius:70%;border: 2px solid black;color:#C50063;padding:8px 5px;background-color:white;margin-right:10px;vertical-align:middle;\">{{sequenceLength}}</span>" +
+                "</div>";
+
+            var displayBadge = showBadge ? badge : "";
 
             var sources = "<div id=\"sequenceHeader\" class=\"row\" style=\"border-bottom: 1px solid #E7EAEC;padding-bottom:5px;margin:0px 0px 15px\">" +
-                "<div style=\"display:inline-block;\">" +
-                "<span class=\"badge\" style=\"border-radius:70%;border: 2px solid black;color:#C50063;padding:8px 5px;background-color:white;margin-right:10px;vertical-align:middle;\">{{sequenceLength}}</span>" +
-                "</div><h4 style=\"display:inline-block;vertical-align:middle;\">" + title + "</h4>" +
+                displayBadge + "<h4 style=\"display:inline-block;vertical-align:middle;\">" + title + "</h4>" +
                 "</div>" +
                 "<div id=\"sequenceBody\" style=\"margin-top: 5px;\">" +
                 "<div id=\"scroller\" style=\"max-height:" + seqHeight + ";overflow:auto;white-space: nowrap;padding-right:20px;margin-right:10px;s\">" +

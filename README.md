@@ -58,6 +58,7 @@ Check out this interactive page for a better understanding of how to use the seq
 * Title
 * sequenceMaxHeight
 * Events
+* Badge
 
 ## Examples 
 
