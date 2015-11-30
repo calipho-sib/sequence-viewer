@@ -37,20 +37,12 @@
     "biojs-events": "x.x.x"
   },
   "devDependencies": {
-    "mkdirp": "^0.5.0",
+    "bower": "^1.6.8",
     "browserify": "6.x",
-    "sniper": "0.x",
-    "watchify": "^1.0.6",
-    "prunner": "1.x",
-    "parcelify": "0.x",
     "grunt": "^0.4.5",
     "grunt-bower-concat": "^0.4.0",
-    "grunt-bump": "^0.3.0",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-nodeunit": "~0.4.1",
-    "grunt-contrib-uglify": "~0.5.0",
     "grunt-bower-task": "^0.4.0",
+    "grunt-bump": "^0.3.0",
     "grunt-concat-css": "^0.3.1",
     "grunt-connect": "^0.2.0",
     "grunt-contrib-clean": "~0.4.0",
@@ -60,20 +52,36 @@
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-cssmin": "~0.6.1",
     "grunt-contrib-handlebars": "^0.10.1",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-contrib-uglify": "~0.5.0",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-hustler": "0.11.2",
     "grunt-regarde": "~0.1.1",
     "grunt-serve": "^0.1.6",
-    "load-grunt-tasks": "^0.6.0"
+    "load-grunt-tasks": "^0.6.0",
+    "mkdirp": "^0.5.0",
+    "parcelify": "0.x",
+    "prunner": "1.x",
+    "sniper": "0.x",
+    "watchify": "^1.0.6"
   },
   "sniper": {
-    "js": ["/build/viewer.js"],
-    "css": ["/build/bundle.css"],
-    "snippets": ["snippets"],
+    "js": [
+      "/build/viewer.js"
+    ],
+    "css": [
+      "/build/bundle.css"
+    ],
+    "snippets": [
+      "snippets"
+    ],
     "first": "simple"
   },
   "keywords": [
-    "sib", "isb", "calipho",
+    "sib",
+    "isb",
+    "calipho",
     "sequence",
     "protein",
     "nextprot",

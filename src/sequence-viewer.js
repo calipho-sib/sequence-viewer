@@ -142,11 +142,43 @@ var Sequence = (function () {
             var j = i + ~~(i / 10) + 4 * (~~(i / lineJump));
             return j;
         }
+        function fillGap(list) {
+            var listCloned = list.slice();
+            for (var i=0;i<=list.length-1;i++) {
+                if (i===0){
+                    if (list[0].start > 0) {
+                        listCloned.unshift({start: 0, end: list[0].start, color: "black", underscore: false});
+                    }
+                }
+                else if (i === list.length-1){
+                    if (list[i-1].end < list[i].start){
+                        listCloned.push({start: list[i-1].end, end: list[i].start, color: "black", underscore: false});
+                    }
+                    if (list[i].end < sequence.length-1){
+                        listCloned.push({start: list[i].end, end: sequence.length, color: "black", underscore: false});
+                    }
+                }
+                else {
+                    if (list[i-1].end < list[i].start){
+                        listCloned.push({start: list[i-1].end, end: list[i].start, color: "black", underscore: false});
+                    }
+                }
+                if (i !== 0 && list[i-1].end > list[i].start){
+                    console.warn("WARNING (error): Some positions in the coverage list are overlapping");
+                }
+            }
+            listCloned.sort(function (a, b) {
+                return a.start - b.start;
+            });
+            return listCloned;
+        }
 
         this.coverage = function (HashAA, start, end, highlightColor) {
             HashAA.sort(function (a, b) {
                 return a.start - b.start;
             });
+            HashAA=fillGap(HashAA);
+            console.log(HashAA);
             var timestart = new Date().getTime();
             if (!start) var start = 0;
             if (!end) var end = 0;
