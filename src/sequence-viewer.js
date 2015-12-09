@@ -49,14 +49,14 @@ var Sequence = (function () {
 
             var displayBadge = showBadge ? badge : "";
 
-            var sources = "<div id=\"sequenceHeader\" class=\"row\" style=\"border-bottom: 1px solid #E7EAEC;padding-bottom:5px;margin:0px 0px 15px\">" +
+            var sources = "<div class=\"sequenceHeader row\" style=\"border-bottom: 1px solid #E7EAEC;padding-bottom:5px;margin:0px 0px 15px\">" +
                 displayBadge + "<h4 style=\"display:inline-block;vertical-align:middle;\">" + title + "</h4>" +
                 "</div>" +
-                "<div id=\"sequenceBody\" style=\"margin-top: 5px;\">" +
-                "<div id=\"scroller\" style=\"max-height:" + seqHeight + ";overflow:auto;white-space: nowrap;padding-right:20px;margin-right:10px;s\">" +
-                "<div id=\"charNumbers\" style=\"font-family: monospace;font-size: 13px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
-                "<div id=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 13px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
-                "<div id=\"coverageLegend\" style=\"margin-top: 10px;margin-left:15px;\"></div>" +
+                "<div class=\"sequenceBody\" style=\"margin-top: 5px;\">" +
+                "<div class=\"scroller\" style=\"max-height:" + seqHeight + ";overflow:auto;white-space: nowrap;padding-right:20px;margin-right:10px;s\">" +
+                "<div class=\"charNumbers\" style=\"font-family: monospace;font-size: 13px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
+                "<div class=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 13px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
+                "<div class=\"coverageLegend\" style=\"margin-top: 10px;margin-left:15px;\"></div>" +
                 "</div>";
 
             var template = Handlebars.compile(sources);
@@ -67,11 +67,11 @@ var Sequence = (function () {
             $(divId).html(html);
 
             if (!(options.wrapAminoAcids === false)) {
-                sequenceLayout(divId + " #fastaSeq");
+                sequenceLayout(divId + " .fastaSeq");
             }
-            else $(divId + " #scroller").css("overflow-x", "auto");
+            else $(divId + " .scroller").css("overflow-x", "auto");
             if (!(options.showLineNumbers === false))
-                lineNumbers(divId + " #fastaSeq", divId + " #charNumbers");
+                lineNumbers(divId + " .fastaSeq", divId + " .charNumbers");
 
             if (options.search) {
                 addSequenceSearch();
@@ -79,7 +79,7 @@ var Sequence = (function () {
             if (options.toolbar) {
                 addToolbar();
                 if (isoName !== "") {
-                    $("#sequenceToolbar").append(
+                    $(".sequenceToolbar").append(
                         "<a class=\"btn btn-default\" href=\"http://www.nextprot.org/db/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" style=\"margin-left:15px;\">view Fasta</a>" +
                         "<a class=\"btn btn-default disabled\" href=\"\" style=\"margin-left:15px;\">Blast sequence</a>" +
                         "<a class=\"btn btn-default disabled\" href=\"\" style=\"margin-left:15px;\">Blast selection</a>"
@@ -87,7 +87,7 @@ var Sequence = (function () {
                 }
             }
 
-            seqInit = $(divId + " #fastaSeq").html();
+            seqInit = $(divId + " .fastaSeq").html();
             mouseSelectionListener();
         };
 
@@ -99,17 +99,17 @@ var Sequence = (function () {
             positions[1] = positions[1] + ~~(positions[1] / 10) + 4 * (~~(positions[1] / lineJump));
             var highlightColor = color;
             hlSeq = hlSeq.substring(0, positions[0]) +
-            "<span id='stringSelected' style=\"background:" + color + ";color:white;\">" +
+            "<span class='stringSelected' style=\"background:" + color + ";color:white;\">" +
             hlSeq.substring(positions[0], positions[1]) +
             "</span>" +
             hlSeq.substring(positions[1], hlSeq.length);
-            $(divID + " #fastaSeq").html(hlSeq);
+            $(divID + " .fastaSeq").html(hlSeq);
         };
 
         function multiHighlighting(ArrayHL, color, options) {
             var startTime2 = new Date().getTime();
             if (ArrayHL.length === 0) {
-                $(divID + " #fastaSeq").html(seqInit);
+                $(divID + " .fastaSeq").html(seqInit);
             }
             var hlSeq = seqInit;
             var seqTemp = hlSeq.toString();
@@ -124,16 +124,16 @@ var Sequence = (function () {
                 "</span>" +
                 seqTemp.substring(positionEnd, seqTemp.length);
             }
-            $(divID + " #fastaSeq").html(seqTemp);
+            $(divID + " .fastaSeq").html(seqTemp);
         }
 
         this.addLegend = function (hashLegend) {
             for (var i = 0; i < hashLegend.length; i++) {
                 if (hashLegend[i].underscore === true) {
-                    $(divID + " #coverageLegend").append("<div style=\"display:inline-block;background:" + hashLegend[i].color + ";width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%; border: 1px solid grey;text-align:center; line-height:0.8;\">_</div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">" + hashLegend[i].name + "</p></div>");
+                    $(divID + " .coverageLegend").append("<div style=\"display:inline-block;background:" + hashLegend[i].color + ";width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%; border: 1px solid grey;text-align:center; line-height:0.8;\">_</div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">" + hashLegend[i].name + "</p></div>");
                 }
                 else {
-                    $(divID + " #coverageLegend").append("<div style=\"display:inline-block;background:" + hashLegend[i].color + ";width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">" + hashLegend[i].name + "</p>");
+                    $(divID + " .coverageLegend").append("<div style=\"display:inline-block;background:" + hashLegend[i].color + ";width:20px;height:20px;vertical-align:middle;margin:0px 5px 0px 10px;border-radius:50%;\"></div><p style=\"display:inline-block;font-weight:bold;font-size:11px;font-style:italic;margin:0;padding-top:3px;vertical-align:top;\">" + hashLegend[i].name + "</p>");
                 }
             }
         };
@@ -197,12 +197,12 @@ var Sequence = (function () {
                 if (end) {
                     if (start >= HashAA[i].start && start < HashAA[i].end && end >= HashAA[i].start && end < HashAA[i].end) {
 
-                        source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(start)) + "<span id=\"peptideHighlighted\" style=\"background:" + highlightColor + ";\">" + seqInit.substring(jTranslation(start), jTranslation(end + 1));
+                        source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(start)) + "<span class=\"peptideHighlighted\" style=\"background:" + highlightColor + ";\">" + seqInit.substring(jTranslation(start), jTranslation(end + 1));
 
                         source += "</span>" + seqInit.substring(jTranslation(end + 1), jTranslation(HashAA[i].end)) + "</span>";
                     }
                     else if (start >= HashAA[i].start && start < HashAA[i].end) {
-                        source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(start)) + "</span><span id=\"peptideHighlighted\" style=\"background:" + highlightColor + ";\">" + pre + seqInit.substring(jTranslation(start), jTranslation(HashAA[i].end)) + "</span>";
+                        source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(start)) + "</span><span class=\"peptideHighlighted\" style=\"background:" + highlightColor + ";\">" + pre + seqInit.substring(jTranslation(start), jTranslation(HashAA[i].end)) + "</span>";
                     }
                     else if (end >= HashAA[i].start && end < HashAA[i].end) {
                         source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(end + 1)) + "</span></span>" + pre + seqInit.substring(jTranslation(end + 1), jTranslation(HashAA[i].end)) + "</span>";
@@ -215,7 +215,7 @@ var Sequence = (function () {
                     source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(HashAA[i].end)) + "</span>";
                 }
             }
-            $(divID + " #fastaSeq").html(source);
+            $(divID + " .fastaSeq").html(source);
         };
 
         function lineNumbers(textAreaID, lineNumberID) {
@@ -242,13 +242,13 @@ var Sequence = (function () {
         }
 
         function addSequenceSearch() {
-            $(divID + " #sequenceHeader").append('<input id=\"inputSearchSeq\" type=\"text\" class=\"form-control pull-right\" style=\"width:40%;margin-top:3px;\" placeholder=\"Search in sequence.. (Regex supported)\">');
+            $(divID + " .sequenceHeader").append('<input class=\"inputSearchSeq form-control pull-right\" type=\"text\" style=\"width:40%;margin-top:3px;\" placeholder=\"Search in sequence.. (Regex supported)\">');
             sequenceSearch();
 
         }
 
         function sequenceSearch() {
-            $(divID + " #inputSearchSeq").keyup(function () {
+            $(divID + " .inputSearchSeq").keyup(function () {
                 var text = $(this).val();
                 if (text !== "") {
                     var text2 = new RegExp(text, "gi");
@@ -264,7 +264,7 @@ var Sequence = (function () {
                     multiHighlighting(matches, "#C50063");
                 }
                 else {
-                    $(divID + " #fastaSeq").html(seqInit);
+                    $(divID + " .fastaSeq").html(seqInit);
                 }
             });
         }
@@ -303,7 +303,7 @@ var Sequence = (function () {
         }
 
         function mouseSelectionListener() {
-            $(divID + " #fastaSeq").mouseup(function () {
+            $(divID + " .fastaSeq").mouseup(function () {
                 var selectedSubpart = getSelectedText();
                 if (selectedSubpart) triggerMouseSelectionEvent(selectedSubpart);
             });
@@ -348,10 +348,10 @@ var Sequence = (function () {
         function addToolbar() {
             var listOfCharsPerLine = ["50", "60", "70", "80", "90", "100"];
             var source = "<form class=\"form-inline\" role=\"form\">" +
-                "<div id=\"sequenceToolbar\" class=\"row\"style=\"margin-bottom:15px;\">" +
+                "<div class=\"sequenceToolbar row\" style=\"margin-bottom:15px;\">" +
                 "<div class=\"input-group\" style=\"margin-left:20px;\"> <span class=\"input-group-addon\">Char per line</i></span>" +
 
-                "<select id=\"CPLChoice\" class=\"form-control\" style=\"border-top-left-radius: 0px;border-bottom-left-radius: 0px;\">" +
+                "<select class=\"CPLChoice form-control\" style=\"border-top-left-radius: 0px;border-bottom-left-radius: 0px;\">" +
                 "<option>Select</option>" +
                 "{{#each CPL}}<option value={{this}}>{{this}}</option>{{/each}}" +
                 "</select>" +
@@ -362,10 +362,10 @@ var Sequence = (function () {
             var html = template({
                 "CPL": listOfCharsPerLine
             });
-            $(divID + " #sequenceBody").prepend(html);
-            $(divID + " #CPLChoice").change(function () {
+            $(divID + " .sequenceBody").prepend(html);
+            $(divID + " .CPLChoice").change(function () {
                 changeCharsPerLine(this);
-                $(divID + " #CPLChoice" + " option:selected").text($(this).val());
+                $(divID + " .CPLChoice" + " option:selected").text($(this).val());
             });
         }
     }
