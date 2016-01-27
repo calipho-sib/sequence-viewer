@@ -149,6 +149,9 @@ var Sequence = (function () {
                     if (list[0].start > 0) {
                         listCloned.unshift({start: 0, end: list[0].start, color: "black", underscore: false});
                     }
+                    if (i === list.length-1) {
+                        listCloned.push({start: list[i].end, end: sequence.length, color: "black", underscore: false});
+                    }
                 }
                 else if (i === list.length-1){
                     if (list[i-1].end < list[i].start){
