@@ -17,16 +17,13 @@
     }
   ],
   "main": "lib/index.js",
-  "style": "css/*.css",
   "scripts": {
     "build": "mkdir -p build && browserify -r ./:sequence-viewer -o build/viewer.js",
     "build-browser": "npm run build",
-    "build-all": "npm run build && npm run css",
+    "build-all": "npm run build",
     "watch": "watchify -r ./:sequence-viewer -v -o build/viewer.js",
-    "w": "prunner \"npm run sniper\" \"npm run watch\" \"npm run watch-css\"",
+    "w": "prunner \"npm run sniper\" \"npm run watch\"",
     "sniper": "sniper .",
-    "css": "parcelify ./ -c build/bundle.css",
-    "watch-css": "parcelify -w ./ -c build/bundle.css --loglevel verbose",
     "dist": "grunt && grunt serve"
   },
   "dependencies": {
@@ -61,7 +58,6 @@
     "grunt-serve": "^0.1.6",
     "load-grunt-tasks": "^0.6.0",
     "mkdirp": "^0.5.0",
-    "parcelify": "0.x",
     "prunner": "1.x",
     "sniper": "0.x",
     "watchify": "^1.0.6"
@@ -71,7 +67,7 @@
       "/build/viewer.js"
     ],
     "css": [
-      "/build/bundle.css"
+      "/css/bootstrap.min.css"
     ],
     "snippets": [
       "snippets"

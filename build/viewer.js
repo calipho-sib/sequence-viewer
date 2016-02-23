@@ -1,4 +1,4 @@
-require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/amdefine/amdefine.js":[function(require,module,exports){
 (function (process,__filename){
 /** vim: et:ts=4:sw=4:sts=4
  * @license amdefine 1.0.0 Copyright (c) 2011-2015, The Dojo Foundation All Rights Reserved.
@@ -303,7 +303,7 @@ function amdefine(module, requireFn) {
 module.exports = amdefine;
 
 }).call(this,require('_process'),"/node_modules/amdefine/amdefine.js")
-},{"_process":26,"path":25}],2:[function(require,module,exports){
+},{"_process":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/watchify/node_modules/process/browser.js","path":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/path-browserify/index.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/backbone-events-standalone/backbone-events-standalone.js":[function(require,module,exports){
 /**
  * Standalone extraction of Backbone.Events, no external dependency required.
  * Degrades nicely when Backone/underscore are already available in the current
@@ -581,10 +581,10 @@ module.exports = amdefine;
   }
 })(this);
 
-},{}],3:[function(require,module,exports){
+},{}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/backbone-events-standalone/index.js":[function(require,module,exports){
 module.exports = require('./backbone-events-standalone');
 
-},{"./backbone-events-standalone":2}],4:[function(require,module,exports){
+},{"./backbone-events-standalone":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/backbone-events-standalone/backbone-events-standalone.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/biojs-events/index.js":[function(require,module,exports){
 var events = require("backbone-events-standalone");
 
 events.onAll = function(callback,context){
@@ -607,9 +607,7 @@ events.mixin = function(proto) {
 
 module.exports = events;
 
-},{"backbone-events-standalone":3}],5:[function(require,module,exports){
-
-},{}],6:[function(require,module,exports){
+},{"backbone-events-standalone":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/backbone-events-standalone/index.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars.js":[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -679,7 +677,7 @@ inst['default'] = inst;
 exports['default'] = inst;
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./handlebars.runtime":7,"./handlebars/compiler/ast":9,"./handlebars/compiler/base":10,"./handlebars/compiler/compiler":12,"./handlebars/compiler/javascript-compiler":14,"./handlebars/compiler/visitor":17}],7:[function(require,module,exports){
+},{"./handlebars.runtime":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars.runtime.js","./handlebars/compiler/ast":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/ast.js","./handlebars/compiler/base":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/base.js","./handlebars/compiler/compiler":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js","./handlebars/compiler/javascript-compiler":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js","./handlebars/compiler/visitor":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/visitor.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars.runtime.js":[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -748,7 +746,7 @@ Handlebars['default'] = Handlebars;
 exports['default'] = Handlebars;
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./handlebars/base":8,"./handlebars/exception":19,"./handlebars/runtime":20,"./handlebars/safe-string":21,"./handlebars/utils":22}],8:[function(require,module,exports){
+},{"./handlebars/base":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/base.js","./handlebars/exception":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/exception.js","./handlebars/runtime":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/runtime.js","./handlebars/safe-string":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/safe-string.js","./handlebars/utils":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/utils.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/base.js":[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -1022,7 +1020,7 @@ function createFrame(object) {
 }
 
 /* [args, ]options */
-},{"./exception":19,"./utils":22}],9:[function(require,module,exports){
+},{"./exception":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/exception.js","./utils":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/utils.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/ast.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1175,7 +1173,7 @@ var AST = {
 // must modify the object to operate properly.
 exports['default'] = AST;
 module.exports = exports['default'];
-},{}],10:[function(require,module,exports){
+},{}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/base.js":[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -1222,7 +1220,7 @@ function parse(input, options) {
   var strip = new _WhitespaceControl2['default']();
   return strip.accept(_parser2['default'].parse(input));
 }
-},{"../utils":22,"./ast":9,"./helpers":13,"./parser":15,"./whitespace-control":18}],11:[function(require,module,exports){
+},{"../utils":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/utils.js","./ast":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/ast.js","./helpers":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/helpers.js","./parser":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js","./whitespace-control":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/whitespace-control.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -1387,7 +1385,7 @@ exports['default'] = CodeGen;
 module.exports = exports['default'];
 
 /* NOP */
-},{"../utils":22,"source-map":27}],12:[function(require,module,exports){
+},{"../utils":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/utils.js","source-map":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js":[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -1915,7 +1913,7 @@ function transformLiteralToPath(sexpr) {
     sexpr.path = new _AST2['default'].PathExpression(false, 0, [literal.original + ''], literal.original + '', literal.loc);
   }
 }
-},{"../exception":19,"../utils":22,"./ast":9}],13:[function(require,module,exports){
+},{"../exception":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/exception.js","../utils":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/utils.js","./ast":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/ast.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/helpers.js":[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -2051,7 +2049,7 @@ function prepareBlock(openBlock, program, inverseAndProgram, close, inverted, lo
 
   return new this.BlockStatement(openBlock.path, openBlock.params, openBlock.hash, program, inverse, openBlock.strip, inverseStrip, close && close.strip, this.locInfo(locInfo));
 }
-},{"../exception":19}],14:[function(require,module,exports){
+},{"../exception":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/exception.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js":[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -3116,7 +3114,7 @@ function strictLookup(requireTerminal, compiler, parts, type) {
 
 exports['default'] = JavaScriptCompiler;
 module.exports = exports['default'];
-},{"../base":8,"../exception":19,"../utils":22,"./code-gen":11}],15:[function(require,module,exports){
+},{"../base":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/base.js","../exception":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/exception.js","../utils":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/utils.js","./code-gen":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js":[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -3798,7 +3796,7 @@ var handlebars = (function () {
 
 /* jshint ignore:end */
 module.exports = exports["default"];
-},{}],16:[function(require,module,exports){
+},{}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/printer.js":[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -3964,7 +3962,7 @@ PrintVisitor.prototype.HashPair = function (pair) {
   return pair.key + '=' + this.accept(pair.value);
 };
 /*eslint-enable new-cap */
-},{"./visitor":17}],17:[function(require,module,exports){
+},{"./visitor":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/visitor.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/visitor.js":[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -4097,7 +4095,7 @@ Visitor.prototype = {
 exports['default'] = Visitor;
 module.exports = exports['default'];
 /* content */ /* comment */ /* path */ /* string */ /* number */ /* bool */ /* literal */ /* literal */
-},{"../exception":19,"./ast":9}],18:[function(require,module,exports){
+},{"../exception":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/exception.js","./ast":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/ast.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/whitespace-control.js":[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -4310,7 +4308,7 @@ function omitLeft(body, i, multiple) {
 
 exports['default'] = WhitespaceControl;
 module.exports = exports['default'];
-},{"./visitor":17}],19:[function(require,module,exports){
+},{"./visitor":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/visitor.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/exception.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4349,7 +4347,7 @@ Exception.prototype = new Error();
 
 exports['default'] = Exception;
 module.exports = exports['default'];
-},{}],20:[function(require,module,exports){
+},{}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/runtime.js":[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -4582,7 +4580,7 @@ function initData(context, data) {
   }
   return data;
 }
-},{"./base":8,"./exception":19,"./utils":22}],21:[function(require,module,exports){
+},{"./base":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/base.js","./exception":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/exception.js","./utils":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/utils.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/safe-string.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4597,7 +4595,7 @@ SafeString.prototype.toString = SafeString.prototype.toHTML = function () {
 
 exports['default'] = SafeString;
 module.exports = exports['default'];
-},{}],22:[function(require,module,exports){
+},{}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/utils.js":[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -4713,7 +4711,7 @@ function blockParams(params, ids) {
 function appendContextPath(contextPath, id) {
   return (contextPath ? contextPath + '.' : '') + id;
 }
-},{}],23:[function(require,module,exports){
+},{}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/lib/index.js":[function(require,module,exports){
 // USAGE:
 // var handlebars = require('handlebars');
 /* eslint-disable no-var */
@@ -4740,7 +4738,7 @@ if (typeof require !== 'undefined' && require.extensions) {
   require.extensions['.hbs'] = extension;
 }
 
-},{"../dist/cjs/handlebars":6,"../dist/cjs/handlebars/compiler/printer":16,"fs":5}],24:[function(require,module,exports){
+},{"../dist/cjs/handlebars":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars.js","../dist/cjs/handlebars/compiler/printer":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/dist/cjs/handlebars/compiler/printer.js","fs":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/watchify/node_modules/browserify/lib/_empty.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/jquery/dist/jquery.js":[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -13952,7 +13950,7 @@ return jQuery;
 
 }));
 
-},{}],25:[function(require,module,exports){
+},{}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/path-browserify/index.js":[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -14180,95 +14178,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":26}],26:[function(require,module,exports){
-// shim for using process in browser
-
-var process = module.exports = {};
-
-process.nextTick = (function () {
-    var canSetImmediate = typeof window !== 'undefined'
-    && window.setImmediate;
-    var canMutationObserver = typeof window !== 'undefined'
-    && window.MutationObserver;
-    var canPost = typeof window !== 'undefined'
-    && window.postMessage && window.addEventListener
-    ;
-
-    if (canSetImmediate) {
-        return function (f) { return window.setImmediate(f) };
-    }
-
-    var queue = [];
-
-    if (canMutationObserver) {
-        var hiddenDiv = document.createElement("div");
-        var observer = new MutationObserver(function () {
-            var queueList = queue.slice();
-            queue.length = 0;
-            queueList.forEach(function (fn) {
-                fn();
-            });
-        });
-
-        observer.observe(hiddenDiv, { attributes: true });
-
-        return function nextTick(fn) {
-            if (!queue.length) {
-                hiddenDiv.setAttribute('yes', 'no');
-            }
-            queue.push(fn);
-        };
-    }
-
-    if (canPost) {
-        window.addEventListener('message', function (ev) {
-            var source = ev.source;
-            if ((source === window || source === null) && ev.data === 'process-tick') {
-                ev.stopPropagation();
-                if (queue.length > 0) {
-                    var fn = queue.shift();
-                    fn();
-                }
-            }
-        }, true);
-
-        return function nextTick(fn) {
-            queue.push(fn);
-            window.postMessage('process-tick', '*');
-        };
-    }
-
-    return function nextTick(fn) {
-        setTimeout(fn, 0);
-    };
-})();
-
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-// TODO(shtylman)
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-
-},{}],27:[function(require,module,exports){
+},{"_process":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/watchify/node_modules/process/browser.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map.js":[function(require,module,exports){
 /*
  * Copyright 2009-2011 Mozilla Foundation and contributors
  * Licensed under the New BSD license. See LICENSE.txt or:
@@ -14278,7 +14188,7 @@ exports.SourceMapGenerator = require('./source-map/source-map-generator').Source
 exports.SourceMapConsumer = require('./source-map/source-map-consumer').SourceMapConsumer;
 exports.SourceNode = require('./source-map/source-node').SourceNode;
 
-},{"./source-map/source-map-consumer":33,"./source-map/source-map-generator":34,"./source-map/source-node":35}],28:[function(require,module,exports){
+},{"./source-map/source-map-consumer":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/source-map-consumer.js","./source-map/source-map-generator":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/source-map-generator.js","./source-map/source-node":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/source-node.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/array-set.js":[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -14377,7 +14287,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./util":36,"amdefine":1}],29:[function(require,module,exports){
+},{"./util":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/util.js","amdefine":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/amdefine/amdefine.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/base64-vlq.js":[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -14521,7 +14431,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./base64":30,"amdefine":1}],30:[function(require,module,exports){
+},{"./base64":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/base64.js","amdefine":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/amdefine/amdefine.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/base64.js":[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -14565,7 +14475,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":1}],31:[function(require,module,exports){
+},{"amdefine":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/amdefine/amdefine.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/binary-search.js":[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -14647,7 +14557,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":1}],32:[function(require,module,exports){
+},{"amdefine":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/amdefine/amdefine.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/mapping-list.js":[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2014 Mozilla Foundation and contributors
@@ -14735,7 +14645,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./util":36,"amdefine":1}],33:[function(require,module,exports){
+},{"./util":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/util.js","amdefine":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/amdefine/amdefine.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/source-map-consumer.js":[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -15312,7 +15222,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./array-set":28,"./base64-vlq":29,"./binary-search":31,"./util":36,"amdefine":1}],34:[function(require,module,exports){
+},{"./array-set":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/array-set.js","./base64-vlq":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/base64-vlq.js","./binary-search":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/binary-search.js","./util":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/util.js","amdefine":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/amdefine/amdefine.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/source-map-generator.js":[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -15714,7 +15624,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./array-set":28,"./base64-vlq":29,"./mapping-list":32,"./util":36,"amdefine":1}],35:[function(require,module,exports){
+},{"./array-set":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/array-set.js","./base64-vlq":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/base64-vlq.js","./mapping-list":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/mapping-list.js","./util":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/util.js","amdefine":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/amdefine/amdefine.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/source-node.js":[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -16130,7 +16040,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./source-map-generator":34,"./util":36,"amdefine":1}],36:[function(require,module,exports){
+},{"./source-map-generator":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/source-map-generator.js","./util":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/util.js","amdefine":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/amdefine/amdefine.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/source-map/lib/source-map/util.js":[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -16451,7 +16361,74 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":1}],37:[function(require,module,exports){
+},{"amdefine":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/amdefine/amdefine.js"}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/watchify/node_modules/browserify/lib/_empty.js":[function(require,module,exports){
+
+},{}],"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/watchify/node_modules/process/browser.js":[function(require,module,exports){
+// shim for using process in browser
+
+var process = module.exports = {};
+
+process.nextTick = (function () {
+    var canSetImmediate = typeof window !== 'undefined'
+    && window.setImmediate;
+    var canPost = typeof window !== 'undefined'
+    && window.postMessage && window.addEventListener
+    ;
+
+    if (canSetImmediate) {
+        return function (f) { return window.setImmediate(f) };
+    }
+
+    if (canPost) {
+        var queue = [];
+        window.addEventListener('message', function (ev) {
+            var source = ev.source;
+            if ((source === window || source === null) && ev.data === 'process-tick') {
+                ev.stopPropagation();
+                if (queue.length > 0) {
+                    var fn = queue.shift();
+                    fn();
+                }
+            }
+        }, true);
+
+        return function nextTick(fn) {
+            queue.push(fn);
+            window.postMessage('process-tick', '*');
+        };
+    }
+
+    return function nextTick(fn) {
+        setTimeout(fn, 0);
+    };
+})();
+
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+}
+
+// TODO(shtylman)
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+
+},{}],"/Users/mathieu/Documents/work-space/sequence-viewer/src/sequence-viewer.js":[function(require,module,exports){
 var Sequence = (function () {
 
     function Sequence(sequence, isoformName) {
@@ -16856,4 +16833,4 @@ var jQuery = $ = require("jquery");
 var Sequence = require("../src/sequence-viewer.js");
 require("biojs-events").mixin(Sequence.prototype);
 module.exports = Sequence;
-},{"../src/sequence-viewer.js":37,"biojs-events":4,"handlebars":23,"jquery":24}]},{},[]);
+},{"../src/sequence-viewer.js":"/Users/mathieu/Documents/work-space/sequence-viewer/src/sequence-viewer.js","biojs-events":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/biojs-events/index.js","handlebars":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/handlebars/lib/index.js","jquery":"/Users/mathieu/Documents/work-space/sequence-viewer/node_modules/jquery/dist/jquery.js"}]},{},[]);
