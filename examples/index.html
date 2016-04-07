@@ -105,8 +105,17 @@ seq2.selection(20, 43, 'red');
         </div>
         <div class="panel-body">
             <p>A coverage with color codes can be apply to the sequence.<br>
-                For this, you must provide a list, mapping all the sequence with some specific colors and labels. <br>
-                With the coverage, it's also possible to give within the parameters an interval to highlight in the
+                For this, you must provide a list, mapping all the sequence with some specific parameters : <p>
+            <ul>
+                <li><strong>start</strong></li>
+                <li><strong>end</strong></li>
+                <li><strong>color</strong> : text color</li>
+                <li><strong>bgcolor</strong> : background color</li>
+                <li><strong>underscore</strong> : add underline below the chars</li>
+                <li><strong>tooltip</strong> : add tooltip</li>
+                <li><strong>onclick</strong> : add click listener</li>
+            </ul>
+            <p>With the coverage, it's also possible to give within the parameters an interval to highlight in the
                 sequence. <br>
                 An other array will be needed to display the legend of color codes.</p>
         </div>
@@ -116,17 +125,25 @@ seq2.selection(20, 43, 'red');
 var seq3 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
 seq3.render('#protein-sequence-viewer3');
 
+//function called by "onclick"
+var onclickFun = function(e) {
+  console.log("Region clicked");
+}
+
 //Coverage list
 var exempleSequenceCoverage = [
-    {start: 0, end: 25, color: "black", underscore: false},
-    {start: 25, end: 47, color: "#ff0000", underscore: false},
+    {start: 0, end: 25, color: "black", underscore: false, bgcolor: "#ffd891"},
+    {start: 25, end: 47, color: "#ff0000", underscore: false, tooltip: "this is a tooltip"},
     {start: 47, end: 54, color: "#ff0000", underscore: true},
     {start: 54, end: 55, color: "#ff0000", underscore: false},
     {start: 55, end: 56, color: "black", underscore: false},
-    {start: 56, end: 89, color: "#69CC33", underscore: false},
+    {start: 56, end: 89, color: "#69CC33", underscore: false, onclick:onclickFun},
     {start: 89, end: 90, color: "black", underscore: false},
     {start: 90, end: 110, color: "#ff0000", underscore: false}
 ];
+                
+
+                
 seq3.coverage(exempleSequenceCoverage);
 // for coverage + highlight :
 // seq3.coverage(exempleSequenceCoverage, start, end, highlightColor);
