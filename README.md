@@ -1,5 +1,7 @@
 # Sequence viewer
 
+[![Build Status](https://travis-ci.org/calipho-sib/sequence-viewer.svg?branch=master)](https://travis-ci.org/calipho-sib/sequence-viewer)
+
 > The sequence viewer is a super easy javascript library to use in order to draw a protein sequence in a readable way.
 
 ![Sequence viewer1](/assets/sequence-viewer-complete.png)
