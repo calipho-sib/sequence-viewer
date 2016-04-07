@@ -21,8 +21,15 @@ var Sequence = (function () {
         var showBadge;
 
         this.render = function (divId, options) {
+            //identifier should be a string in other cases we might get strange effects
+            if (typeof divId !== 'string') {
+               throw new Error("Div identifier must be a string");
+            }
             divID = divId;
             el = document.getElementById(divId.substring(1));
+            if (el === null) {
+              throw new Error("Cannot find element with id: " + divId.substring(1));
+            }
             if (typeof options === 'undefined') {
                 var options = {
                     'showLineNumbers': true,
@@ -65,7 +72,7 @@ var Sequence = (function () {
                 "sequenceLength": sequence.length
             });
             $(divId).html(html);
-
+	
             if (!(options.wrapAminoAcids === false)) {
                 sequenceLayout(divId + " .fastaSeq");
             }
@@ -189,12 +196,31 @@ var Sequence = (function () {
             var source = "";
             var pre = "";
             for (var i = 0; i < HashAA.length; i++) {
+                var tooltipStr = "";
+                if (HashAA[i].tooltip !== undefined) {
+                    tooltipStr = " title=\""+HashAA[i].tooltip+"\"";
+                }
+                var bgcolorStr = "";
+                if (HashAA[i].bgcolor !== undefined) {
+                    bgcolorStr = "background:"+HashAA[i].bgcolor+";";
+                }
+                //in html string there is no easy way to put function, therefore
+                //assign to onclick event handler identifier of the region,
+                //and after all DOM objects will be created we will replace this handlers
+                //with proper functions
+                var onclickStr = "";
+                var cursorStr = "";
+                if (HashAA[i].onclick !== undefined) {
+                    onclickStr = " onclick=\" return "+i+";\" ";
+                    cursorStr = "cursor: pointer;";
+                }
+                
                 if (HashAA[i].underscore) {
-                    pre = "<span style=\"text-decoration:underline;color:" + HashAA[i].color + ";\">";
+                    pre = "<span style=\"text-decoration:underline;color:" + HashAA[i].color + ";" + bgcolorStr + cursorStr+ "\"" + tooltipStr + onclickStr + ">";
                     source += pre;
                 }
                 else {
-                    pre = "<span style=\"color:" + HashAA[i].color + ";\">";
+                    pre = "<span style=\"color:" + HashAA[i].color + ";" + bgcolorStr + cursorStr + "\"" + tooltipStr + onclickStr + ">";
                     source += pre;
                 }
                 if (end) {
@@ -218,7 +244,18 @@ var Sequence = (function () {
                     source += seqInit.substring(jTranslation(HashAA[i].start), jTranslation(HashAA[i].end)) + "</span>";
                 }
             }
-            $(divID + " .fastaSeq").html(source);
+            var fastaDiv = $(divID + " .fastaSeq");
+            fastaDiv.html(source);
+
+            //and now (after we created dom objects) we can assign onclick events
+            var onclickObjects = $("[onclick]",fastaDiv);
+            for (var i=0;i<onclickObjects.length;i++) {
+              //get the id that was assigned to onclick event in the simple html
+              var onclickId = onclickObjects[i].onclick();
+              //and replace it with proper function
+              onclickObjects[i].onclick = HashAA[onclickId].onclick;
+            }
+
         };
 
         function lineNumbers(textAreaID, lineNumberID) {
