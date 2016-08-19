@@ -62,7 +62,7 @@ var Sequence = (function () {
                 "<div class=\"sequenceBody\" style=\"margin-top: 5px;\">" +
                 "<div class=\"scroller\" style=\"max-height:" + seqHeight + ";overflow:auto;white-space: nowrap;padding-right:20px;margin-right:10px;s\">" +
                 "<div class=\"charNumbers\" style=\"font-family: monospace;font-size: 13px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
-                "<div class=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 13px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
+                "<div id='teste' class=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 13px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
                 "<div class=\"coverageLegend\" style=\"margin-top: 10px;margin-left:15px;\"></div>" +
                 "</div>";
 
@@ -359,16 +359,38 @@ var Sequence = (function () {
         };
 
         function getSelectedText() {
-            var text = window.getSelection().toString();
-            text = text.replace(/\s+/g, '');
-            return text;
+            var text = window.getSelection().toString().replace(/\s+/g, '');
+            var selection = window.getSelection();
+            var element = $(divID + " .fastaSeq")[0];
+            var caretOffset = 0;
+            var seqText = $(divID + " .fastaSeq").text();
+            
+            var range = selection.getRangeAt(0);
+            var preCaretRange = range.cloneRange();
+            preCaretRange.selectNodeContents(element);
+            preCaretRange.setEnd(range.endContainer, range.endOffset);
+            caretOffset = preCaretRange.toString().length;
+            
+            var pos_end_parsed = seqText.substring(0,caretOffset).replace(/\s+/g, '').length;
+            
+            var pos_start_parsed = pos_end_parsed - (text.length -1);
+            
+            var text_selected = {
+                text: text,
+                start: pos_start_parsed,
+                end: pos_end_parsed
+            }
+            
+            return text_selected;
         }
 
         function triggerMouseSelectionEvent(subseq) {
             if (CustomEvent) {
                 var event = new CustomEvent(self.events.MOUSE_SELECTION_EVENT, {
                     detail: {
-                        'selection': subseq
+                        'selection': subseq.text,
+                        'start':subseq.start,
+                        'end':subseq.end
                     }
                 });
                 el.dispatchEvent(event);
