@@ -62,7 +62,7 @@ var Sequence = (function () {
                 "<div class=\"sequenceBody\" style=\"margin-top: 5px;\">" +
                 "<div class=\"scroller\" style=\"max-height:" + seqHeight + ";overflow:auto;white-space: nowrap;padding-right:20px;margin-right:10px;s\">" +
                 "<div class=\"charNumbers\" style=\"font-family: monospace;font-size: 13px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
-                "<div id='teste' class=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 13px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
+                "<div class=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 13px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
                 "<div class=\"coverageLegend\" style=\"margin-top: 10px;margin-left:15px;\"></div>" +
                 "</div>";
 
