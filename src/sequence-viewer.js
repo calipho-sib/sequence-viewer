@@ -110,10 +110,10 @@ var Sequence = (function () {
 //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast sequence</a>" +
 //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast selection</a>"
 //                        '<label style="margin-left:10px;">Blast</label>' +
-                        '<div class="btn-group" role="group" aria-label="..." style="margin-left:5px;" title="Soon to be implemented">' +
+                        '<div class="btn-group" role="group" aria-label="..." style="margin-left:5px;" data-toggle="tooltip" data-placement="top" title="Soon to be implemented">' +
                           '<span class="" style="position:relative; float:left;padding: 5px 10px;font-size: 12px;line-height: 1.5;font-weight:900;background-color:#eee;border:1px solid #ccc;border-radius:3px;border-top-right-radius:0;border-bottom-right-radius:0;">Blast :</span>' +
-                          '<a class=\"btn btn-default btn-sm disabled\" style="margin-left:-1px;" href=\"\" data-toggle="tooltip" data-placement="top" title="Soon to be implemented">sequence</a>' +
-                          '<a class=\"btn btn-default btn-sm disabled\" href=\"\" data-toggle="tooltip" data-placement="top" title="Soon to be implemented">selection</a>' +
+                          '<a class=\"btn btn-default btn-sm disabled\" style="margin-left:-1px;" href=\"\">sequence</a>' +
+                          '<a class=\"btn btn-default btn-sm disabled\" href=\"\">selection</a>' +
                         '</div>'
                     );
 //                    $('[data-toggle="tooltip"]').tooltip();
