@@ -29,15 +29,31 @@
             seq1.render('#protein-sequence-viewer', {
                 'showLineNumbers': true,
                 'wrapAminoAcids': true,
-                'charsPerLine': 100,
+                'charsPerLine': 70,
                 'toolbar': true,
-                'search': true
+                'search': true,
+                'header' : {
+                    display:true,
+                    searchInTitle :true,
+                    unit: "Char"
+                }
             });
+            
+        
             //Ex: Get and print the selection in the browser console
             seq1.onMouseSelection(function(elem){
                     console.log(elem);
                 }
-);
+            );
+                                  //Coverage list
+//            var exempleSequenceCoverage = [
+//                {start: 0, end: 25, color: "black", underscore: false, bgcolor: "#ffd891"},
+//                {start: 25, end: 47, color: "#ff0000", underscore: false, tooltip: "this is a tooltip"},
+//                {start: 47, end: 54, color: "#69CC33", underscore: true},
+//                {start: 54, end: 55, color: "#ff0000", underscore: false}
+//            ];
+//
+//            seq1.coverage(exempleSequenceCoverage);
 
         };
 

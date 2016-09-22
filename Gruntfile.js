@@ -7,9 +7,13 @@ module.exports = function (grunt) {
             options: {
                 separator: ';'
             },
-            dist: {
-                src: ['bower_components/jquery/dist/jquery.js', 'bower_components/handlebars/handlebars.js', 'dist/sequence-viewer.min.js'],
+            bundle: {
+                src: ['bower_components/jquery/dist/jquery.js', 'src/sequence-viewer.js'],
                 dest: 'dist/sequence-viewer.bundle.js'
+            },
+            raw : {
+                src: ['src/sequence-viewer.js'],
+                dest: 'dist/sequence-viewer.min.js'
             }
         },
         bump: {
@@ -35,8 +39,12 @@ module.exports = function (grunt) {
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
             },
             build: {
-                src: 'src/sequence-viewer.js',
+                src: 'dist/sequence-viewer.min.js',
                 dest: 'dist/sequence-viewer.min.js'
+            },
+            bundle: {
+                src: 'dist/sequence-viewer.bundle.js',
+                dest: 'dist/sequence-viewer.bundle.js'
             }
         },
         connect: {
@@ -69,7 +77,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task(s).
-    grunt.registerTask('default', ['uglify','concat']);
+    grunt.registerTask('default', ['concat']);
+    grunt.registerTask('prod', ['concat', 'uglify']);
     grunt.registerTask('serve', ['connect:server', 'watch']);
 
 };
