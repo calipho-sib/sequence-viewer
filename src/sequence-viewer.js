@@ -106,7 +106,7 @@ var Sequence = (function () {
                 addToolbar();
                 if (isoName !== "") {
                     $(".sequenceToolbar").append(
-                        "<a class=\"btn btn-default btn-sm\" href=\"http://www.nextprot.org/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" target='_blank' style=\"margin-left:10px;\">View FASTA</a>" +
+                        "<a class=\"btn btn-default btn-sm fasta-link\" href=\"http://www.nextprot.org/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" target='_blank' style=\"margin-left:10px;\">View FASTA</a>" +
 //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast sequence</a>" +
 //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast selection</a>"
 //                        '<label style="margin-left:10px;">Blast</label>' +
