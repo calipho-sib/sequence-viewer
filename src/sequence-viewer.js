@@ -70,8 +70,9 @@ var Sequence = (function () {
             sequenceOptions.header = options.header ? {
                 display : options.header.display === undefined ? true : options.header.display,
                 searchInTitle : options.header.searchInTitle === undefined ? true : options.header.searchInTitle,
-                unit : options.header.unit === undefined ? "Char" : options.header.unit
-            } : {display : true, searchInTitle : true, unit : "Char"};
+                unit : options.header.unit === undefined ? "Char" : options.header.unit,
+                showCpl : options.header.showCpl === undefined ? true : options.header.showCpl
+            } : {display : true, searchInTitle : true, unit : "Char", showCpl: true};
 
 
             var badge = "<div style=\"display:inline-block;\">" +
@@ -103,9 +104,17 @@ var Sequence = (function () {
                 lineNumbers(divId + " .fastaSeq", divId + " .charNumbers");
 
             if (sequenceOptions.toolbar) {
-                addToolbar();
+                if (sequenceOptions.header.showCpl){
+                    addToolbar();
+                }
+                else {
+                    var source = "<form class=\"form-inline\" style=\"margin-bottom:5px;\">" +
+                    "<div class=\"form-group form-group-sm sequenceToolbar\" style=\"\"> "+
+                        "</div></form>";
+                    $(divID + " .sequenceBody").prepend(source);
+                }
                 if (isoName !== "") {
-                    $(".sequenceToolbar").append(
+                    $(divID + " .sequenceToolbar").append(
                         "<a class=\"btn btn-default btn-sm fasta-link\" href=\"http://www.nextprot.org/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" target='_blank' style=\"margin-left:10px;\">View FASTA</a>" +
 //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast sequence</a>" +
 //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast selection</a>"
