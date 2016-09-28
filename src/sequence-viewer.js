@@ -71,15 +71,20 @@ var Sequence = (function () {
                 display : options.header.display === undefined ? true : options.header.display,
                 searchInTitle : options.header.searchInTitle === undefined ? true : options.header.searchInTitle,
                 unit : options.header.unit === undefined ? "Char" : options.header.unit,
-                showCpl : options.header.showCpl === undefined ? true : options.header.showCpl
-            } : {display : true, searchInTitle : true, unit : "Char", showCpl: true};
+                showCpl : options.header.showCpl === undefined ? true : options.header.showCpl,
+                badgeWithUnit : options.header.badgeWithUnit === undefined ? false : options.header.badgeWithUnit
+            } : {display : true, searchInTitle : true, unit : "Char", showCpl: true, badgeWithUnit: false};
 
 
             var badge = "<div style=\"display:inline-block;\">" +
                 "<span class=\"badge\" style=\"border-radius:70%;border: 2px solid black;color:#C50063;padding:8px 5px;background-color:white;margin-right:10px;vertical-align:middle;min-width:32px;\">" + sequence.length + "</span>" +
                 "</div>";
+            
+            var badgeWithUnit = "<div style=\"display:inline-block;\">" +
+                "<span class=\"badge\" style=\"border-radius:70%;border: 2px solid black;color:#C50063;padding:5px 5px;background-color:white;margin-right:10px;vertical-align:middle;min-width:32px;font-size:11px;\">" + sequence.length + "<div style='margin-top:-2px;font-size:9px;color:black;text-transform:lowercase;'>" + sequenceOptions.header.unit + "</div></span>" +
+                "</div>";
 
-            var displayBadge = sequenceOptions.badge ? badge : "";
+            var displayBadge = sequenceOptions.badge ? sequenceOptions.header.badgeWithUnit ? badgeWithUnit : badge : "";
             
             var header = sequenceOptions.header.display ? "<div class=\"sequenceHeader row\" style=\"border-bottom: 1px solid #E7EAEC;padding-bottom:5px;margin:0px 0px 10px\">" +
                 displayBadge + "<h4 style=\"display:inline-block;vertical-align:middle;\">" + sequenceOptions.title + "</h4>" +
