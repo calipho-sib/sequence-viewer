@@ -120,7 +120,7 @@ var Sequence = (function () {
                 }
                 if (isoName !== "") {
                     $(divID + " .sequenceToolbar").append(
-                        "<a class=\"btn btn-default btn-sm fasta-link\" href=\"http://www.nextprot.org/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" target='_blank' style=\"margin-left:10px;\">View FASTA</a>" +
+                        "<a class=\"btn btn-default btn-sm fasta-link\" href=\"http://www.nextprot.org/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" target='_blank'>View FASTA</a>" +
 //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast sequence</a>" +
 //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast selection</a>"
                         '<div class="btn-group" role="group" aria-label="..." style="margin-left:5px;" data-toggle="tooltip" data-placement="top" title="Soon to be implemented">' +
@@ -486,7 +486,7 @@ var Sequence = (function () {
 //                "<div class=\"sequenceToolbar row\" style=\"margin-bottom:15px;\">" +
                 "<div class=\"form-group form-group-sm sequenceToolbar\" style=\"\"> "+
                     "<label class=\"control-label charPerLine-label " + hidexsCharPerLine + "\" for='"+ divID.substring(1) +"-cpl' style='margin-right:5px;'>" + sequenceOptions.header.unit + " per line</label>" +
-                    "<select class=\"CPLChoice form-control " + hidexsCharPerLine + "\" id='"+ divID.substring(1) +"-cpl' style='display:inline-block;width:auto;'>" +
+                    "<select class=\"CPLChoice form-control " + hidexsCharPerLine + "\" id='"+ divID.substring(1) +"-cpl' style='display:inline-block;width:auto;margin-right:10px;'>" +
                         "<option>Select</option>" +
                         "<option value=50>50</option>" +
                         "<option value=60>60</option>" +
