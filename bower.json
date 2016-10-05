@@ -1,14 +1,10 @@
 {
   "name": "sequence-viewer",
-  "version": "0.0.1",
   "main": "dist/sequence-viewer.min.js",
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "vendor",
-    "demo"
+    "bower_components"
   ],
   "repository": {
     "type": "git",
@@ -18,14 +14,15 @@
     "sequence",
     "nextprot",
     "uniprot",
-    "protein"
+    "protein",
+    "viewer"
   ],
   "authors": [
-    "Mathieu Schaeffer <mat.schaeff@gmail.com>"
+    "Mathieu Schaeffer <mat.schaeff@gmail.com>",
+    "Calipho Team <ndu@isb-sib.ch>"
   ],
-  "license": "MIT",
+  "license": "GNU GPL v2",
   "dependencies": {
-    "jquery": "~2.1.3",
-    "handlebars": "x.x.x"
+    "jquery": "~2.1.3"
   }
 }

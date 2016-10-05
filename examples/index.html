@@ -8,10 +8,11 @@
     <script src="../dist/sequence-viewer.bundle.js"></script>
 </head>
 
-<body class="container col-md-10 col-xs-12 col-md-offset-1">
+<body>
+ <div class="container col-md-10 col-xs-12 col-md-offset-1">
 <div class="jumbotron">
     <p class="pull-right" style="display: inline-block;"><a href="http://www.nextprot.org" alt="neXtProt"
-                                                            style="color:#C50063;">neXtProt &copy;</a></p>
+                                                            style="color:#C50063;">neXtProt</a></p>
 
     <h1>Sequence Viewer</h1>
 
@@ -19,7 +20,7 @@
         and apply some visual improvment for selection and coverage</p>
 </div>
 <div class="row" style="margin-top: 30px;border-bottom:1px solid #E7EAEC;">
-    <div class="panel panel-default col-md-5 col-md-offset-1 col-xs-10 col-xs-offset-1">
+    <div class="panel panel-default col-lg-6 col-md-6">
         <div class="row panel-heading">
             <h4 class="text-center">Simple</h4>
         </div>
@@ -31,12 +32,20 @@
                 <li><strong>wrapAminoAcids</strong> <em>(boolean)</em> : Add or not the layout with break-line and blank
                     separation
                 </li>
-                <li><strong>charsPerLine</strong> <em>(integer)</em> : Choose the number of letter per Line (must be a
-                    multiple of 10)
+                <li><strong>charsPerLine</strong> <em>(integer)</em> : Choose the number of letters per Line (must be a
+                    multiple of 10) Default: 50
                 </li>
-                <li><strong>toolbar</strong> <em>(boolean)</em> : Add a toolbar allowing users to choose the number of letter per line
+                <li><strong>toolbar</strong> <em>(boolean)</em> : Add a toolbar allowing users to choose the number of
+                    letters per line.
                 </li>
-                <li><strong>search</strong> <em>(boolean)</em> : Add an input in the header to search for pattern in the sequence. Regular expression is supported.
+                <li><strong>search</strong> <em>(boolean)</em> : Add an input in the header to search for pattern in the
+                    sequence. Regular expression is supported.
+                </li>
+                <li><strong>title</strong> <em>(string)</em> : Allows to change the title. Default: "Protein Sequence"
+                </li>
+                <li><strong>sequenceMaxHeight</strong> <em>(string)</em> : Define the max-height of the sequence. Default: "400px"
+                </li>
+                <li><strong>badge</strong> <em>(boolean)</em> : Display the badge with sequence length. Default: true
                 </li>
             </ul>
         </div>
@@ -50,7 +59,10 @@ seq1.render('#protein-sequence-viewer', {
   'wrapAminoAcids': true,
   'charsPerLine': 50,
   'toolbar': true,
-  'search': true
+  'search': true,
+  'title' : "Your title",
+  'sequenceMaxHeight': "300px",
+  'badge': true
 });
     </textarea>
         </form>
@@ -58,12 +70,12 @@ seq1.render('#protein-sequence-viewer', {
                 onclick=executeCode("#protein-sequence-viewer2",simpleRender)>Execute
         </button>
     </div>
-    <div id="protein-sequence-viewer" class="col-md-4 col-md-offset-1 col-xs-10 col-xs-offset-1"
+    <div id="protein-sequence-viewer" class="col-md-5 col-xs-10 col-xs-offset-1"
          style="height:250px;vertical-align:top;margin-top:15px;"></div>
 
 </div>
 <div class="row" style="margin-top: 30px;border-bottom:1px solid #E7EAEC;">
-    <div class="panel panel-default col-md-5 col-xs-10 col-md-offset-1 col-xs-offset-1 pull-left">
+    <div class="panel panel-default col-lg-6 col-md-6">
         <div class="row panel-heading">
             <h4 class="text-center">Selection</h4>
         </div>
@@ -83,18 +95,27 @@ seq2.selection(20, 43, 'red');
                 onclick=executeCode("#protein-sequence-viewer2",highlightCode)>Execute
         </button>
     </div>
-    <div id="protein-sequence-viewer2" class="col-md-4 col-md-offset-1 col-xs-10 col-xs-offset-1"
+    <div id="protein-sequence-viewer2" class="col-md-5 col-xs-10 col-xs-offset-1"
          style="height:250px;vertical-align:top;margin-top:15px;"></div>
 </div>
 <div class="row" style="margin-top: 30px;border-bottom:1px solid #E7EAEC;">
-    <div class="panel panel-default col-md-5 col-xs-10 col-md-offset-1 col-xs-offset-1 pull-left">
+    <div class="panel panel-default col-lg-6 col-md-6">
         <div class="row panel-heading">
             <h4 class="text-center">Coverage</h4>
         </div>
         <div class="panel-body">
             <p>A coverage with color codes can be apply to the sequence.<br>
-                For this, you must provide a list, mapping all the sequence with some specific colors and labels. <br>
-                With the coverage, it's also possible to give within the parameters an interval to highlight in the
+                For this, you must provide a list, mapping all the sequence with some specific parameters : <p>
+            <ul>
+                <li><strong>start</strong></li>
+                <li><strong>end</strong></li>
+                <li><strong>color</strong> : text color</li>
+                <li><strong>bgcolor</strong> : background color</li>
+                <li><strong>underscore</strong> : add underline below the chars</li>
+                <li><strong>tooltip</strong> : add tooltip</li>
+                <li><strong>onclick</strong> : add click listener</li>
+            </ul>
+            <p>With the coverage, it's also possible to give within the parameters an interval to highlight in the
                 sequence. <br>
                 An other array will be needed to display the legend of color codes.</p>
         </div>
@@ -104,17 +125,25 @@ seq2.selection(20, 43, 'red');
 var seq3 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
 seq3.render('#protein-sequence-viewer3');
 
+//function called by "onclick"
+var onclickFun = function(e) {
+  console.log("Region clicked");
+}
+
 //Coverage list
 var exempleSequenceCoverage = [
-    {start: 0, end: 25, color: "black", underscore: false},
-    {start: 25, end: 47, color: "#ff0000", underscore: false},
+    {start: 0, end: 25, color: "black", underscore: false, bgcolor: "#ffd891"},
+    {start: 25, end: 47, color: "#ff0000", underscore: false, tooltip: "this is a tooltip"},
     {start: 47, end: 54, color: "#ff0000", underscore: true},
     {start: 54, end: 55, color: "#ff0000", underscore: false},
     {start: 55, end: 56, color: "black", underscore: false},
-    {start: 56, end: 89, color: "#69CC33", underscore: false},
+    {start: 56, end: 89, color: "#69CC33", underscore: false, onclick:onclickFun},
     {start: 89, end: 90, color: "black", underscore: false},
     {start: 90, end: 110, color: "#ff0000", underscore: false}
 ];
+                
+
+                
 seq3.coverage(exempleSequenceCoverage);
 // for coverage + highlight :
 // seq3.coverage(exempleSequenceCoverage, start, end, highlightColor);
@@ -132,14 +161,61 @@ seq3.addLegend(exempleLegend);
                 onclick=executeCode("#protein-sequence-viewer3",coverageCode)>Execute
         </button>
     </div>
-    <div id="protein-sequence-viewer3" class="col-md-4 col-md-offset-1 col-xs-10 col-xs-offset-1"
+    <div id="protein-sequence-viewer3" class="col-md-5 col-xs-10 col-xs-offset-1"
          style="height:250px;vertical-align:top;margin-top:15px;"></div>
 </div>
+<div class="row" style="margin-top: 30px;border-bottom:1px solid #E7EAEC;">
+    <div class="panel panel-default col-lg-6 col-md-6">
+        <div class="row panel-heading">
+            <h4 class="text-center">Events</h4>
+        </div>
+        <div class="panel-body">
+            <p>The sequence-viewer includes two listeners :</p>
+            <ul>
+                <li><strong>onMouseSelection</strong> : When selecting a subpart of the sequence with the mouse.</li>
+                <li><strong>onSubpartSelected</strong> : When a subpart of the sequence is highlighted.</li>
+            </ul>
+            <p>Those methods take a custom function in parameter to connect the sequence-viewer events to the rest of your application.</p>
+        </div>
+        <form>
+            <textarea id="code4" name="code4" style="width:500px;max-height:200px;overflow:auto;font-size:11px;">
+// Display the sequence with coverage and legend
+var seq4 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+seq4.render('#protein-sequence-viewer4', {
+  'charsPerLine': 50,
+  'toolbar': true,
+  'search': true
+});
 
+//Use listener with custom function in parameter.
+//Ex: Get and print the selection in the browser console
+seq4.onMouseSelection(function(elem){
+        console.log(elem.detail);
+    }
+);
+seq4.onSubpartSelected(function(elem){
+        console.log(elem.detail);
+    }
+);
+    </textarea>
+        </form>
+        <button type="button" class="btn btn-default center-block" style="margin-bottom:20px;"
+                onclick=executeCode("#protein-sequence-viewer4",eventsCode)>Execute
+        </button>
+    </div>
+    <div id="protein-sequence-viewer4" class="col-md-5 col-xs-10 col-xs-offset-1"
+         style="height:250px;vertical-align:top;margin-top:15px;"></div>
+</div>
+     </div>
+ <a href="https://github.com/calipho-sib/sequence-viewer"  target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;"
+                                                                                src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67"
+                                                                                alt="Fork me on GitHub"
+                                                                                data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
 <script>
     var simpleRender;
     var highlightCode;
     var coverageCode;
+    var eventsCode;
 
     var executeCode = function (outputDiv, mirrorCode) {
         var code = mirrorCode.getValue();
@@ -163,93 +239,100 @@ seq3.addLegend(exempleLegend);
             lineNumbers: true,
             lineWrapping: true
         });
+        eventsCode = CodeMirror.fromTextArea(code4, {
+            mode: "javascript",
+            lineNumbers: true,
+            lineWrapping: true
+        });
         $(function () {
             executeCode("#protein-sequence-viewer1", simpleRender);
             executeCode("#protein-sequence-viewer2", highlightCode);
             executeCode("#protein-sequence-viewer3", coverageCode);
+            executeCode("#protein-sequence-viewer4", eventsCode);
         });
     };
 </script>
 <script class="example">
 
 
-//    $(function () {
+    //    $(function () {
 
-        // For the example
+    // For the example
 
-        // Classic display of the sequence
-//        var seq1 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
-//        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
-        // You can add some rendering options
-//        seq1.render('#protein-sequence-viewer', {
-//                    'showLineNumbers': true,
-//                    'wrapAminoAcids': true,
-//                    'charsPerLine': 50
-//                }
-//        );
+    // Classic display of the sequence
+    //        var seq1 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+    //        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+    //        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+    //        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+    //        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+    //        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+    //        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+    //        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+    //        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+    //        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+    //        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN' +
+    //        'MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+    // You can add some rendering options
+    //        seq1.render('#protein-sequence-viewer', {
+    //                    'showLineNumbers': true,
+    //                    'wrapAminoAcids': true,
+    //                    'charsPerLine': 50
+    //                }
+    //        );
 
-//        var myCodeMirror = CodeMirror($("#highlightCode")[0], {
-//            value: "var seq2 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEAL" +
-//            "YLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');\n" +
-//            "seq2.render('#protein-sequence-viewer2');\n" +
-//            "seq2.selection(20, 43, 'red');",
-//            mode: "javascript"
-//        });
-
-
-        // Display the sequence with a part highlighted
-//        var seq2 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
-//        seq2.render('#protein-sequence-viewer2');
-//        seq2.selection(20, 43, 'red');
+    //        var myCodeMirror = CodeMirror($("#highlightCode")[0], {
+    //            value: "var seq2 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEAL" +
+    //            "YLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');\n" +
+    //            "seq2.render('#protein-sequence-viewer2');\n" +
+    //            "seq2.selection(20, 43, 'red');",
+    //            mode: "javascript"
+    //        });
 
 
-        // Display the sequence with coverage and legend
-//        var seq3 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
-//        seq3.render('#protein-sequence-viewer3');
-//        //Coverage list
-//        var dataCoverage = [
-//            {start: 0, end: 25, color: "black", underscore: false},
-//            {start: 25, end: 47, color: "#ff0000", underscore: false},
-//            {start: 47, end: 54, color: "#ff0000", underscore: true},
-//            {start: 54, end: 55, color: "#ff0000", underscore: false},
-//            {start: 55, end: 56, color: "black", underscore: false},
-//            {start: 56, end: 89, color: "#69CC33", underscore: false},
-//            {start: 89, end: 90, color: "black", underscore: false},
-//            {start: 90, end: 110, color: "#ff0000", underscore: false}
-//        ];
-//        //IMPORTANT : You need to be sure the the Coverage array is sorted before drawing
-////        ExempleSequenceCoverage.sort(function (a, b) {
-////            return a.start - b.start;
-////        });
-//        seq3.coverage(dataCoverage);
-//        //Legend
-//        var ExempleLegend = [{
-//            name: "Mature Protein",
-//            color: "#ff0000",
-//            underscore: false
-//        }, {name: "Proteotypic peptide", color: "#69CC33", underscore: false}, {
-//            name: "Synthetic peptide",
-//            color: "#fff",
-//            underscore: true
-//        }];
-//        seq3.addLegend(ExempleLegend);
-//
-//
-//    });
+    // Display the sequence with a part highlighted
+    //        var seq2 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+    //        seq2.render('#protein-sequence-viewer2');
+    //        seq2.selection(20, 43, 'red');
+
+
+    // Display the sequence with coverage and legend
+    //        var seq3 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
+    //        seq3.render('#protein-sequence-viewer3');
+    //        //Coverage list
+    //        var dataCoverage = [
+    //            {start: 0, end: 25, color: "black", underscore: false},
+    //            {start: 25, end: 47, color: "#ff0000", underscore: false},
+    //            {start: 47, end: 54, color: "#ff0000", underscore: true},
+    //            {start: 54, end: 55, color: "#ff0000", underscore: false},
+    //            {start: 55, end: 56, color: "black", underscore: false},
+    //            {start: 56, end: 89, color: "#69CC33", underscore: false},
+    //            {start: 89, end: 90, color: "black", underscore: false},
+    //            {start: 90, end: 110, color: "#ff0000", underscore: false}
+    //        ];
+    //        //IMPORTANT : You need to be sure the the Coverage array is sorted before drawing
+    ////        ExempleSequenceCoverage.sort(function (a, b) {
+    ////            return a.start - b.start;
+    ////        });
+    //        seq3.coverage(dataCoverage);
+    //        //Legend
+    //        var ExempleLegend = [{
+    //            name: "Mature Protein",
+    //            color: "#ff0000",
+    //            underscore: false
+    //        }, {name: "Proteotypic peptide", color: "#69CC33", underscore: false}, {
+    //            name: "Synthetic peptide",
+    //            color: "#fff",
+    //            underscore: true
+    //        }];
+    //        seq3.addLegend(ExempleLegend);
+    //
+    //
+    //    });
 
 
 </script>
 
 
 </body>
+
 </html>

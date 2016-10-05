@@ -1,0 +1,74 @@
+<html>
+<head>
+    <title>Simple sequence formatter</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="../dist/sequence-viewer.bundle.js"></script>
+</head>
+
+<body class="container col-md-10 col-xs-12 col-md-offset-1">
+    <p class="pull-right" style="display: inline-block;"><a href="http://www.nextprot.org" alt="neXtProt" style="color:#C50063;">neXtProt &copy;</a></p>
+
+    <h1>Simple Sequence Formatter and Regex Operator</h1>
+    <p>Paste your sequence on the text area</p>
+    <div class="row">
+            <textarea id="sequenceTextArea"   class="form-control" rows="3" style="width:100%;">MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRRKRGIVEQCCTSICSLYQLENYCNMALW</textarea>
+            <button type="button" class="btn btn-primary center-block " style="margin:20px;" onclick=formatCode()>Format</button>
+    </div>
+
+    <div class="row" style="width:100%">
+        <div id="protein-sequence-viewer"></div>
+    </div>
+
+    <script>
+
+        var formatCode = function () {
+
+            console.log($('#sequenceTextArea').val());
+            var seq1 = new Sequence($('#sequenceTextArea').val());
+            // You can add some rendering options
+            seq1.render('#protein-sequence-viewer', {
+                'showLineNumbers': true,
+                'wrapAminoAcids': true,
+                'charsPerLine': 70,
+                'toolbar': true,
+                'search': true,
+                'header' : {
+                    display:true,
+                    searchInTitle :true,
+                    unit: "Char",
+                    showCpl: true,
+                    badgeWithUnit : false
+                }
+            });
+            
+        
+            //Ex: Get and print the selection in the browser console
+            seq1.onMouseSelection(function(elem){
+                    console.log(elem);
+                }
+            );
+                                  //Coverage list
+//            var exempleSequenceCoverage = [
+//                {start: 0, end: 25, color: "black", underscore: false, bgcolor: "#ffd891"},
+//                {start: 25, end: 47, color: "#ff0000", underscore: false, tooltip: "this is a tooltip"},
+//                {start: 47, end: 54, color: "#69CC33", underscore: true},
+//                {start: 54, end: 55, color: "#ff0000", underscore: false}
+//            ];
+//
+//            seq1.coverage(exempleSequenceCoverage);
+
+        };
+
+        window.onload = function () {
+            $(function () {
+                formatCode();
+            });
+        };
+    </script>
+    <script class="example">
+    </script>
+
+
+</body>
+
+</html>

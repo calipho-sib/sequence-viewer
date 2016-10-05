@@ -7,7 +7,7 @@ var seq1 = new Sequence('MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR
 seq1.render('#seqView1', {
     'showLineNumbers': true,
     'wrapAminoAcids': true,
-    'charsPerLine': 50,
+    'charsPerLine': 60,
     'toolbar': true,
     'search': true,
     'title': "Protein Sequence"
@@ -20,7 +20,7 @@ seq1.onSubpartSelected(function(elem){
         console.log(elem.detail);
     }
 );
-//@biojs-instance=ft2
+//@biojs-instance=seq1
 seq1.onAll(function(name,data){
     console.log(arguments);
 });
