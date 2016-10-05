@@ -124,8 +124,8 @@ var Sequence = (function () {
 //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast sequence</a>" +
 //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast selection</a>"
                         '<div class="btn-group" role="group" aria-label="..." style="margin-left:5px;" data-toggle="tooltip" data-placement="top" title="Soon to be implemented">' +
-                          '<a class=\"btn btn-default btn-sm disabled\" style="margin-left:-1px;" href=\"\">Blast sequence</a>' +
-                          '<a class=\"btn btn-default btn-sm disabled\" href=\"\">Blast selection</a>' +
+                          '<a class=\"btn btn-default btn-sm disabled\" style="margin-left:-1px;" href=\"\">BLAST sequence</a>' +
+                          '<a class=\"btn btn-default btn-sm disabled\" href=\"\">BLAST selection</a>' +
                         '</div>'
                     );
                 }
