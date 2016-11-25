@@ -70,7 +70,7 @@ Check out this interactive page for a better understanding of how to use the seq
 
 ## Examples 
 
-[https://search.nextprot.org/entry/NX_P01308/view/proteomics](https://search.nextprot.org/entry/NX_P01308/view/proteomics)
+[https://search.nextprot.org/entry/NX_P01308/structures](https://search.nextprot.org/entry/NX_P01308/structures)
 
 ## Support
 
