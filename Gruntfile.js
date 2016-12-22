@@ -50,7 +50,8 @@ module.exports = function (grunt) {
         connect: {
             server: {
                 options: {
-                    port: 9000,
+                    useAvailablePort: true,
+                    port: '?',
                     livereload: true,
                     base: '.'
                 }
