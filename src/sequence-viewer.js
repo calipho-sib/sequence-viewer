@@ -121,12 +121,8 @@ var Sequence = (function () {
                 if (isoName !== "") {
                     $(divID + " .sequenceToolbar").append(
                         "<a class=\"btn btn-default btn-sm fasta-link\" href=\"http://www.nextprot.org/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" target='_blank'>View FASTA</a>" +
-//                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast sequence</a>" +
-//                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast selection</a>"
-                        '<div class="btn-group" role="group" aria-label="..." style="margin-left:5px;" data-toggle="tooltip" data-placement="top" title="Soon to be implemented">' +
-                          '<a class=\"btn btn-default btn-sm disabled\" style="margin-left:-1px;" href=\"\">BLAST sequence</a>' +
-                          '<a class=\"btn btn-default btn-sm disabled\" href=\"\">BLAST selection</a>' +
-                        '</div>'
+                        "<a class=\"btn btn-default btn-sm\" href=\"/blast/"+isoName+"\" style=\"margin-left:5px;\">Blast sequence</a>" +
+                        "<a id=\"selectionBlast\" class=\"btn btn-default btn-sm\" href=\"/blast/"+isoName+"\" style=\"margin-left:5px;\"> Blast selection</a>"
                     );
                 }
             }
@@ -153,6 +149,7 @@ var Sequence = (function () {
             "</span>" +
             hlSeq.substring(positions[1], hlSeq.length);
             $(divID + " .fastaSeq").html(hlSeq);
+            $("#selectionBlast").attr("href", "/blast/"+isoName+"/"+positions[0]+"/"+positions[1]+"/");
         };
 
         function multiHighlighting(ArrayHL, color, options) {
