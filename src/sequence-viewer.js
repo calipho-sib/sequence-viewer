@@ -66,6 +66,8 @@ var Sequence = (function () {
             sequenceOptions.search = options.search === undefined ? false : options.search;
             sequenceOptions.toolbar = options.toolbar === undefined ? false : options.toolbar;
             sequenceOptions.badge = options.badge === undefined ? true : options.badge;
+            sequenceOptions.fasta = options.fasta === undefined ? true : options.fasta;
+            sequenceOptions.blast = options.blast === undefined ? true : options.blast;
             
             sequenceOptions.header = options.header ? {
                 display : options.header.display === undefined ? true : options.header.display,
@@ -119,15 +121,21 @@ var Sequence = (function () {
                     $(divID + " .sequenceBody").prepend(source);
                 }
                 if (isoName !== "") {
-                    $(divID + " .sequenceToolbar").append(
-                        "<a class=\"btn btn-default btn-sm fasta-link\" href=\"http://www.nextprot.org/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" target='_blank'>View FASTA</a>" +
-//                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast sequence</a>" +
-//                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast selection</a>"
-                        '<div class="btn-group" role="group" aria-label="..." style="margin-left:5px;" data-toggle="tooltip" data-placement="top" title="Soon to be implemented">' +
-                          '<a class=\"btn btn-default btn-sm disabled\" style="margin-left:-1px;" href=\"\">BLAST sequence</a>' +
-                          '<a class=\"btn btn-default btn-sm disabled\" href=\"\">BLAST selection</a>' +
-                        '</div>'
-                    );
+                    if (sequenceOptions.fasta){
+                        $(divID + " .sequenceToolbar").append(
+                            "<a class=\"btn btn-default btn-sm fasta-link\" href=\"http://www.nextprot.org/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" target='_blank'>View FASTA</a>"
+    //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast sequence</a>" +
+    //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast selection</a>"
+    //                        '<div class="btn-group" role="group" aria-label="..." style="margin-left:5px;" data-toggle="tooltip" data-placement="top" title="Soon to be implemented">' +
+    //                          '<a class=\"btn btn-default btn-sm disabled\" style="margin-left:-1px;" href=\"\">BLAST sequence</a>' +
+    //                          '<a class=\"btn btn-default btn-sm disabled\" href=\"\">BLAST selection</a>' +
+    //                        '</div>'
+                        );
+                    }
+                    if (sequenceOptions.blast){
+                        $(divID + " .sequenceToolbar").append("<a class=\"btn btn-default btn-sm\" href=\"/blast/"+isoName+"\" style=\"margin-left:5px;\">Blast sequence</a>" + 
+                      "<a id=\"selectionBlast\" class=\"btn btn-default btn-sm\" href=\"/blast/"+isoName+"\" style=\"margin-left:5px;\"> Blast selection</a>");
+                    }
                 }
             }
             
@@ -153,6 +161,9 @@ var Sequence = (function () {
             "</span>" +
             hlSeq.substring(positions[1], hlSeq.length);
             $(divID + " .fastaSeq").html(hlSeq);
+            if (sequenceOptions.blast) {
+                $("#selectionBlast").attr("href", "/blast/"+isoName+"/"+(start+1)+"/"+end+"/");
+            }
         };
 
         function multiHighlighting(ArrayHL, color, options) {
@@ -399,7 +410,12 @@ var Sequence = (function () {
         function mouseSelectionListener() {
             $(divID + " .fastaSeq").mouseup(function () {
                 var selectedSubpart = getSelectedText();
-                if (selectedSubpart) triggerMouseSelectionEvent(selectedSubpart);
+                if (selectedSubpart) {
+                    triggerMouseSelectionEvent(selectedSubpart);
+                    if (sequenceOptions.blast) {
+                        $("#selectionBlast").attr("href", "/blast/"+isoName+"/"+selectedSubpart.start+"/"+selectedSubpart.end+"/");
+                    }
+                }
             });
         }
 
