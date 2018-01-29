@@ -513,10 +513,6 @@ var Sequence = (function () {
                     "</select>" +
                 "</div>" +
                 "</form>";
-//            var template = Handlebars.compile(source);
-//            var html = template({
-//                "CPL": listOfCharsPerLine
-//            });
             $(divID + " .sequenceBody").prepend(source);
             $(divID + " .CPLChoice").change(function () {
                 changeCharsPerLine(this);
