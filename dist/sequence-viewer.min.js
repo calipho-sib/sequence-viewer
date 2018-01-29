@@ -351,7 +351,7 @@ var Sequence = (function () {
         }
 
         function sequenceSearch() {
-            $(divID + " .inputSearchSeq").keyup(function () {
+            $(divID + " .inputSearchSeq").keyup(debounce(function () {
                 var text = $(this).val();
                 var containsLetter = (/\S/.test(text));
                 if (containsLetter) {
@@ -371,7 +371,7 @@ var Sequence = (function () {
                 else {
                     $(divID + " .fastaSeq").html(seqCustomized);
                 }
-            });
+            }), 250);
         }
 
         function subpartSelection(list) {
