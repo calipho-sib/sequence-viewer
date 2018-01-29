@@ -9550,7 +9550,7 @@ return jQuery;
         }
 
         function sequenceSearch() {
-            $(divID + " .inputSearchSeq").keyup(function () {
+            $(divID + " .inputSearchSeq").keyup(debounce(function () {
                 var text = $(this).val();
                 var containsLetter = (/\S/.test(text));
                 if (containsLetter) {
@@ -9570,7 +9570,7 @@ return jQuery;
                 else {
                     $(divID + " .fastaSeq").html(seqCustomized);
                 }
-            });
+            }), 250);
         }
 
         function subpartSelection(list) {
