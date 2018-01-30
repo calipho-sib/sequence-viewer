@@ -11052,6 +11052,9 @@ module.exports = debounce;
 },{}],6:[function(require,module,exports){
 var Sequence = (function () {
 
+
+    var debounce = require('lodash.debounce');
+
     function Sequence(sequence, isoformName) {
         var self = this;
         this.events = {
@@ -11423,7 +11426,7 @@ var Sequence = (function () {
                 else {
                     $(divID + " .fastaSeq").html(seqCustomized);
                 }
-            }), 250);
+            }, 250));
         }
 
         function subpartSelection(list) {
@@ -11578,7 +11581,7 @@ if ( typeof module === "object" && typeof module.exports === "object" ) {
     module.exports = Sequence;
 }
 
-},{}],"sequence-viewer":[function(require,module,exports){
+},{"lodash.debounce":5}],"sequence-viewer":[function(require,module,exports){
 /*
  * sequence-viewer
  * https://github.com/calipho-sib/sequence-viewer
@@ -11599,10 +11602,9 @@ if ( typeof module === "object" && typeof module.exports === "object" ) {
 //};
 var jQuery = $ = require("jquery");
 
-var debounce = require('lodash.debounce');
-
 var Sequence = require("../src/sequence-viewer.js");
+
 require("biojs-events").mixin(Sequence.prototype);
 module.exports = Sequence;
 
-},{"../src/sequence-viewer.js":6,"biojs-events":3,"jquery":4,"lodash.debounce":5}]},{},[]);
+},{"../src/sequence-viewer.js":6,"biojs-events":3,"jquery":4}]},{},[]);

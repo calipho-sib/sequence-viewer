@@ -29,7 +29,6 @@
   },
   "dependencies": {
     "biojs-events": "x.x.x",
-    "bower": "^1.3.12",
     "grunt-cli": "^0.1.13",
     "jquery": "x.x.x",
     "lodash.debounce": "^4.0.8"

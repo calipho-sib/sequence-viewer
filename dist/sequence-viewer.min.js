@@ -1,5 +1,8 @@
 var Sequence = (function () {
 
+
+    var debounce = require('lodash.debounce');
+
     function Sequence(sequence, isoformName) {
         var self = this;
         this.events = {
@@ -371,7 +374,7 @@ var Sequence = (function () {
                 else {
                     $(divID + " .fastaSeq").html(seqCustomized);
                 }
-            }), 250);
+            }, 250));
         }
 
         function subpartSelection(list) {
