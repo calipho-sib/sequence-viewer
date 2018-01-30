@@ -1,5 +1,8 @@
 var Sequence = (function () {
 
+
+    var debounce = require('lodash.debounce');
+
     function Sequence(sequence, isoformName) {
         var self = this;
         this.events = {
@@ -351,7 +354,7 @@ var Sequence = (function () {
         }
 
         function sequenceSearch() {
-            $(divID + " .inputSearchSeq").keyup(function () {
+            $(divID + " .inputSearchSeq").keyup(debounce(function () {
                 var text = $(this).val();
                 var containsLetter = (/\S/.test(text));
                 if (containsLetter) {
@@ -371,7 +374,7 @@ var Sequence = (function () {
                 else {
                     $(divID + " .fastaSeq").html(seqCustomized);
                 }
-            });
+            }, 250));
         }
 
         function subpartSelection(list) {
@@ -513,10 +516,6 @@ var Sequence = (function () {
                     "</select>" +
                 "</div>" +
                 "</form>";
-//            var template = Handlebars.compile(source);
-//            var html = template({
-//                "CPL": listOfCharsPerLine
-//            });
             $(divID + " .sequenceBody").prepend(source);
             $(divID + " .CPLChoice").change(function () {
                 changeCharsPerLine(this);

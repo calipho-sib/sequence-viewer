@@ -50,7 +50,8 @@ module.exports = function (grunt) {
         connect: {
             server: {
                 options: {
-                    port: 9000,
+                    useAvailablePort: true,
+                    port: '?',
                     livereload: true,
                     base: '.'
                 }
@@ -73,7 +74,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-bump');
     grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-handlebars');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task(s).
