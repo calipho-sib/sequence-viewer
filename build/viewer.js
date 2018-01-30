@@ -1,27 +1,4 @@
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var events = require("backbone-events-standalone");
-
-events.onAll = function(callback,context){
-  this.on("all", callback,context);
-  return this;
-};
-
-// Mixin utility
-events.oldMixin = events.mixin;
-events.mixin = function(proto) {
-  events.oldMixin(proto);
-  // add custom onAll
-  var exports = ['onAll'];
-  for(var i=0; i < exports.length;i++){
-    var name = exports[i];
-    proto[name] = this[name];
-  }
-  return proto;
-};
-
-module.exports = events;
-
-},{"backbone-events-standalone":3}],2:[function(require,module,exports){
 /**
  * Standalone extraction of Backbone.Events, no external dependency required.
  * Degrades nicely when Backone/underscore are already available in the current
@@ -299,10 +276,33 @@ module.exports = events;
   }
 })(this);
 
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 module.exports = require('./backbone-events-standalone');
 
-},{"./backbone-events-standalone":2}],4:[function(require,module,exports){
+},{"./backbone-events-standalone":1}],3:[function(require,module,exports){
+var events = require("backbone-events-standalone");
+
+events.onAll = function(callback,context){
+  this.on("all", callback,context);
+  return this;
+};
+
+// Mixin utility
+events.oldMixin = events.mixin;
+events.mixin = function(proto) {
+  events.oldMixin(proto);
+  // add custom onAll
+  var exports = ['onAll'];
+  for(var i=0; i < exports.length;i++){
+    var name = exports[i];
+    proto[name] = this[name];
+  }
+  return proto;
+};
+
+module.exports = events;
+
+},{"backbone-events-standalone":2}],4:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -11605,8 +11605,4 @@ var Sequence = require("../src/sequence-viewer.js");
 require("biojs-events").mixin(Sequence.prototype);
 module.exports = Sequence;
 
-<<<<<<< HEAD
 },{"../src/sequence-viewer.js":6,"biojs-events":3,"jquery":4,"lodash.debounce":5}]},{},[]);
-=======
-},{"../src/sequence-viewer.js":5,"biojs-events":1,"jquery":4}]},{},[]);
->>>>>>> vISSUE-12
