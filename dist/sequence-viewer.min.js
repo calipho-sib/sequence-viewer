@@ -370,6 +370,7 @@ var Sequence = (function () {
                 }
                 else {
                     $(divID + " .fastaSeq").html(seqCustomized);
+                    triggerSequenceSelectedEvent([]);
                 }
             }), 250);
         }
