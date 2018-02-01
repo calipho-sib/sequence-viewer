@@ -9583,6 +9583,7 @@ return jQuery;
                 }
                 else {
                     $(divID + " .fastaSeq").html(seqCustomized);
+                    triggerSequenceSelectedEvent([]);
                 }
             }, 250));
         }
