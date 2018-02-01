@@ -17,7 +17,6 @@ chai.expect();
 chai.should();
 
 // requires your main app (specified in index.js)
-Handlebars = require("handlebars");
 var Sequence = require('../src/sequence-viewer.js');
 
 // Create mock document object

@@ -47,7 +47,7 @@ seq.render('#sequence-viewer');
 ![Sequence viewer2](/assets/sequence-viewer-simple.png)
 
 
-Note: if you choose the later approach with only the main javascript you should also include the dependencies, jquery,handlebars and bootstrap.min.css
+Note: if you choose the later approach with only the main javascript you should also include the dependencies, jquery and bootstrap.min.css
 
 ## Documentation
 
