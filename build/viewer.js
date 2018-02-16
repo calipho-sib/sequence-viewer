@@ -13899,6 +13899,7 @@ var Sequence = (function () {
             sequenceOptions.toolbar = options.toolbar === undefined ? false : options.toolbar;
             sequenceOptions.badge = options.badge === undefined ? true : options.badge;
             sequenceOptions.fasta = options.fasta === undefined ? true : options.fasta;
+            sequenceOptions.apiURL = options.apiURL === undefined ? true : options.apiURL;
             sequenceOptions.blast = options.blast === undefined ? true : options.blast;
             
             sequenceOptions.header = options.header ? {
@@ -13954,8 +13955,8 @@ var Sequence = (function () {
                 }
                 if (isoName !== "") {
                     if (sequenceOptions.fasta){
-                        var apiURL = "https://www.nextprot.org/";
-                        if(!sequenceOptions.fasta.apiURL) {
+                        var apiURL = "https://www.nextprot.org";
+                        if(sequenceOptions.fasta.apiURL) {
                             apiURL = sequenceOptions.fasta.apiURL;
                         }
                         $(divID + " .sequenceToolbar").append(
