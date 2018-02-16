@@ -124,8 +124,8 @@ var Sequence = (function () {
                 if (isoName !== "") {
                     if (sequenceOptions.fasta){
                         var apiURL = "https://www.nextprot.org";
-                        if(sequenceOptions.fasta.apiURL) {
-                            apiURL = sequenceOptions.fasta.apiURL;
+                        if(sequenceOptions.apiURL) {
+                            apiURL = sequenceOptions.apiURL;
                         }
                         $(divID + " .sequenceToolbar").append(
                             // TODO: should point to prod instead of alpha once this service is available !
