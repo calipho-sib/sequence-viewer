@@ -122,10 +122,14 @@ var Sequence = (function () {
                 }
                 if (isoName !== "") {
                     if (sequenceOptions.fasta){
+                        var apiURL = "https://www.nextprot.org/";
+                        if(sequenceOptions.fasta.apiURL) {
+                            apiURL = sequenceOptions.fasta.apiURL;
+                        }
                         $(divID + " .sequenceToolbar").append(
                             // TODO: should point to prod instead of alpha once this service is available !
                             //"<a class=\"btn btn-default btn-sm fasta-link\" href=\"https://api.nextprot.org/isoform/" + isoName + ".fasta target='_blank'>View FASTA</a>" +
-                            "<a class=\"btn btn-default btn-sm fasta-link\" href=\"http://alpha-api.nextprot.org/isoform/" + isoName + ".fasta target='_blank'>View FASTA</a>"
+                            "<a class=\"btn btn-default btn-sm fasta-link\" href=\""+ apiURL +"/isoform/" + isoName + ".fasta\" target='_blank'>View FASTA</a>"
     //                        "<a class=\"btn btn-default btn-sm fasta-link\" href=\"http://www.nextprot.org/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" target='_blank'>View FASTA</a>"
     //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast sequence</a>" +
     //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast selection</a>"
