@@ -69,6 +69,7 @@ var Sequence = (function () {
             sequenceOptions.fasta = options.fasta === undefined ? true : options.fasta;
             sequenceOptions.apiURL = options.apiURL === undefined ? true : options.apiURL;
             sequenceOptions.blast = options.blast === undefined ? true : options.blast;
+            sequenceOptions.digestion = options.digestion === undefined ? true : options.digestion;
             
             sequenceOptions.header = options.header ? {
                 display : options.header.display === undefined ? true : options.header.display,
@@ -143,6 +144,12 @@ var Sequence = (function () {
                     if (sequenceOptions.blast){
                         $(divID + " .sequenceToolbar").append("<a class=\"btn btn-default btn-sm\" href=\"/blast/"+isoName+"\" style=\"margin-left:5px;\">Blast sequence</a>" + 
                       "<a id=\"selectionBlast\" class=\"btn btn-default btn-sm\" href=\"/blast/"+isoName+"\" style=\"margin-left:5px;\"> Blast selection</a>");
+                    }
+
+                    // Protein Digestion button
+                    if(sequenceOptions.digestion) {
+                        $(divID + " .sequenceToolbar").append("<a class=\"btn btn-default btn-sm\" href=\"/blast/"+isoName+"\" style=\"margin-left:5px;\"> Protein Digestion </a>" +
+                            "<a id=\"selectionBlast\" class=\"btn btn-default btn-sm\" href=\"/blast/"+isoName+"\" style=\"margin-left:5px;\"> Protein selection</a>");
                     }
                 }
             }
