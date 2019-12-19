@@ -69,7 +69,7 @@ var Sequence = (function () {
             sequenceOptions.fasta = options.fasta === undefined ? true : options.fasta;
             sequenceOptions.apiURL = options.apiURL === undefined ? true : options.apiURL;
             sequenceOptions.blast = options.blast === undefined ? true : options.blast;
-            sequenceOptions.digestion = options.digestion === undefined ? true : options.digestion;
+            sequenceOptions.digestion = options.digestion === undefined ? false : options.digestion;
             
             sequenceOptions.header = options.header ? {
                 display : options.header.display === undefined ? true : options.header.display,
