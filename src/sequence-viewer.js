@@ -259,7 +259,7 @@ var Sequence = (function () {
         }
 
         this.coverage = function (HashAA, start, end, highlightColor) {
-            seqCoverage.data = jQuery.extend(true, [], HashAA);
+            seqCoverage.data = jquery.extend(true, [], HashAA);
             seqCoverage.start = start;
             seqCoverage.end = end;
             seqCoverage.hlColor = highlightColor;
