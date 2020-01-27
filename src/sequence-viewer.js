@@ -3,7 +3,6 @@ let root = null;
 const $ = function(selector){
   return jquery(root).find(selector);
 }
-
 var Sequence = (function () {
 
     function Sequence(sequence, isoformName) {
@@ -18,10 +17,17 @@ var Sequence = (function () {
         console.log(isoName);
         var sequence = sequence;
         var seqInit = "";
-        var lineJump = 0;
+        var seqCustomized = "";
+        var seqCoverage = {
+            data : [],
+            start : null,
+            end : null,
+            hlColor : null
+        }
+//        var lineJump = 0;
         var title;
         var divID;
-        var sequenceOptions;
+        var sequenceOptions = {};
         var el;
         var seqHeight;
         var showBadge;
@@ -31,77 +37,133 @@ var Sequence = (function () {
             if (typeof divId !== 'string') {
                throw new Error("Div identifier must be a string");
             }
-            if(root === null){
-             root = document;
-            }
             divID = divId;
-            console.log(document);
+	    if(root===null){
+	        root = document;
+	    }
             el = document.getElementById(divId.substring(1));
             if (el === null) {
               throw new Error("Cannot find element with id: " + divId.substring(1));
             }
-            if (typeof options === 'undefined') {
-                var options = {
-                    'showLineNumbers': true,
-                    'wrapAminoAcids': true,
-                    'charsPerLine': 30,
-                    'search': false,
-                    'toolbar': false,
-                    'title': "Protein Sequence",
-                    'sequenceMaxHeight': "400px",
-                    'badge': true
-                }
-            }
-            else sequenceOptions = options;
-
-            (typeof options.charsPerLine === 'undefined') ? lineJump = 30 : lineJump = options.charsPerLine;
-            (typeof options.title === 'undefined') ? title = "Protein Sequence" : title = options.title;
-            (typeof options.sequenceMaxHeight === 'undefined') ? seqHeight = "400px" : seqHeight = options.sequenceMaxHeight;
-            (typeof options.badge === 'undefined') ? showBadge = true : showBadge = options.badge;
+//            if (typeof options === 'undefined') {
+//                var options = {
+//                    'showLineNumbers': true,
+//                    'wrapAminoAcids': true,
+//                    'charsPerLine': 30,
+//                    'search': false,
+//                    'toolbar': false,
+//                    'title': "Protein Sequence",
+//                    'sequenceMaxHeight': "400px",
+//                    'badge': true
+//                     'header' : {
+//                         display: true or false,
+//                         searchInTitle : true or false
+//                     }
+//                }
+//            }
+//            
+//            else sequenceOptions = options;
+            if (!options) options = {};
+            
+            
+            sequenceOptions.showLineNumbers = options.showLineNumbers === undefined ? true : options.showLineNumbers;
+            sequenceOptions.wrapAminoAcids = options.wrapAminoAcids === undefined ? true : options.wrapAminoAcids;
+            sequenceOptions.sequenceMaxHeight = options.sequenceMaxHeight === undefined ? "400px" : options.sequenceMaxHeight;
+            sequenceOptions.title = options.title === undefined ? "Protein Sequence" : options.title;
+            sequenceOptions.charsPerLine = options.charsPerLine === undefined ? 30 : options.charsPerLine;
+            sequenceOptions.search = options.search === undefined ? false : options.search;
+            sequenceOptions.toolbar = options.toolbar === undefined ? false : options.toolbar;
+            sequenceOptions.badge = options.badge === undefined ? true : options.badge;
+            sequenceOptions.fasta = options.fasta === undefined ? true : options.fasta;
+            sequenceOptions.apiURL = options.apiURL === undefined ? true : options.apiURL;
+            sequenceOptions.blast = options.blast === undefined ? true : options.blast;
+            sequenceOptions.digestion = options.digestion === undefined ? false : options.digestion;
+            
+            sequenceOptions.header = options.header ? {
+                display : options.header.display === undefined ? true : options.header.display,
+                searchInTitle : options.header.searchInTitle === undefined ? true : options.header.searchInTitle,
+                unit : options.header.unit === undefined ? "Char" : options.header.unit,
+                showCpl : options.header.showCpl === undefined ? true : options.header.showCpl,
+                badgeWithUnit : options.header.badgeWithUnit === undefined ? false : options.header.badgeWithUnit
+            } : {display : true, searchInTitle : true, unit : "Char", showCpl: true, badgeWithUnit: false};
 
 
             var badge = "<div style=\"display:inline-block;\">" +
-                "<span class=\"badge\" style=\"border-radius:70%;border: 2px solid black;color:#C50063;padding:8px 5px;background-color:white;margin-right:10px;vertical-align:middle;\">{{sequenceLength}}</span>" +
+                "<span class=\"badge\" style=\"border-radius:70%;border: 2px solid black;color:#C50063;padding:8px 5px;background-color:white;margin-right:10px;vertical-align:middle;min-width:32px;\">" + sequence.length + "</span>" +
+                "</div>";
+            
+            var badgeWithUnit = "<div style=\"display:inline-block;\">" +
+                "<span class=\"badge\" style=\"border-radius:70%;border: 2px solid black;color:#C50063;padding:5px 5px;background-color:white;margin-right:10px;vertical-align:middle;min-width:32px;font-size:11px;\">" + sequence.length + "<div style='margin-top:-2px;font-size:9px;color:black;text-transform:lowercase;'>" + sequenceOptions.header.unit + "</div></span>" +
                 "</div>";
 
-            var displayBadge = showBadge ? badge : "";
+            var displayBadge = sequenceOptions.badge ? sequenceOptions.header.badgeWithUnit ? badgeWithUnit : badge : "";
+            
+            var header = sequenceOptions.header.display ? "<div class=\"sequenceHeader row\" style=\"border-bottom: 1px solid #E7EAEC;padding-bottom:5px;margin:0px 0px 10px\">" +
+                displayBadge + "<h4 style=\"display:inline-block;vertical-align:middle;\">" + sequenceOptions.title + "</h4>" +
+                "</div>" : "";
 
-            var sources = "<div class=\"sequenceHeader row\" style=\"border-bottom: 1px solid #E7EAEC;padding-bottom:5px;margin:0px 0px 15px\">" +
-                displayBadge + "<h4 style=\"display:inline-block;vertical-align:middle;\">" + title + "</h4>" +
-                "</div>" +
+            var sources = header +
                 "<div class=\"sequenceBody\" style=\"margin-top: 5px;\">" +
-                "<div class=\"scroller\" style=\"max-height:" + seqHeight + ";overflow:auto;white-space: nowrap;padding-right:20px;margin-right:10px;s\">" +
+                "<div class=\"scroller\" style=\"max-height:" + sequenceOptions.sequenceMaxHeight + ";overflow:auto;white-space: nowrap;padding-right:20px;margin-right:10px;\">" +
                 "<div class=\"charNumbers\" style=\"font-family: monospace;font-size: 13px;display:inline-block;text-align:right; padding-right:5px; border-right:1px solid LightGray;\"></div>" +
-                "<div id='teste' class=\"fastaSeq\" display-option=\"" + lineJump + "\" style=\"font-family: monospace;font-size: 13px;display:inline-block;padding:5px;\">{{{sequence}}}</div></div>" +
+                "<div class=\"fastaSeq\" display-option=\"" + sequenceOptions.charsPerLine + "\" style=\"font-family: monospace;font-size: 13px;display:inline-block;padding:5px;\">" + sequence + "</div></div>" +
                 "<div class=\"coverageLegend\" style=\"margin-top: 10px;margin-left:15px;\"></div>" +
                 "</div>";
 
-            var template = Handlebars.compile(sources);
-            var html = template({
-                "sequence": sequence,
-                "sequenceLength": sequence.length
-            });
-            $(divId).html(html);
+            $(divId).html(sources);
 	
-            if (!(options.wrapAminoAcids === false)) {
+            if (sequenceOptions.wrapAminoAcids) {
                 sequenceLayout(divId + " .fastaSeq");
             }
             else $(divId + " .scroller").css("overflow-x", "auto");
-            if (!(options.showLineNumbers === false))
+            
+            if (sequenceOptions.showLineNumbers)
                 lineNumbers(divId + " .fastaSeq", divId + " .charNumbers");
 
-            if (options.search) {
-                addSequenceSearch();
-            }
-            if (options.toolbar) {
-                addToolbar();
-                if (isoName !== "") {
-                    $(".sequenceToolbar").append(
-                        "<a class=\"btn btn-default\" href=\"http://www.nextprot.org/db/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" style=\"margin-left:15px;\">view Fasta</a>" +
-                        "<a class=\"btn btn-default disabled\" href=\"\" style=\"margin-left:15px;\">Blast sequence</a>" +
-                        "<a class=\"btn btn-default disabled\" href=\"\" style=\"margin-left:15px;\">Blast selection</a>"
-                    );
+            if (sequenceOptions.toolbar) {
+                if (sequenceOptions.header.showCpl){
+                    addToolbar();
                 }
+                else {
+                    var source = "<form class=\"form-inline\" style=\"margin-bottom:5px;\">" +
+                    "<div class=\"form-group form-group-sm sequenceToolbar\" style=\"\"> "+
+                        "</div></form>";
+                    $(divID + " .sequenceBody").prepend(source);
+                }
+                if (isoName !== "") {
+                    if (sequenceOptions.fasta){
+                        var apiURL = "https://www.nextprot.org";
+                        if(sequenceOptions.apiURL) {
+                            apiURL = sequenceOptions.apiURL;
+                        }
+                        $(divID + " .sequenceToolbar").append(
+                            // TODO: should point to prod instead of alpha once this service is available !
+                            //"<a class=\"btn btn-default btn-sm fasta-link\" href=\"https://api.nextprot.org/isoform/" + isoName + ".fasta target='_blank'>View FASTA</a>" +
+                            "<a class=\"btn btn-default btn-sm fasta-link\" href=\""+ apiURL +"/isoform/" + isoName + ".fasta\" target='_blank'>View FASTA</a>"
+    //                        "<a class=\"btn btn-default btn-sm fasta-link\" href=\"http://www.nextprot.org/entry/" + isoName.split("-")[0] + "/fasta?isoform=" + isoName.slice(3) + "\" target='_blank'>View FASTA</a>"
+    //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast sequence</a>" +
+    //                        "<a class=\"btn btn-default btn-sm disabled\" href=\"\" style=\"margin-left:5px;\">Blast selection</a>"
+    //                        '<div class="btn-group" role="group" aria-label="..." style="margin-left:5px;" data-toggle="tooltip" data-placement="top" title="Soon to be implemented">' +
+    //                          '<a class=\"btn btn-default btn-sm disabled\" style="margin-left:-1px;" href=\"\">BLAST sequence</a>' +
+    //                          '<a class=\"btn btn-default btn-sm disabled\" href=\"\">BLAST selection</a>' +
+    //                        '</div>'
+                        );
+                    }
+                    if (sequenceOptions.blast){
+                        $(divID + " .sequenceToolbar").append("<a class=\"btn btn-default btn-sm\" href=\"/blast/"+isoName+"\" style=\"margin-left:5px;\">Blast sequence</a>" + 
+                      "<a id=\"selectionBlast\" class=\"btn btn-default btn-sm\" href=\"/blast/"+isoName+"\" style=\"margin-left:5px;\"> Blast selection</a>");
+                    }
+
+                    // Protein Digestion button
+                    if(sequenceOptions.digestion) {
+                        $(divID + " .sequenceToolbar").append("<a class=\"btn btn-default btn-sm\" href=\"/tools/protein-digestion/"+isoName+"\" style=\"margin-left:5px;\"> Protein Digestion </a>");
+                    }
+                }
+            }
+            
+            if (sequenceOptions.search) {
+                var inHeader = sequenceOptions.header.searchInTitle;
+                addSequenceSearch(inHeader);
             }
 
             seqInit = $(divId + " .fastaSeq").html();
@@ -112,8 +174,8 @@ var Sequence = (function () {
             var positions = [start, end];
             var hlSeq = seqInit;
             subpartSelection([{start:start,end:end}]);
-            positions[0] = positions[0] + ~~(positions[0] / 10) + 4 * (~~(positions[0] / lineJump));
-            positions[1] = positions[1] + ~~(positions[1] / 10) + 4 * (~~(positions[1] / lineJump));
+            positions[0] = positions[0] + ~~(positions[0] / 10) + 4 * (~~(positions[0] / sequenceOptions.charsPerLine));
+            positions[1] = positions[1] + ~~(positions[1] / 10) + 4 * (~~(positions[1] / sequenceOptions.charsPerLine));
             var highlightColor = color;
             hlSeq = hlSeq.substring(0, positions[0]) +
             "<span class='stringSelected' style=\"background:" + color + ";color:white;\">" +
@@ -121,6 +183,9 @@ var Sequence = (function () {
             "</span>" +
             hlSeq.substring(positions[1], hlSeq.length);
             $(divID + " .fastaSeq").html(hlSeq);
+            if (sequenceOptions.blast) {
+                $("#selectionBlast").attr("href", "/blast/"+isoName+"/"+(start+1)+"/"+end+"/");
+            }
         };
 
         function multiHighlighting(ArrayHL, color, options) {
@@ -156,7 +221,7 @@ var Sequence = (function () {
         };
 
         function jTranslation(i) {
-            var j = i + ~~(i / 10) + 4 * (~~(i / lineJump));
+            var j = i + ~~(i / 10) + 4 * (~~(i / sequenceOptions.charsPerLine));
             return j;
         }
         function fillGap(list) {
@@ -194,11 +259,15 @@ var Sequence = (function () {
         }
 
         this.coverage = function (HashAA, start, end, highlightColor) {
+            seqCoverage.data = jQuery.extend(true, [], HashAA);
+            seqCoverage.start = start;
+            seqCoverage.end = end;
+            seqCoverage.hlColor = highlightColor;
+            
             HashAA.sort(function (a, b) {
                 return a.start - b.start;
             });
             HashAA=fillGap(HashAA);
-            console.log(HashAA);
             var timestart = new Date().getTime();
             if (!start) var start = 0;
             if (!end) var end = 0;
@@ -256,6 +325,7 @@ var Sequence = (function () {
             }
             var fastaDiv = $(divID + " .fastaSeq");
             fastaDiv.html(source);
+            seqCustomized = source;
 
             //and now (after we created dom objects) we can assign onclick events
             var onclickObjects = $("[onclick]",fastaDiv);
@@ -282,17 +352,22 @@ var Sequence = (function () {
         };
 
         function sequenceLayout(textAreaID) {
-
             var newLines = parseInt($(textAreaID).attr("display-option"));
             newLines = (newLines + (newLines / 10)).toString();
             var seqFormat = $(textAreaID).html();
             seqFormat = seqFormat.toString().match(/.{1,10}/g).join(' ').match(new RegExp('.{1,' + newLines + '}', 'g')).join('<br>');
-
+            
+            seqCustomized = seqFormat;
             $(textAreaID).html(seqFormat);
         }
 
-        function addSequenceSearch() {
-            $(divID + " .sequenceHeader").append('<input class=\"inputSearchSeq form-control pull-right\" type=\"text\" style=\"width:40%;margin-top:3px;\" placeholder=\"Search in sequence.. (Regex supported)\">');
+        function addSequenceSearch(inHeader) {
+            if (inHeader){
+                $(divID + " .sequenceHeader").append('<input class=\"inputSearchSeq form-control pull-right\" type=\"text\" style=\"width:40%;margin-top: 3px;\" placeholder=\"Search in sequence.. (Regex supported)\">');
+            }
+            else{
+                $(divID + " .sequenceBody").prepend('<input class=\"inputSearchSeq form-control\" type=\"text\" style=\"width:100%;margin:3px auto 10px;\" placeholder=\"Search in sequence.. (Regex supported)\">');
+            }
             sequenceSearch();
 
         }
@@ -300,7 +375,9 @@ var Sequence = (function () {
         function sequenceSearch() {
             $(divID + " .inputSearchSeq").keyup(function () {
                 var text = $(this).val();
-                if (text !== "") {
+                var containsLetter = (/\S/.test(text));
+                if (containsLetter) {
+//                if (text !== "") {
                     var text2 = new RegExp(text, "gi");
                     var match;
                     var matches = [];
@@ -314,7 +391,7 @@ var Sequence = (function () {
                     multiHighlighting(matches, "#C50063");
                 }
                 else {
-                    $(divID + " .fastaSeq").html(seqInit);
+                    $(divID + " .fastaSeq").html(seqCustomized);
                 }
             });
         }
@@ -355,7 +432,12 @@ var Sequence = (function () {
         function mouseSelectionListener() {
             $(divID + " .fastaSeq").mouseup(function () {
                 var selectedSubpart = getSelectedText();
-                if (selectedSubpart) triggerMouseSelectionEvent(selectedSubpart);
+                if (selectedSubpart) {
+                    triggerMouseSelectionEvent(selectedSubpart);
+                    if (sequenceOptions.blast) {
+                        $("#selectionBlast").attr("href", "/blast/"+isoName+"/"+selectedSubpart.start+"/"+selectedSubpart.end+"/");
+                    }
+                }
             });
         }
 
@@ -412,29 +494,52 @@ var Sequence = (function () {
         }
 
         function changeCharsPerLine(selection) {
-            var options = sequenceOptions;
-            options.charsPerLine = selection.value;
-            self.render(divID,root, options);
+            sequenceOptions.charsPerLine = selection.value;
+            self.render(divID, root , sequenceOptions);
+            if (seqCoverage.data.length){
+                self.coverage(seqCoverage.data, seqCoverage.start, seqCoverage.end, seqCoverage.hlColor);
+            }
         }
 
         function addToolbar() {
             var listOfCharsPerLine = ["50", "60", "70", "80", "90", "100"];
-            var source = "<form class=\"form-inline\" role=\"form\">" +
-                "<div class=\"sequenceToolbar row\" style=\"margin-bottom:15px;\">" +
-                "<div class=\"input-group\" style=\"margin-left:20px;\"> <span class=\"input-group-addon\">Char per line</i></span>" +
-
-                "<select class=\"CPLChoice form-control\" style=\"border-top-left-radius: 0px;border-bottom-left-radius: 0px;\">" +
-                "<option>Select</option>" +
-                "{{#each CPL}}<option value={{this}}>{{this}}</option>{{/each}}" +
-                "</select>" +
-                "</div>" +
+//            var source = "<form class=\"form-inline\" role=\"form\">" +
+//                "<div class=\"sequenceToolbar row\" style=\"margin-bottom:15px;\">" +
+//                "<div class=\"input-group input-group-sm\" style=\"margin-left:20px;\"> <span class=\"input-group-addon charPerLine-label\">Char per line</i></span>" +
+//
+//                "<select class=\"CPLChoice form-control\" style=\"border-top-left-radius: 0px;border-bottom-left-radius: 0px;\">" +
+//                "<option>Select</option>" +
+//                "<option value=50>50</option>" +
+//                "<option value=60>60</option>" +
+//                "<option value=70>70</option>" +
+//                "<option value=80>80</option>" +
+//                "<option value=90>90</option>" +
+//                "<option value=100>100</option>" +
+//                "</select>" +
+//                "</div>" +
+//                "</div>" +
+//                "</form>";         
+            var hidexsCharPerLine = isoName ? "hidden-xs" : "";
+            var source = "<form class=\"form-inline\" style=\"margin-bottom:5px;\">" +
+//                "<div class=\"sequenceToolbar row\" style=\"margin-bottom:15px;\">" +
+                "<div class=\"form-group form-group-sm sequenceToolbar\" style=\"\"> "+
+                    "<label class=\"control-label charPerLine-label " + hidexsCharPerLine + "\" for='"+ divID.substring(1) +"-cpl' style='margin-right:5px;'>" + sequenceOptions.header.unit + " per line</label>" +
+                    "<select class=\"CPLChoice form-control " + hidexsCharPerLine + "\" id='"+ divID.substring(1) +"-cpl' style='display:inline-block;width:auto;margin-right:10px;'>" +
+                        "<option>Select</option>" +
+                        "<option value=50>50</option>" +
+                        "<option value=60>60</option>" +
+                        "<option value=70>70</option>" +
+                        "<option value=80>80</option>" +
+                        "<option value=90>90</option>" +
+                        "<option value=100>100</option>" +
+                    "</select>" +
                 "</div>" +
                 "</form>";
-            var template = Handlebars.compile(source);
-            var html = template({
-                "CPL": listOfCharsPerLine
-            });
-            $(divID + " .sequenceBody").prepend(html);
+//            var template = Handlebars.compile(source);
+//            var html = template({
+//                "CPL": listOfCharsPerLine
+//            });
+            $(divID + " .sequenceBody").prepend(source);
             $(divID + " .CPLChoice").change(function () {
                 changeCharsPerLine(this);
                 $(divID + " .CPLChoice" + " option:selected").text($(this).val());
