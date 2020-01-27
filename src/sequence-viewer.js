@@ -148,7 +148,7 @@ var Sequence = (function () {
 
                     // Protein Digestion button
                     if(sequenceOptions.digestion) {
-                        $(divID + " .sequenceToolbar").append("<a class=\"btn btn-default btn-sm\" href=\"/tools/protein-digestion/"+isoName+"\" style=\"margin-left:5px;\"> Protein Digestion </a>");
+                        $(divID + " .sequenceToolbar").append("<a class=\"btn btn-default btn-sm\" href=\"/tools/protein-digestion/"+isoName+"\" style=\"margin-left:5px;\"> Digest </a>");
                     }
                 }
             }
