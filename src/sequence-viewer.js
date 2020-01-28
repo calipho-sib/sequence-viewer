@@ -33,8 +33,8 @@ var Sequence = (function () {
                throw new Error("Div identifier must be a string");
             }
             divID = divId;
-            el = document.getElementById(divId.substring(1));
-            if (el === null) {
+            el = $(divId);
+            if (!el.length) {
               throw new Error("Cannot find element with id: " + divId.substring(1));
             }
 //            if (typeof options === 'undefined') {
