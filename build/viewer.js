@@ -14432,7 +14432,8 @@ var Sequence = (function () {
 
         function sequenceSearch() {
             $(divID + " .inputSearchSeq").keyup(function () {
-                var text = $(this).val();
+                // We should remove whitespaces in the string, otherwise it does not match the sequence
+                var text = $(this).val().replace('/\s/g', '');
                 var containsLetter = (/\S/.test(text));
                 if (containsLetter) {
 //                if (text !== "") {
