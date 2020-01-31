@@ -14433,7 +14433,7 @@ var Sequence = (function () {
         function sequenceSearch() {
             $(divID + " .inputSearchSeq").keyup(function () {
                 // We should remove whitespaces in the string, otherwise it does not match the sequence
-                var text = $(this).val().replace('/\s/g', '');
+                var text = $(this).val().replace(/\s/g, '');
                 var containsLetter = (/\S/.test(text));
                 if (containsLetter) {
 //                if (text !== "") {
@@ -14448,6 +14448,10 @@ var Sequence = (function () {
                     });
                     subpartSelection(matches);
                     multiHighlighting(matches, "#C50063");
+                    // sets the URL for blast selection
+                    if (matches) {
+                        $("#selectionBlast").attr("href", "/blast/"+isoName+"/"+matches[0].start+"/"+matches[0].end+"/");
+                    }
                 }
                 else {
                     $(divID + " .fastaSeq").html(seqCustomized);
@@ -14491,8 +14495,9 @@ var Sequence = (function () {
         function mouseSelectionListener() {
             $(divID + " .fastaSeq").mouseup(function () {
                 var selectedSubpart = getSelectedText();
-                if (selectedSubpart) {
+                if (selectedSubpart && selectedSubpart.start <= selectedSubpart.end) {
                     triggerMouseSelectionEvent(selectedSubpart);
+                    multiHighlighting([{start: selectedSubpart.start - 1, end: selectedSubpart.end}], "#C50063");
                     if (sequenceOptions.blast) {
                         $("#selectionBlast").attr("href", "/blast/"+isoName+"/"+selectedSubpart.start+"/"+selectedSubpart.end+"/");
                     }
