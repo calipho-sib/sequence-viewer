@@ -1,7 +1,7 @@
-const jquery = require('jquery');
-let root = null; 
+const jQuery = require('jquery');
+let root = null;
 const $ = function(selector){
-  return jquery(root).find(selector);
+  return jQuery(root).find(selector);
 }
 var Sequence = (function () {
 
@@ -259,7 +259,7 @@ var Sequence = (function () {
         }
 
         this.coverage = function (HashAA, start, end, highlightColor) {
-            seqCoverage.data = jquery.extend(true, [], HashAA);
+            seqCoverage.data = jQuery.extend(true, [], HashAA);
             seqCoverage.start = start;
             seqCoverage.end = end;
             seqCoverage.hlColor = highlightColor;
