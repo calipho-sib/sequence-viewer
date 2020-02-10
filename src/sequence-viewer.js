@@ -453,7 +453,7 @@ var Sequence = (function () {
         function getSelectedText() {
             var text = window.getSelection().toString().replace(/\s+/g, '');
             var selection = root.getSelection();
-            var element = root.querySelector(`${divID} .fastaSeq`);
+            var element = $(divID + " .fastaSeq")[0];
             var caretOffset = 0;
             var seqText = $(divID + " .fastaSeq").text();
             
