@@ -1,7 +1,7 @@
-const jquery = require('jquery');
-let root = null; 
+const jQuery = require('jquery');
+let root = null;
 const $ = function(selector){
-  return jquery(root).find(selector);
+  return jQuery(root).find(selector);
 }
 var Sequence = (function () {
 
@@ -259,7 +259,7 @@ var Sequence = (function () {
         }
 
         this.coverage = function (HashAA, start, end, highlightColor) {
-            seqCoverage.data = jquery.extend(true, [], HashAA);
+            seqCoverage.data = jQuery.extend(true, [], HashAA);
             seqCoverage.start = start;
             seqCoverage.end = end;
             seqCoverage.hlColor = highlightColor;
@@ -452,7 +452,7 @@ var Sequence = (function () {
 
         function getSelectedText() {
             var text = window.getSelection().toString().replace(/\s+/g, '');
-            var selection = window.getSelection();
+            var selection = root.getSelection();
             var element = $(divID + " .fastaSeq")[0];
             var caretOffset = 0;
             var seqText = $(divID + " .fastaSeq").text();
