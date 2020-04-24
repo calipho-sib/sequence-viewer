@@ -233,7 +233,7 @@ var Sequence = (function () {
       }
 
       seqInit = $(divId + " .fastaSeq").html();
-      mouseSelectionListener();
+      mouseSelectionListener(document);
     };
 
     this.selection = function (start, end, color, options) {
@@ -615,9 +615,9 @@ var Sequence = (function () {
         self.trigger(self.events.SEQUENCE_SELECTED_EVENT, selection);
     }
 
-    function mouseSelectionListener() {
+    function mouseSelectionListener(document) {
       $(divID + " .fastaSeq").mouseup(function () {
-        var selectedSubpart = getSelectedText();
+        var selectedSubpart = getSelectedText(document);
         if (selectedSubpart) {
           triggerMouseSelectionEvent(selectedSubpart);
           if (sequenceOptions.blast) {
@@ -645,7 +645,8 @@ var Sequence = (function () {
       //$(document).on(self.events.FEATURE_SELECTED_EVENT, listener);
     };
 
-    function getSelectedText() {
+    function getSelectedText(document) {
+      root = document;
       var text = window.getSelection().toString().replace(/\s+/g, "");
       var selection = root.getSelection();
       var element = $(divID + " .fastaSeq")[0];
