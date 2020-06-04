@@ -28,8 +28,9 @@
     "test": "mocha"
   },
   "dependencies": {
-    "jquery": "x.x.x",
-    "biojs-events": "x.x.x"
+    "biojs-events": "^0.0.4",
+    "handlebars": "^4.7.6",
+    "jquery": "^3.5.1"
   },
   "devDependencies": {
     "bower": "^1.6.8",
@@ -57,9 +58,9 @@
     "grunt-serve": "^0.1.6",
     "jsdom": "7.x",
     "load-grunt-tasks": "^0.6.0",
+    "mkdirp": "^0.5.0",
     "mocha": "1.x",
     "mocha-jsdom": "^1.1.0",
-    "mkdirp": "^0.5.0",
     "prunner": "1.x",
     "sniper": "0.x",
     "watchify": "^1.0.6"
