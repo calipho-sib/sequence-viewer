@@ -1,6 +1,4 @@
-var Sequence = (function () {
-
-    function Sequence(sequence, isoformName) {
+function Sequence(sequence, isoformName) {
         var self = this;
         this.events = {
             MOUSE_SELECTION_EVENT: "sequence-viewer-mouse-selection",
@@ -544,8 +542,6 @@ var Sequence = (function () {
             });
         }
     }
-    return Sequence;
-})();
-if ( typeof module === "object" && typeof module.exports === "object" ) {
-    module.exports = Sequence;
-}
+    if ( typeof module === "object" && typeof module.exports === "object" ) {
+        module.exports = Sequence;
+    }
