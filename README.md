@@ -18,30 +18,41 @@ Simple example: https://cdn.rawgit.com/calipho-sib/sequence-viewer/master/exampl
 
 ## Getting Started
 
-1) Include the library using bower or npm or simply by including the javascript sequence-viewer.js
+1) Include the library using NPM/Yarn
 ```
-//BOWER//
-bower install sequence-viewer
-
-//NODE//
+//NPM//
 npm install sequence-viewer
+
+//YARN//
+yarn add sequence-viewer
+```
+Or Include the feature-viewer from jsDelivr CDN in the header of your html
+```html
+<script src="https://cdn.jsdelivr.net/gh/calipho-sib/sequence-viewer@v1.0.0/dist/sequence-viewer.bundle.js"></script>
+```
+
+**NOTE** : If you already got the dependencies (Bootstrap & Jquery) in your project, use the simple minified version instead of the bundle :
+```html
+<script src="https://cdn.jsdelivr.net/gh/calipho-sib/sequence-viewer@v1.0.0/dist/sequence-viewer.min.js"></script>
 ```
 
 2) Specify a div in your html
 ```
 <div id="sequence-viewer"></div>
 ```
-3) Create an instance of Sequence in javascript and apply the render method
+3) Create an instance of Sequence in JavaScript and apply the render method
 ```javascript
-//For Node add before : var Sequence = require("sequence-viewer"); //
-
-
 var seq = new Sequence('MALWMRLLPLLALLALWGPGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN');
 // Render the sequence with or without rendering options
 // (Check the interactive documentation)
 seq.render('#sequence-viewer');
 
 ```
+To import Sequence Viewer into an ES2015 application, you can import specific symbols from specific Sequence Viewer modules:
+```javascript
+import Sequence from "sequence-viewer";
+```
+
 4) Et voila!
 
 ![Sequence viewer2](/assets/sequence-viewer-simple.png)
@@ -82,15 +93,11 @@ If you have any problem or suggestion please open an issue [here](https://github
 
 `npm install`  (will install the development dependencies)
 
-`bower install`  (will install the browser dependencies)
+`npm start`  (will start the development server on localhost:8080)
 
 ...make your changes and modifications...
 
-`npm run dist` (will create the min & bundle versions in dist/)
-
-`npm run build` (will create the bundle js & css in build/ for node)
-
-`grunt bump` (will push and add a new release)
+`npm run build` (will create the bundle js & css in build/)
 
 `npm publish` (will publish in npm)
 
