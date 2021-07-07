@@ -67,7 +67,7 @@ seq1.render('#protein-sequence-viewer', {
     </textarea>
         </form>
         <button type="button" class="btn btn-default center-block" style="margin-bottom:20px;"
-                onclick=executeCode("#protein-sequence-viewer2",simpleRender)>Execute
+                onclick="executeCode('#protein-sequence-viewer1',simpleRender)">Execute
         </button>
     </div>
     <div id="protein-sequence-viewer" class="col-md-5 col-xs-10 col-xs-offset-1"
@@ -92,7 +92,7 @@ seq2.selection(20, 43, 'red');
             </textarea>
         </form>
         <button type="button" class="btn btn-default center-block" style="margin-bottom:20px;"
-                onclick=executeCode("#protein-sequence-viewer2",highlightCode)>Execute
+                onclick="executeCode('#protein-sequence-viewer2',highlightCode)">Execute
         </button>
     </div>
     <div id="protein-sequence-viewer2" class="col-md-5 col-xs-10 col-xs-offset-1"
@@ -158,7 +158,7 @@ seq3.addLegend(exempleLegend);
     </textarea>
         </form>
         <button type="button" class="btn btn-default center-block" style="margin-bottom:20px;"
-                onclick=executeCode("#protein-sequence-viewer3",coverageCode)>Execute
+                onclick="executeCode('#protein-sequence-viewer3',coverageCode)">Execute
         </button>
     </div>
     <div id="protein-sequence-viewer3" class="col-md-5 col-xs-10 col-xs-offset-1"
@@ -200,7 +200,7 @@ seq4.onSubpartSelected(function(elem){
     </textarea>
         </form>
         <button type="button" class="btn btn-default center-block" style="margin-bottom:20px;"
-                onclick=executeCode("#protein-sequence-viewer4",eventsCode)>Execute
+                onclick="executeCode('#protein-sequence-viewer4',eventsCode)">Execute
         </button>
     </div>
     <div id="protein-sequence-viewer4" class="col-md-5 col-xs-10 col-xs-offset-1"
@@ -212,6 +212,7 @@ seq4.onSubpartSelected(function(elem){
                                                                                 alt="Fork me on GitHub"
                                                                                 data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
 <script>
+    console.log(Sequence, "here")
     var simpleRender;
     var highlightCode;
     var coverageCode;
@@ -220,7 +221,7 @@ seq4.onSubpartSelected(function(elem){
     var executeCode = function (outputDiv, mirrorCode) {
         var code = mirrorCode.getValue();
         eval(code);
-        $(outputDiv).animate({opacity: "100"}, 2000);
+        jQuery(outputDiv).animate({opacity: "100"}, 2000);
     };
 
     window.onload = function () {
@@ -244,7 +245,7 @@ seq4.onSubpartSelected(function(elem){
             lineNumbers: true,
             lineWrapping: true
         });
-        $(function () {
+        jQuery(function () {
             executeCode("#protein-sequence-viewer1", simpleRender);
             executeCode("#protein-sequence-viewer2", highlightCode);
             executeCode("#protein-sequence-viewer3", coverageCode);

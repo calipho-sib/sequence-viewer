@@ -1,28 +1,6 @@
-<html>
-<head>
-    <title>Simple sequence formatter</title>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="../dist/sequence-viewer.bundle.js"></script>
-</head>
-
-<body class="container col-md-10 col-xs-12 col-md-offset-1">
-    <p class="pull-right" style="display: inline-block;"><a href="http://www.nextprot.org" alt="neXtProt" style="color:#C50063;">neXtProt &copy;</a></p>
-
-    <h1>Simple Sequence Formatter and Regex Operator</h1>
-    <p>Paste your sequence on the text area</p>
-    <div class="row">
-            <textarea id="sequenceTextArea"   class="form-control" rows="3" style="width:100%;">MALWMRLLPL LALLALWGPD PAAAFVNQHL CGSHLVEALY LVCGERGFFY
+<html><head><title>Simple sequence formatter</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"><script src="../dist/sequence-viewer.bundle.js"></script><script defer="defer" src="sequence-viewer.bundle.js"></script></head><body class="container col-md-10 col-xs-12 col-md-offset-1"><p class="pull-right" style="display: inline-block;"><a href="http://www.nextprot.org" alt="neXtProt" style="color:#C50063;">neXtProt &copy;</a></p><h1>Simple Sequence Formatter and Regex Operator</h1><p>Paste your sequence on the text area</p><div class="row"><textarea id="sequenceTextArea" class="form-control" rows="3" style="width:100%;">MALWMRLLPL LALLALWGPD PAAAFVNQHL CGSHLVEALY LVCGERGFFY
 TPKTRREAED LQVGQVELGG GPGAGSLQPL ALEGSLQKRG IVEQCCTSIC
-SLYQLENYCN</textarea>
-            <button type="button" class="btn btn-primary center-block " style="margin:20px;" onclick="formatCode()">Format</button>
-    </div>
-
-    <div class="row" style="width:100%">
-        <div id="protein-sequence-viewer"></div>
-    </div>
-
-    <script>
-        var formatCode = function () {
+SLYQLENYCN</textarea> <button type="button" class="btn btn-primary center-block" style="margin:20px;" onclick="formatCode()">Format</button></div><div class="row" style="width:100%"><div id="protein-sequence-viewer"></div></div><script>var formatCode = function () {
 
             console.log($('#sequenceTextArea').val());
             var seq1 = new Sequence($('#sequenceTextArea').val().replace(/\s+/g,''));
@@ -65,12 +43,4 @@ SLYQLENYCN</textarea>
             $(function () {
                 formatCode();
             });
-        };
-    </script>
-    <script class="example">
-    </script>
-
-
-</body>
-
-</html>
+        };</script><script class="example"></script></body></html>

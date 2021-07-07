@@ -1,6 +1,7 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const { merge } = require("webpack-merge");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const commonConfig = {
   optimization: {
@@ -36,6 +37,12 @@ const maxConfig = {
     libraryTarget: "var",
     filename: "sequence-viewer.bundle.js",
   },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./examples/simple.html",
+    }),
+  ],
 
   module: {
     rules: [
