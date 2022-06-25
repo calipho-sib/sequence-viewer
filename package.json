@@ -36,7 +36,7 @@
     "chai": "1.x",
     "css-loader": "^5.2.6",
     "html-webpack-plugin": "^5.3.1",
-    "jsdom": "7.x",
+    "jsdom": "16.x",
     "mocha": "1.x",
     "mocha-jsdom": "^1.1.0",
     "sniper": "0.x",
